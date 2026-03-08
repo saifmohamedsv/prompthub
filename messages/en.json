@@ -1,0 +1,77 @@
+{
+  "common": {
+    "appName": "PromptHub",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "submit": "Submit",
+    "back": "Back"
+  },
+  "nav": {
+    "home": "Home",
+    "explore": "Explore",
+    "myPrompts": "My Prompts",
+    "likes": "Likes",
+    "login": "Log in",
+    "logout": "Log out"
+  },
+  "home": {
+    "title": "Discover & Share AI Prompts",
+    "subtitle": "Find the best prompts for ChatGPT, Claude, Midjourney, and more. Share your favorites with the community.",
+    "exploreButton": "Explore Prompts",
+    "shareButton": "Share a Prompt"
+  },
+  "explore": {
+    "title": "Explore Prompts",
+    "searchPlaceholder": "Search prompts...",
+    "allCategories": "All Categories",
+    "noResults": "No prompts found",
+    "noResultsDescription": "Try adjusting your search or filters."
+  },
+  "prompt": {
+    "by": "by",
+    "likes": "likes",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "tryIt": "Try it",
+    "addNew": "Add New Prompt",
+    "editPrompt": "Edit Prompt",
+    "deletePrompt": "Delete Prompt",
+    "deleteConfirm": "Are you sure you want to delete this prompt?",
+    "title": "Title",
+    "titlePlaceholder": "Give your prompt a catchy title",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe what this prompt does...",
+    "link": "Link",
+    "linkPlaceholder": "https://...",
+    "category": "Category",
+    "selectCategory": "Select a category",
+    "image": "Image",
+    "uploadImage": "Upload image"
+  },
+  "auth": {
+    "loginTitle": "Welcome to PromptHub",
+    "loginSubtitle": "Sign in to share and like prompts",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGitHub": "Continue with GitHub"
+  },
+  "dashboard": {
+    "myPrompts": "My Prompts",
+    "myPromptsEmpty": "You haven't shared any prompts yet.",
+    "likedPrompts": "Liked Prompts",
+    "likedPromptsEmpty": "You haven't liked any prompts yet."
+  },
+  "footer": {
+    "tagline": "Discover and share the best AI prompts.",
+    "builtWith": "Built with"
+  },
+  "locale": {
+    "en": "English",
+    "ar": "العربية"
+  }
+}
