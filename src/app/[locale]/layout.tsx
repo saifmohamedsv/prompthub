@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { inter, cairo } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
+import { QueryProvider } from "@/lib/react-query/provider";
 import { Toaster } from "@/components/ui/sonner";
 import "../globals.css";
 
@@ -50,10 +51,12 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-            <Toaster />
-          </NextIntlClientProvider>
+          <QueryProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+              <Toaster />
+            </NextIntlClientProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

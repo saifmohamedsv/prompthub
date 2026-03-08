@@ -20,8 +20,8 @@ function MyPromptsView() {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("dashboard.myPrompts")}</h1>
         <Button>
-          <Link href="/my-prompts/new">
-            <Plus className="h-4 w-4" />
+          <Link className="flex items-center" href="/my-prompts/new">
+            <Plus className="h-5 w-5 me-1" />
             {t("prompt.addNew")}
           </Link>
         </Button>
