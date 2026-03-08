@@ -28,7 +28,7 @@ function PromptCardSkeleton() {
           <Skeleton className="h-6 w-6 rounded-full" />
           <Skeleton className="h-3 w-20" />
         </div>
-        <Skeleton className="h-8 w-16 rounded-md" />
+        <Skeleton className="h-10 w-16 rounded-md" />
       </div>
     </div>
   );
