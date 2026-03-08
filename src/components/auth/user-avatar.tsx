@@ -1,37 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { User } from "@supabase/supabase-js";
 
 export function UserAvatar() {
   const t = useTranslations("nav");
-  const [user, setUser] = useState<User | null>(null);
-  const supabase = createClient();
+  const { user, profile, isLoading, isAuthenticated, signOut } = useAuth();
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+  // Show skeleton while checking auth — prevents flash of login button
+  if (isLoading) {
+    return <Skeleton className="h-8 w-8 rounded-full" />;
+  }
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (!user) {
+  if (!isAuthenticated) {
     return (
       <Button variant="default" size="sm">
         <Link href="/login">{t("login")}</Link>
@@ -39,15 +30,23 @@ export function UserAvatar() {
     );
   }
 
-  const avatarUrl = user.user_metadata?.avatar_url;
-  const name = user.user_metadata?.full_name ?? user.email;
+  const avatarUrl =
+    profile?.avatar_url ?? user?.user_metadata?.avatar_url;
+  const displayName =
+    profile?.full_name ?? user?.user_metadata?.full_name ?? user?.email;
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="rounded-full" />}>
+      <DropdownMenuTrigger
+        render={
+          <Button variant="ghost" size="icon" className="rounded-full" />
+        }
+      >
         <Avatar className="h-8 w-8">
-          <AvatarImage src={avatarUrl} />
-          <AvatarFallback>{name?.[0]?.toUpperCase() ?? "?"}</AvatarFallback>
+          <AvatarImage src={avatarUrl ?? undefined} />
+          <AvatarFallback>
+            {displayName?.[0]?.toUpperCase() ?? "?"}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -59,7 +58,7 @@ export function UserAvatar() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={async () => {
-            await supabase.auth.signOut();
+            await signOut();
             window.location.href = "/";
           }}
         >
