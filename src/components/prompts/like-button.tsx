@@ -1,44 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useAuth } from "@/hooks/use-auth";
+import { useUserLikes, useToggleLike } from "@/hooks/use-prompts";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "@/i18n/navigation";
 
 export function LikeButton({
   promptId,
   initialCount,
-  initialLiked = false,
+  floating,
 }: {
   promptId: string;
   initialCount: number;
-  initialLiked?: boolean;
+  floating?: boolean;
 }) {
-  const [liked, setLiked] = useState(initialLiked);
-  const [count, setCount] = useState(initialCount);
+  const { isAuthenticated } = useAuth();
+  const { data: likedIds } = useUserLikes();
+  const { mutate, isPending } = useToggleLike();
+  const router = useRouter();
 
-  async function toggleLike() {
-    // Optimistic update
-    setLiked(!liked);
-    setCount(liked ? count - 1 : count + 1);
+  const isLiked = likedIds?.includes(promptId) ?? false;
 
-    // TODO: call Supabase to insert/delete like
+  function handleClick(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
+    mutate({ promptId, isLiked });
+  }
+
+  if (floating) {
+    return (
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={isPending}
+        className="flex items-center gap-1.5 rounded-full bg-black/40 px-2.5 py-1.5 text-white backdrop-blur-md transition-colors hover:bg-black/55"
+      >
+        <Heart
+          className={cn(
+            "h-3.5 w-3.5 transition-colors",
+            isLiked && "fill-red-500 text-red-500"
+          )}
+        />
+        <span className="text-xs font-medium">{initialCount}</span>
+      </button>
+    );
   }
 
   return (
     <Button
       variant="ghost"
       size="sm"
-      onClick={toggleLike}
+      onClick={handleClick}
+      disabled={isPending}
       className="gap-1.5"
     >
       <Heart
         className={cn(
           "h-4 w-4 transition-colors",
-          liked && "fill-red-500 text-red-500"
+          isLiked && "fill-red-500 text-red-500"
         )}
       />
-      <span className="text-xs">{count}</span>
+      <span className="text-xs">{initialCount}</span>
     </Button>
   );
 }
