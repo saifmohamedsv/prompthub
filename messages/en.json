@@ -35,8 +35,9 @@
   "prompt": {
     "by": "by",
     "likes": "likes",
+    "views": "views",
     "share": "Share",
-    "copyLink": "Copy link",
+    "copyPrompt": "Copy Prompt",
     "linkCopied": "Link copied!",
     "tryIt": "Try it",
     "addNew": "Add New Prompt",
@@ -51,8 +52,19 @@
     "linkPlaceholder": "https://...",
     "category": "Category",
     "selectCategory": "Select a category",
+    "promptText": "Prompt Content",
+    "promptTextPlaceholder": "Paste the actual prompt text here...",
+    "promptTextHint": "The exact prompt users can copy and use. Optional but highly recommended.",
+    "tags": "Tags",
     "image": "Image",
-    "uploadImage": "Upload image"
+    "uploadImage": "Upload image",
+    "titleRequired": "Title is required",
+    "descriptionRequired": "Description is required",
+    "categoryRequired": "Please select a category",
+    "invalidUrl": "Please enter a valid URL",
+    "createSuccess": "Prompt created successfully!",
+    "updateSuccess": "Prompt updated successfully!",
+    "saving": "Saving..."
   },
   "auth": {
     "loginTitle": "Welcome to PromptHub",

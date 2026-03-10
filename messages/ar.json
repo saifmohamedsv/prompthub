@@ -35,8 +35,9 @@
   "prompt": {
     "by": "بواسطة",
     "likes": "إعجاب",
+    "views": "مشاهدة",
     "share": "مشاركة",
-    "copyLink": "نسخ الرابط",
+    "copyPrompt": "نسخ البرومبت",
     "linkCopied": "تم نسخ الرابط!",
     "tryIt": "جربه",
     "addNew": "إضافة برومبت جديد",
@@ -51,8 +52,19 @@
     "linkPlaceholder": "https://...",
     "category": "الفئة",
     "selectCategory": "اختر فئة",
+    "promptText": "نص البرومبت",
+    "promptTextPlaceholder": "الصق نص البرومبت الفعلي هنا...",
+    "promptTextHint": "النص الفعلي الذي يمكن للمستخدمين نسخه واستخدامه. اختياري لكن يُنصح به بشدة.",
+    "tags": "الوسوم",
     "image": "الصورة",
-    "uploadImage": "رفع صورة"
+    "uploadImage": "رفع صورة",
+    "titleRequired": "العنوان مطلوب",
+    "descriptionRequired": "الوصف مطلوب",
+    "categoryRequired": "يرجى اختيار فئة",
+    "invalidUrl": "يرجى إدخال رابط صحيح",
+    "createSuccess": "تم إنشاء البرومبت بنجاح!",
+    "updateSuccess": "تم تحديث البرومبت بنجاح!",
+    "saving": "جاري الحفظ..."
   },
   "auth": {
     "loginTitle": "مرحباً بك في PromptHub",
