@@ -8,6 +8,7 @@ export function useCategories() {
   return useQuery({
     queryKey: queryKeys.categories.all,
     queryFn: fetchCategories,
-    staleTime: 10 * 60 * 1000, // categories rarely change
+    staleTime: 30 * 60 * 1000, // 30 min — categories rarely change
+    gcTime: 60 * 60 * 1000, // 1 hour
   });
 }

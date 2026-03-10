@@ -26,6 +26,8 @@ export function usePrompts(filters?: PromptFilters) {
   return useQuery({
     queryKey: queryKeys.prompts.list(filters as Record<string, string>),
     queryFn: () => fetchPrompts(filters),
+    staleTime: 2 * 60 * 1000, // 2 min
+    gcTime: 10 * 60 * 1000, // 10 min
   });
 }
 
@@ -34,6 +36,8 @@ export function usePromptDetail(id: string) {
     queryKey: queryKeys.prompts.detail(id),
     queryFn: () => fetchPromptById(id),
     enabled: !!id,
+    staleTime: 5 * 60 * 1000, // 5 min
+    gcTime: 10 * 60 * 1000, // 10 min
   });
 }
 
@@ -43,6 +47,7 @@ export function useMyPrompts() {
     queryKey: queryKeys.prompts.my,
     queryFn: () => fetchUserPrompts(user!.id),
     enabled: !!user,
+    staleTime: 60 * 1000, // 1 min — user expects own data fresh
   });
 }
 
@@ -52,15 +57,17 @@ export function useLikedPrompts() {
     queryKey: queryKeys.prompts.liked,
     queryFn: () => fetchLikedPrompts(user!.id),
     enabled: !!user,
+    staleTime: 60 * 1000, // 1 min — user expects own data fresh
   });
 }
 
 export function useUserLikes() {
   const { user } = useAuth();
   return useQuery({
-    queryKey: [...queryKeys.auth.me, "likes"],
+    queryKey: queryKeys.auth.likes,
     queryFn: () => fetchUserLikes(user!.id),
     enabled: !!user,
+    staleTime: Infinity, // only changes via mutation which invalidates
   });
 }
 
@@ -157,7 +164,7 @@ export function useToggleLike() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.prompts.all });
       queryClient.invalidateQueries({
-        queryKey: [...queryKeys.auth.me, "likes"],
+        queryKey: queryKeys.auth.likes,
       });
     },
   });
