@@ -48,14 +48,17 @@ create table public.prompts (
   id uuid default gen_random_uuid() primary key,
   title text not null,
   description text not null,
+  prompt_text text,
   link text,
   image_url text,
   likes_count integer default 0 not null,
+  views_count integer default 0 not null,
   category_id uuid references public.categories on delete set null,
   user_id uuid references public.profiles on delete cascade not null,
   fts tsvector generated always as (
     setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
-    setweight(to_tsvector('english', coalesce(description, '')), 'B')
+    setweight(to_tsvector('english', coalesce(description, '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(prompt_text, '')), 'C')
   ) stored,
   created_at timestamptz default now() not null,
   updated_at timestamptz default now() not null
@@ -64,6 +67,37 @@ create table public.prompts (
 create index prompts_fts_idx on public.prompts using gin (fts);
 create index prompts_category_idx on public.prompts (category_id);
 create index prompts_user_idx on public.prompts (user_id);
+
+-- Tags
+create table public.tags (
+  id uuid default gen_random_uuid() primary key,
+  name text unique not null,
+  slug text unique not null,
+  created_at timestamptz default now() not null
+);
+
+-- Prompt-Tags junction
+create table public.prompt_tags (
+  prompt_id uuid references public.prompts on delete cascade not null,
+  tag_id uuid references public.tags on delete cascade not null,
+  primary key (prompt_id, tag_id)
+);
+
+create index prompt_tags_prompt_idx on public.prompt_tags (prompt_id);
+create index prompt_tags_tag_idx on public.prompt_tags (tag_id);
+
+-- Increment views (RPC)
+create or replace function public.increment_views(p_prompt_id uuid)
+returns void
+language plpgsql
+security definer set search_path = ''
+as $$
+begin
+  update public.prompts
+  set views_count = views_count + 1
+  where id = p_prompt_id;
+end;
+$$;
 
 -- Likes (junction table)
 create table public.likes (
@@ -102,6 +136,8 @@ alter table public.profiles enable row level security;
 alter table public.categories enable row level security;
 alter table public.prompts enable row level security;
 alter table public.likes enable row level security;
+alter table public.tags enable row level security;
+alter table public.prompt_tags enable row level security;
 
 -- Profiles: public read, users can update own
 create policy "Profiles are publicly readable"
@@ -126,6 +162,29 @@ create policy "Authors can update own prompts"
 
 create policy "Authors can delete own prompts"
   on public.prompts for delete using (auth.uid() = user_id);
+
+-- Tags: public read, authenticated create
+create policy "Tags are publicly readable"
+  on public.tags for select using (true);
+
+create policy "Authenticated users can create tags"
+  on public.tags for insert with check (auth.role() = 'authenticated');
+
+-- Prompt tags: public read, authors manage
+create policy "Prompt tags are publicly readable"
+  on public.prompt_tags for select using (true);
+
+create policy "Prompt authors can manage tags"
+  on public.prompt_tags for insert
+  with check (
+    auth.uid() = (select user_id from public.prompts where id = prompt_id)
+  );
+
+create policy "Prompt authors can remove tags"
+  on public.prompt_tags for delete
+  using (
+    auth.uid() = (select user_id from public.prompts where id = prompt_id)
+  );
 
 -- Likes: authenticated insert/delete own
 create policy "Likes are publicly readable"
@@ -158,6 +217,28 @@ create policy "Users can delete own prompt images"
 -- ============================================
 -- Seed categories
 -- ============================================
+
+insert into public.tags (name, slug) values
+  ('gpt-4', 'gpt-4'),
+  ('gpt-4o', 'gpt-4o'),
+  ('claude', 'claude'),
+  ('gemini', 'gemini'),
+  ('midjourney', 'midjourney'),
+  ('dall-e', 'dall-e'),
+  ('stable-diffusion', 'stable-diffusion'),
+  ('coding', 'coding'),
+  ('writing', 'writing'),
+  ('marketing', 'marketing'),
+  ('seo', 'seo'),
+  ('portrait', 'portrait'),
+  ('landscape', 'landscape'),
+  ('productivity', 'productivity'),
+  ('education', 'education'),
+  ('creative', 'creative'),
+  ('business', 'business'),
+  ('data-analysis', 'data-analysis'),
+  ('summarization', 'summarization'),
+  ('translation', 'translation');
 
 insert into public.categories (name, name_ar, slug) values
   ('Writing', 'الكتابة', 'writing'),
