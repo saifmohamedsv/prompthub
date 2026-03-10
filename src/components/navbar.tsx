@@ -23,7 +23,7 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm dark:shadow-md dark:shadow-black/20">
+    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm dark:shadow-lg dark:shadow-black/30">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
           <Sparkles className="h-5 w-5 text-primary" />

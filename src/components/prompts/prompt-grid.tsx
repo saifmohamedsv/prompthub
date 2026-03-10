@@ -48,7 +48,7 @@ export function PromptGrid({
 
 function PromptCardSkeleton() {
   return (
-    <div className="flex flex-col rounded-xl bg-card shadow-sm ring-1 ring-border dark:shadow-md dark:shadow-black/25 dark:ring-white/[0.04]">
+    <div className="flex flex-col rounded-xl bg-card shadow-sm ring-1 ring-border dark:shadow-lg dark:shadow-black/30 dark:ring-white/5">
       {/* Top row */}
       <div className="flex items-center justify-between px-4 pt-4">
         <Skeleton className="h-5 w-16 rounded-full" />

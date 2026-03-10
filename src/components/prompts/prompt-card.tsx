@@ -42,7 +42,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   return (
     <Link
       href={`/prompt/${prompt.id}`}
-      className="group flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-lg hover:ring-border/80 dark:shadow-md dark:shadow-black/25 dark:ring-white/4 dark:hover:shadow-lg dark:hover:shadow-black/40 dark:hover:ring-white/4"
+      className="group flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-lg hover:ring-border/80 dark:shadow-lg dark:shadow-black/30 dark:ring-white/5 dark:hover:shadow-xl dark:hover:shadow-black/50 dark:hover:ring-white/10"
     >
       {/* Top row: category + stats */}
       <div className="flex items-center justify-between px-4 pt-4">
