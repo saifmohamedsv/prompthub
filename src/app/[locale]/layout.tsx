@@ -8,6 +8,7 @@ import { inter, cairo } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/hooks/use-auth";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -52,10 +53,12 @@ export default async function LocaleLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <NextIntlClientProvider messages={messages}>
-              {children}
-              <Toaster />
-            </NextIntlClientProvider>
+            <AuthProvider>
+              <NextIntlClientProvider messages={messages}>
+                {children}
+                <Toaster />
+              </NextIntlClientProvider>
+            </AuthProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>
