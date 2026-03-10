@@ -1,6 +1,7 @@
 export const queryKeys = {
   auth: {
     me: ["auth", "me"] as const,
+    likes: ["auth", "me", "likes"] as const,
   },
   prompts: {
     all: ["prompts"] as const,
