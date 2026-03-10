@@ -13,4 +13,7 @@ export const queryKeys = {
   categories: {
     all: ["categories"] as const,
   },
+  tags: {
+    all: ["tags"] as const,
+  },
 } as const;

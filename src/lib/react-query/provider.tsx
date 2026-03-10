@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  MutationCache,
+} from "@tanstack/react-query";
+import { toast } from "sonner";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -11,6 +16,11 @@ function makeQueryClient() {
         refetchOnWindowFocus: false,
       },
     },
+    mutationCache: new MutationCache({
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong");
+      },
+    }),
   });
 }
 
@@ -18,10 +28,8 @@ let browserQueryClient: QueryClient | undefined;
 
 function getQueryClient() {
   if (typeof window === "undefined") {
-    // Server: always make a new query client
     return makeQueryClient();
   }
-  // Browser: reuse the same client across renders
   if (!browserQueryClient) {
     browserQueryClient = makeQueryClient();
   }
