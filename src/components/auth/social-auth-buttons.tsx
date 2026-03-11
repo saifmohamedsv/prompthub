@@ -19,7 +19,7 @@ export function SocialAuthButtons() {
 
   return (
     <div className="flex flex-col gap-3">
-      <Button
+      {/* <Button
         variant="outline"
         className="w-full gap-2"
         onClick={() => signInWith("google")}
@@ -43,7 +43,7 @@ export function SocialAuthButtons() {
           />
         </svg>
         {t("continueWithGoogle")}
-      </Button>
+      </Button> */}
 
       <Button
         variant="outline"
