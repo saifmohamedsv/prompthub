@@ -223,6 +223,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
           <div className="flex flex-col">
             <label className="mb-2 text-sm font-medium">{t("promptText")}</label>
             <Textarea
+              dir="ltr"
               placeholder={t("promptTextPlaceholder")}
               className="min-h-32 font-mono text-sm"
               value={promptText}
@@ -275,7 +276,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
 
           <div className="flex flex-col">
             <label className="mb-2 text-sm font-medium">{t("tags")}</label>
-            <div className="flex flex-wrap gap-2">
+            <div dir="ltr" className="flex flex-wrap gap-2">
               {tags?.map((tag) => {
                 const isSelected = selectedTagIds.includes(tag.id);
                 return (

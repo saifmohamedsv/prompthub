@@ -133,7 +133,7 @@
     font-feature-settings: "cv11", "ss01";
   }
   html[dir="rtl"] body {
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 

@@ -46,7 +46,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
       {/* Tags */}
       {tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 px-3 pt-2.5 sm:px-4">
+        <div dir="ltr" className="flex flex-wrap gap-1.5 px-3 pt-2.5 sm:px-4">
           {tags.map((tag) => (
             <span key={tag.id} className="rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground">
               {tag.name}

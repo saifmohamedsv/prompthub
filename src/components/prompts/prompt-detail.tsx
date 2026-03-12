@@ -75,7 +75,7 @@ export function PromptDetail({ id }: { id: string }) {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="space-y-3">
               <h1 className="text-xl font-bold sm:text-2xl">{title}</h1>
-              <div className="flex flex-wrap items-center gap-2">
+              <div dir="ltr" className="flex flex-wrap items-center gap-2">
                 {prompt.categories && <Badge variant="secondary">{categoryName}</Badge>}
                 {tags.map((tag) => (
                   <Badge key={tag.id} variant="outline">
