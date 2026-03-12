@@ -166,7 +166,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-3">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium">{t("title")}</label>
               <Input
                 placeholder={t("titlePlaceholder")}
@@ -180,7 +180,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 <p className="text-sm text-destructive">{errors.title}</p>
               )}
             </div>
-            <div className="space-y-3">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium">{t("titleAr")}</label>
               <Input
                 dir="rtl"
@@ -192,7 +192,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-3">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium">{t("description")}</label>
               <Textarea
                 placeholder={t("descriptionPlaceholder")}
@@ -208,7 +208,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 <p className="text-sm text-destructive">{errors.description}</p>
               )}
             </div>
-            <div className="space-y-3">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium">{t("descriptionAr")}</label>
               <Textarea
                 dir="rtl"
@@ -220,7 +220,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">{t("promptText")}</label>
             <Textarea
               placeholder={t("promptTextPlaceholder")}
@@ -231,7 +231,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             <p className="text-xs text-muted-foreground">{t("promptTextHint")}</p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">{t("link")}</label>
             <Input
               placeholder={t("linkPlaceholder")}
@@ -247,7 +247,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             )}
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">{t("category")}</label>
             <Select
               value={categoryId}
@@ -273,7 +273,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             )}
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">{t("tags")}</label>
             <div className="flex flex-wrap gap-2">
               {tags?.map((tag) => {
@@ -297,7 +297,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">{t("image")}</label>
             {imagePreview && (
               <div className="relative">
