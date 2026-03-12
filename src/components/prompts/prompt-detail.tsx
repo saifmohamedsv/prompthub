@@ -116,7 +116,7 @@ export function PromptDetail({ id }: { id: string }) {
         <CardContent className="space-y-6 px-4 pt-6 sm:px-6">
           {prompt.image_url && (
             <div className="overflow-hidden rounded-lg">
-              <Image src={prompt.image_url} alt={title} className="w-full object-cover" width={600} height={400} />
+              <Image src={prompt.image_url} alt={title} className="max-h-64 w-full rounded-lg object-cover" width={600} height={256} />
             </div>
           )}
 
