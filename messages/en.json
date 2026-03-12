@@ -30,7 +30,10 @@
     "searchPlaceholder": "Search prompts...",
     "allCategories": "All Categories",
     "noResults": "No prompts found",
-    "noResultsDescription": "Try adjusting your search or filters."
+    "noResultsDescription": "Try adjusting your search or filters.",
+    "sortRecent": "Recently Added",
+    "sortMostViewed": "Most Viewed",
+    "sortMostLiked": "Most Liked"
   },
   "prompt": {
     "by": "by",

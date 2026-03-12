@@ -8,10 +8,13 @@ const PROMPT_SELECT = `
   prompt_tags (tags (id, name, slug))
 `;
 
+export type SortOption = "recent" | "most_viewed" | "most_liked";
+
 export type PromptFilters = {
   search?: string;
   category?: string;
   tag?: string;
+  sort?: SortOption;
   limit?: number;
   page?: number;
 };
@@ -39,10 +42,18 @@ export async function fetchPrompts(
     if (!categoryId) return [];
   }
 
+  const sort = filters?.sort ?? "recent";
+  const orderColumn =
+    sort === "most_viewed"
+      ? "views_count"
+      : sort === "most_liked"
+        ? "likes_count"
+        : "created_at";
+
   let query = client
     .from("prompts")
     .select(PROMPT_SELECT, { count: "exact" })
-    .order("created_at", { ascending: false });
+    .order(orderColumn, { ascending: false });
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);

@@ -30,7 +30,10 @@
     "searchPlaceholder": "ابحث عن برومبتات...",
     "allCategories": "جميع الفئات",
     "noResults": "لم يتم العثور على برومبتات",
-    "noResultsDescription": "حاول تعديل البحث أو الفلاتر."
+    "noResultsDescription": "حاول تعديل البحث أو الفلاتر.",
+    "sortRecent": "الأحدث",
+    "sortMostViewed": "الأكثر مشاهدة",
+    "sortMostLiked": "الأكثر إعجاباً"
   },
   "prompt": {
     "by": "بواسطة",

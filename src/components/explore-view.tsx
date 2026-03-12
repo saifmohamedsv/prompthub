@@ -3,21 +3,36 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { usePrompts } from "@/hooks/use-prompts";
+import type { SortOption } from "@/lib/supabase/queries";
 import { SearchBar } from "@/components/search-bar";
 import { CategoryFilter } from "@/components/category-filter";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { useDebounce } from "@/hooks/use-debounce";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
 
 export function ExploreView() {
   const t = useTranslations("explore");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [sort, setSort] = useState<SortOption>("recent");
   const debouncedSearch = useDebounce(search, 300);
+
+  const sortOptions: { value: SortOption; label: string }[] = [
+    { value: "recent", label: t("sortRecent") },
+    { value: "most_viewed", label: t("sortMostViewed") },
+    { value: "most_liked", label: t("sortMostLiked") },
+  ];
 
   const filters = {
     ...(debouncedSearch && { search: debouncedSearch }),
     ...(category !== "all" && { category }),
+    ...(sort !== "recent" && { sort }),
   };
 
   const {
@@ -60,6 +75,18 @@ export function ExploreView() {
       <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:gap-4">
         <SearchBar value={search} onChange={setSearch} />
         <CategoryFilter value={category} onChange={setCategory} />
+        <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
+          <SelectTrigger className="w-full sm:w-44">
+            <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
+          </SelectTrigger>
+          <SelectContent>
+            {sortOptions.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <PromptGrid prompts={prompts} isLoading={isLoading} />
