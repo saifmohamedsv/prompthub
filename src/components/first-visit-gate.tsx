@@ -1,8 +1,7 @@
 "use client";
 
 import {
-  useState,
-  useEffect,
+  useSyncExternalStore,
   useCallback,
   createContext,
   useContext,
@@ -10,6 +9,19 @@ import {
 } from "react";
 
 const STORAGE_KEY = "prompthub_visited";
+
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getSnapshot() {
+  return localStorage.getItem(STORAGE_KEY);
+}
+
+function getServerSnapshot() {
+  return "true"; // On server, assume visited (show children)
+}
 
 const DismissContext = createContext<(() => void) | null>(null);
 
@@ -20,21 +32,14 @@ export function FirstVisitGate({
   landing: ReactNode;
   children: ReactNode;
 }) {
-  const [showLanding, setShowLanding] = useState(false);
-
-  useEffect(() => {
-    const visited = localStorage.getItem(STORAGE_KEY);
-    if (!visited) {
-      setShowLanding(true);
-    }
-  }, []);
+  const visited = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const dismiss = useCallback(() => {
     localStorage.setItem(STORAGE_KEY, "true");
-    setShowLanding(false);
+    window.dispatchEvent(new StorageEvent("storage"));
   }, []);
 
-  if (showLanding) {
+  if (!visited) {
     return (
       <DismissContext.Provider value={dismiss}>
         {landing}

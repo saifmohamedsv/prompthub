@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { useMyPrompts } from "@/hooks/use-prompts";
+import { routes } from "@/lib/config";
 import { Plus } from "lucide-react";
 
 export function MyPromptsView() {
@@ -13,10 +14,10 @@ export function MyPromptsView() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">{t("dashboard.myPrompts")}</h1>
+      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold sm:text-3xl">{t("dashboard.myPrompts")}</h1>
         <Button>
-          <Link className="flex items-center" href="/my-prompts/new">
+          <Link className="flex items-center" href={routes.newPrompt}>
             <Plus className="me-1 h-5 w-5" />
             {t("prompt.addNew")}
           </Link>

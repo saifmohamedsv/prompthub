@@ -1,18 +1,20 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Eye, Calendar, Copy } from "lucide-react";
-import { toast } from "sonner";
+import { Eye, Calendar } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
+import { PromptSnippet } from "@/components/prompts/prompt-snippet";
+import { routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
 export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
-  const t = useTranslations("prompt");
   const locale = useLocale();
 
   const categoryName = locale === "ar" ? prompt.categories?.name_ar : prompt.categories?.name;
+  const title = (locale === "ar" && prompt.title_ar) ? prompt.title_ar : prompt.title;
+  const description = (locale === "ar" && prompt.description_ar) ? prompt.description_ar : prompt.description;
 
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
@@ -21,31 +23,13 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
     day: "numeric",
   });
 
-  const SNIPPET_LIMIT = 130;
-  const snippetText = (() => {
-    if (!prompt.prompt_text) return "";
-    if (prompt.prompt_text.length <= SNIPPET_LIMIT) return prompt.prompt_text;
-    // Cut at the last space before the limit so we don't break mid-word
-    const cut = prompt.prompt_text.lastIndexOf(" ", SNIPPET_LIMIT);
-    return prompt.prompt_text.slice(0, cut > 0 ? cut : SNIPPET_LIMIT) + "…";
-  })();
-
-  function handleCopy(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (prompt.prompt_text) {
-      navigator.clipboard.writeText(prompt.prompt_text);
-      toast.success(t("linkCopied"));
-    }
-  }
-
   return (
     <Link
-      href={`/prompt/${prompt.id}`}
+      href={routes.promptDetail(prompt.id)}
       className="group flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-lg hover:ring-border/80 dark:shadow-lg dark:shadow-black/30 dark:ring-white/5 dark:hover:shadow-xl dark:hover:shadow-black/50 dark:hover:ring-white/10"
     >
       {/* Top row: category + stats */}
-      <div className="flex items-center justify-between px-4 pt-4">
+      <div className="flex items-center justify-between px-3 pt-3 sm:px-4 sm:pt-4">
         {categoryName && <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-primary uppercase">{categoryName}</span>}
         <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
           <span className="inline-flex items-center gap-1">
@@ -61,7 +45,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
       {/* Tags */}
       {tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 px-4 pt-2.5">
+        <div className="flex flex-wrap gap-1.5 px-3 pt-2.5 sm:px-4">
           {tags.map((tag) => (
             <span key={tag.id} className="rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground">
               {tag.name}
@@ -71,28 +55,20 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       )}
 
       {/* Title */}
-      <h3 className="line-clamp-2 px-4 pt-3 text-[15px] font-semibold leading-snug">{prompt.title}</h3>
+      <h3 className="line-clamp-2 px-3 pt-3 text-[14px] font-semibold leading-snug sm:px-4 sm:text-[15px]">{title}</h3>
 
       {/* Description */}
-      <p className="line-clamp-2 flex-1 px-4 pt-1.5 text-[13px] leading-relaxed text-muted-foreground">{prompt.description}</p>
+      <p className="line-clamp-2 flex-1 px-3 pt-1.5 text-[12px] leading-relaxed text-muted-foreground sm:px-4 sm:text-[13px]">{description}</p>
 
       {/* Prompt snippet */}
       {prompt.prompt_text && (
-        <div className="mx-4 mt-3 overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
-          <div className="flex items-center justify-between px-3 pt-2">
-            <span className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">{t("promptText")}</span>
-            <button type="button" onClick={handleCopy} className="rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground">
-              <Copy className="h-3.5 w-3.5" />
-            </button>
-          </div>
-          <p dir="ltr" className="px-3 pt-1 pb-2.5 font-mono text-[12px] leading-relaxed text-muted-foreground">
-            {snippetText}
-          </p>
+        <div className="mx-3 mt-3 sm:mx-4">
+          <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
       {/* Footer: author + likes */}
-      <div className="mt-auto flex items-center justify-between px-4 pt-3 pb-4">
+      <div className="mt-auto flex items-center justify-between px-3 pt-3 pb-3 sm:px-4 sm:pb-4">
         <div className="flex items-center gap-2">
           <Avatar className="h-6 w-6">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />

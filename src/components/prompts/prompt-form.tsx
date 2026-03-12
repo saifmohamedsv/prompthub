@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
 import { X } from "lucide-react";
+import { routes } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,7 +46,9 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   const [isUploading, setIsUploading] = useState(false);
 
   const [title, setTitle] = useState("");
+  const [titleAr, setTitleAr] = useState("");
   const [description, setDescription] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
   const [promptText, setPromptText] = useState("");
   const [link, setLink] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -58,7 +61,9 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   useEffect(() => {
     if (existing) {
       setTitle(existing.title);
+      setTitleAr(existing.title_ar ?? "");
       setDescription(existing.description);
+      setDescriptionAr(existing.description_ar ?? "");
       setPromptText(existing.prompt_text ?? "");
       setLink(existing.link ?? "");
       setCategoryId(existing.category_id ?? "");
@@ -123,7 +128,9 @@ export function PromptForm({ promptId }: { promptId?: string }) {
 
     const payload = {
       title: title.trim(),
+      title_ar: titleAr.trim() || null,
       description: description.trim(),
+      description_ar: descriptionAr.trim() || null,
       prompt_text: promptText.trim() || null,
       link: link.trim() || null,
       category_id: categoryId,
@@ -137,7 +144,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
         {
           onSuccess: () => {
             toast.success(t("updateSuccess"));
-            router.push("/my-prompts");
+            router.push(routes.myPrompts);
           },
         }
       );
@@ -157,36 +164,59 @@ export function PromptForm({ promptId }: { promptId?: string }) {
     <Card>
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">{t("title")}</label>
-            <Input
-              placeholder={t("titlePlaceholder")}
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-                if (errors.title) setErrors((p) => ({ ...p, title: undefined }));
-              }}
-            />
-            {errors.title && (
-              <p className="text-sm text-destructive">{errors.title}</p>
-            )}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">{t("title")}</label>
+              <Input
+                placeholder={t("titlePlaceholder")}
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                  if (errors.title) setErrors((p) => ({ ...p, title: undefined }));
+                }}
+              />
+              {errors.title && (
+                <p className="text-sm text-destructive">{errors.title}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">{t("titleAr")}</label>
+              <Input
+                dir="rtl"
+                placeholder={t("titleArPlaceholder")}
+                value={titleAr}
+                onChange={(e) => setTitleAr(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium">{t("description")}</label>
-            <Textarea
-              placeholder={t("descriptionPlaceholder")}
-              className="min-h-24"
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-                if (errors.description)
-                  setErrors((p) => ({ ...p, description: undefined }));
-              }}
-            />
-            {errors.description && (
-              <p className="text-sm text-destructive">{errors.description}</p>
-            )}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">{t("description")}</label>
+              <Textarea
+                placeholder={t("descriptionPlaceholder")}
+                className="min-h-24"
+                value={description}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                  if (errors.description)
+                    setErrors((p) => ({ ...p, description: undefined }));
+                }}
+              />
+              {errors.description && (
+                <p className="text-sm text-destructive">{errors.description}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">{t("descriptionAr")}</label>
+              <Textarea
+                dir="rtl"
+                placeholder={t("descriptionArPlaceholder")}
+                className="min-h-24"
+                value={descriptionAr}
+                onChange={(e) => setDescriptionAr(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="space-y-2">

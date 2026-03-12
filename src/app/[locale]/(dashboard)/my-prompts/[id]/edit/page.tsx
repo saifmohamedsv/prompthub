@@ -17,8 +17,8 @@ function EditPromptView({ id }: { id: string }) {
   const t = useTranslations("prompt");
 
   return (
-    <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-3xl font-bold">{t("editPrompt")}</h1>
+    <div className="mx-auto max-w-3xl">
+      <h1 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl">{t("editPrompt")}</h1>
       <PromptForm promptId={id} />
     </div>
   );

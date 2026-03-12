@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { toast } from "sonner";
 import { usePromptDetail, useIncrementViews } from "@/hooks/use-prompts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +11,9 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
-import { ExternalLink, ArrowLeft, Copy, Eye } from "lucide-react";
+import { PromptSnippet } from "@/components/prompts/prompt-snippet";
+import { routes } from "@/lib/config";
+import { ExternalLink, ArrowLeft, Eye } from "lucide-react";
 import Image from "next/image";
 
 export function PromptDetail({ id }: { id: string }) {
@@ -22,7 +23,6 @@ export function PromptDetail({ id }: { id: string }) {
   const { data: prompt, isLoading } = usePromptDetail(id);
   const { mutate: incrementViews } = useIncrementViews();
 
-  // Increment views on mount
   useEffect(() => {
     if (id) incrementViews(id);
   }, [id, incrementViews]);
@@ -58,28 +58,22 @@ export function PromptDetail({ id }: { id: string }) {
   }
 
   const categoryName = locale === "ar" ? prompt.categories?.name_ar : prompt.categories?.name;
-
+  const title = (locale === "ar" && prompt.title_ar) ? prompt.title_ar : prompt.title;
+  const description = (locale === "ar" && prompt.description_ar) ? prompt.description_ar : prompt.description;
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
-  function handleCopyPrompt() {
-    if (prompt?.prompt_text) {
-      navigator.clipboard.writeText(prompt.prompt_text);
-      toast.success(t("linkCopied"));
-    }
-  }
-
   return (
-    <div className="mx-auto max-w-3xl">
-      <Link href="/explore" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+    <div className="mx-auto max-w-3xl px-4 sm:px-0">
+      <Link href={routes.explore} className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" />
         {tNav("back")}
       </Link>
 
       <Card>
-        <CardHeader>
-          <div className="flex items-start justify-between gap-4">
+        <CardHeader className="px-4 sm:px-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="space-y-3">
-              <h1 className="text-2xl font-bold">{prompt.title}</h1>
+              <h1 className="text-xl font-bold sm:text-2xl">{title}</h1>
               <div className="flex flex-wrap items-center gap-2">
                 {prompt.categories && <Badge variant="secondary">{categoryName}</Badge>}
                 {tags.map((tag) => (
@@ -118,29 +112,17 @@ export function PromptDetail({ id }: { id: string }) {
 
         <Separator />
 
-        <CardContent className="space-y-6 pt-6">
+        <CardContent className="space-y-6 px-4 pt-6 sm:px-6">
           {prompt.image_url && (
             <div className="overflow-hidden rounded-lg">
-              <Image src={prompt.image_url} alt={prompt.title} className="w-full object-cover"  width={600} height={400} />
+              <Image src={prompt.image_url} alt={title} className="w-full object-cover" width={600} height={400} />
             </div>
           )}
 
-          <p className="whitespace-pre-wrap leading-relaxed text-foreground">{prompt.description}</p>
+          <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground sm:text-base">{description}</p>
 
-          {/* Prompt text block */}
           {prompt.prompt_text && (
-            <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
-              <div className="flex items-center justify-between border-b border-border/50 px-4 py-2.5">
-                <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">{t("promptText")}</span>
-                <Button variant="ghost" size="sm" onClick={handleCopyPrompt} className="h-7 gap-1.5 text-xs">
-                  <Copy className="h-3.5 w-3.5" />
-                  {t("copyPrompt")}
-                </Button>
-              </div>
-              <pre dir="ltr" className="text-justify whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-relaxed text-foreground">
-                {prompt.prompt_text}
-              </pre>
-            </div>
+            <PromptSnippet text={prompt.prompt_text} variant="full" />
           )}
 
           <Separator />

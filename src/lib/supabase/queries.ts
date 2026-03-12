@@ -12,6 +12,8 @@ export type PromptFilters = {
   search?: string;
   category?: string;
   tag?: string;
+  limit?: number;
+  page?: number;
 };
 
 // Helper to get an untyped client for complex queries
@@ -39,22 +41,34 @@ export async function fetchPrompts(
 
   let query = client
     .from("prompts")
-    .select(PROMPT_SELECT)
+    .select(PROMPT_SELECT, { count: "exact" })
     .order("created_at", { ascending: false });
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);
   }
 
+  // Flexible partial-match search across title, description, and Arabic variants
   if (filters?.search) {
-    query = query.textSearch("fts", filters.search, {
-      type: "websearch",
-    });
+    const term = `%${filters.search}%`;
+    query = query.or(
+      `title.ilike.${term},description.ilike.${term},title_ar.ilike.${term},description_ar.ilike.${term},prompt_text.ilike.${term}`
+    );
   }
 
-  const { data, error } = await query;
+  // Pagination
+  if (filters?.limit) {
+    const page = filters.page ?? 0;
+    const from = page * filters.limit;
+    const to = from + filters.limit - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, count, error } = await query;
   if (error) throw error;
-  return (data ?? []) as unknown as PromptWithAuthor[];
+  return Object.assign((data ?? []) as unknown as PromptWithAuthor[], {
+    totalCount: count ?? 0,
+  });
 }
 
 export async function fetchPromptById(
@@ -143,7 +157,9 @@ export async function fetchUserLikes(userId: string): Promise<string[]> {
 
 export async function createPrompt(data: {
   title: string;
+  title_ar?: string | null;
   description: string;
+  description_ar?: string | null;
   prompt_text?: string | null;
   link?: string | null;
   image_url?: string | null;
@@ -164,7 +180,9 @@ export async function updatePrompt(
   id: string,
   data: {
     title?: string;
+    title_ar?: string | null;
     description?: string;
+    description_ar?: string | null;
     prompt_text?: string | null;
     link?: string | null;
     image_url?: string | null;

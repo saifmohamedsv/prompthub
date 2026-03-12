@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { routes } from "@/lib/config";
 
 export function SocialAuthButtons() {
   const t = useTranslations("auth");
@@ -12,14 +13,14 @@ export function SocialAuthButtons() {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/api/auth/callback`,
+        redirectTo: `${window.location.origin}${routes.apiAuthCallback}`,
       },
     });
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {/* <Button
+      <Button
         variant="outline"
         className="w-full gap-2"
         onClick={() => signInWith("google")}
@@ -43,7 +44,7 @@ export function SocialAuthButtons() {
           />
         </svg>
         {t("continueWithGoogle")}
-      </Button> */}
+      </Button>
 
       <Button
         variant="outline"

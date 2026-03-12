@@ -8,7 +8,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { UserAvatar } from "@/components/auth/user-avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
-import { Sparkles, Menu } from "lucide-react";
+import { Logo } from "@/components/logo";
+import { routes } from "@/lib/config";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 
 export function Navbar() {
@@ -17,17 +19,16 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: "/explore" as const, label: t("explore") },
-    { href: "/my-prompts" as const, label: t("myPrompts") },
-    { href: "/likes" as const, label: t("likes") },
-  ];
+    { href: routes.explore, label: t("explore") },
+    { href: routes.myPrompts, label: t("myPrompts") },
+    { href: routes.likes, label: t("likes") },
+  ] as const;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm dark:shadow-lg dark:shadow-black/30">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Sparkles className="h-5 w-5 text-primary" />
-          PromptHub
+      <nav className="container mx-auto flex h-14 items-center justify-between px-4 sm:h-16">
+        <Link href={routes.home} className="flex items-center">
+          <Logo size="sm" />
         </Link>
 
         {/* Desktop nav */}
@@ -47,7 +48,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <LocaleSwitcher />
           <ThemeToggle />
           <UserAvatar />

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "@/i18n/navigation";
+import { routes } from "@/lib/config";
 
 export function LikeButton({
   promptId,
@@ -27,7 +28,7 @@ export function LikeButton({
     e.preventDefault();
     e.stopPropagation();
     if (!isAuthenticated) {
-      router.push("/login");
+      router.push(routes.login);
       return;
     }
     mutate({ promptId, isLiked });

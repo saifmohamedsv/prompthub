@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { routes } from "@/lib/config";
 
 export function UserAvatar() {
   const t = useTranslations("nav");
   const { user, profile, isLoading, isAuthenticated, signOut } = useAuth();
 
-  // Show skeleton while checking auth — prevents flash of login button
   if (isLoading) {
     return <Skeleton className="h-8 w-8 rounded-full" />;
   }
@@ -20,7 +20,7 @@ export function UserAvatar() {
   if (!isAuthenticated) {
     return (
       <Button variant="default" size="sm">
-        <Link href="/login">{t("login")}</Link>
+        <Link href={routes.login}>{t("login")}</Link>
       </Button>
     );
   }
@@ -37,12 +37,12 @@ export function UserAvatar() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem render={<Link href="/my-prompts" />}>{t("myPrompts")}</DropdownMenuItem>
-        <DropdownMenuItem render={<Link href="/likes" />}>{t("likes")}</DropdownMenuItem>
+        <DropdownMenuItem render={<Link href={routes.myPrompts} />}>{t("myPrompts")}</DropdownMenuItem>
+        <DropdownMenuItem render={<Link href={routes.likes} />}>{t("likes")}</DropdownMenuItem>
         <DropdownMenuItem
           onClick={async () => {
             await signOut();
-            window.location.href = "/";
+            window.location.href = routes.home;
           }}
         >
           {t("logout")}

@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useCategories } from "@/hooks/use-categories";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 
 export function CategoryFilter({ value, onChange }: { value?: string; onChange?: (slug: string) => void }) {
   const t = useTranslations("explore");

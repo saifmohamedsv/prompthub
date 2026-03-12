@@ -62,7 +62,9 @@ export interface Database {
         Row: {
           id: string;
           title: string;
+          title_ar: string | null;
           description: string;
+          description_ar: string | null;
           prompt_text: string | null;
           link: string | null;
           image_url: string | null;
@@ -77,7 +79,9 @@ export interface Database {
         Insert: {
           id?: string;
           title: string;
+          title_ar?: string | null;
           description: string;
+          description_ar?: string | null;
           prompt_text?: string | null;
           link?: string | null;
           image_url?: string | null;
@@ -92,7 +96,9 @@ export interface Database {
         Update: {
           id?: string;
           title?: string;
+          title_ar?: string | null;
           description?: string;
+          description_ar?: string | null;
           prompt_text?: string | null;
           link?: string | null;
           image_url?: string | null;

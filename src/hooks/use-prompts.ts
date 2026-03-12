@@ -2,10 +2,12 @@
 
 import {
   useQuery,
+  useInfiniteQuery,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import { queryKeys } from "@/lib/react-query/keys";
+import { pagination } from "@/lib/config";
 import {
   fetchPrompts,
   fetchPromptById,
@@ -21,13 +23,28 @@ import {
   type PromptFilters,
 } from "@/lib/supabase/queries";
 import { useAuth } from "@/hooks/use-auth";
+import type { PromptWithAuthor } from "@/types/prompt";
 
-export function usePrompts(filters?: PromptFilters) {
-  return useQuery({
+type PromptPage = PromptWithAuthor[] & { totalCount: number };
+
+export function usePrompts(filters?: Omit<PromptFilters, "limit" | "page">) {
+  return useInfiniteQuery({
     queryKey: queryKeys.prompts.list(filters as Record<string, string>),
-    queryFn: () => fetchPrompts(filters),
-    staleTime: 2 * 60 * 1000, // 2 min
-    gcTime: 10 * 60 * 1000, // 10 min
+    queryFn: async ({ pageParam = 0 }) => {
+      const result = await fetchPrompts({
+        ...filters,
+        limit: pagination.defaultPageSize,
+        page: pageParam,
+      });
+      return result as PromptPage;
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      const loaded = allPages.reduce((sum, p) => sum + p.length, 0);
+      return loaded < lastPage.totalCount ? allPages.length : undefined;
+    },
+    staleTime: 2 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 }
 
@@ -78,7 +95,9 @@ export function useCreatePrompt() {
   return useMutation({
     mutationFn: async (data: {
       title: string;
+      title_ar?: string | null;
       description: string;
+      description_ar?: string | null;
       prompt_text?: string | null;
       link?: string | null;
       image_url?: string | null;
@@ -110,7 +129,9 @@ export function useUpdatePrompt() {
     }: {
       id: string;
       title?: string;
+      title_ar?: string | null;
       description?: string;
+      description_ar?: string | null;
       prompt_text?: string | null;
       link?: string | null;
       image_url?: string | null;

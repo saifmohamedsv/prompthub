@@ -38,16 +38,20 @@
     "views": "مشاهدة",
     "share": "مشاركة",
     "copyPrompt": "نسخ البرومبت",
-    "linkCopied": "تم نسخ الرابط!",
+    "linkCopied": "تم النسخ!",
     "tryIt": "جربه",
     "addNew": "إضافة برومبت جديد",
     "editPrompt": "تعديل البرومبت",
     "deletePrompt": "حذف البرومبت",
     "deleteConfirm": "هل أنت متأكد من حذف هذا البرومبت؟",
-    "title": "العنوان",
+    "title": "العنوان (إنجليزي)",
     "titlePlaceholder": "أعطِ برومبتك عنواناً جذاباً",
-    "description": "الوصف",
+    "titleAr": "العنوان (عربي)",
+    "titleArPlaceholder": "العنوان بالعربي",
+    "description": "الوصف (إنجليزي)",
     "descriptionPlaceholder": "اوصف ما يفعله هذا البرومبت...",
+    "descriptionAr": "الوصف (عربي)",
+    "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
     "link": "الرابط",
     "linkPlaceholder": "https://...",
     "category": "الفئة",
@@ -79,8 +83,7 @@
     "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد."
   },
   "footer": {
-    "tagline": "اكتشف وشارك أفضل برومبتات الذكاء الاصطناعي.",
-    "builtWith": "بُني بـ"
+    "madeBy": "صُنع بواسطة"
   },
   "locale": {
     "en": "English",
