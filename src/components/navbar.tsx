@@ -10,8 +10,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/logo";
 import { routes } from "@/lib/config";
-import { Menu } from "lucide-react";
+import { Menu, Compass, FileText, Heart } from "lucide-react";
 import { useState } from "react";
+
+const navIcons = {
+  [routes.explore]: Compass,
+  [routes.myPrompts]: FileText,
+  [routes.likes]: Heart,
+} as const;
 
 export function Navbar() {
   const t = useTranslations("nav");
@@ -61,23 +67,37 @@ export function Navbar() {
             >
               <Menu className="h-5 w-5" />
             </SheetTrigger>
-            <SheetContent side="left" className="w-64">
-              <div className="flex flex-col gap-4 pt-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={`text-sm font-medium ${
-                      pathname === link.href
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+            <SheetContent side="left" className="w-72 p-0">
+              <div className="flex flex-col h-full">
+                {/* Sheet header */}
+                <div className="px-5 pt-6 pb-4">
+                  <Logo size="md" />
+                </div>
+
                 <Separator />
+
+                {/* Nav links */}
+                <nav className="flex flex-col gap-1 px-3 py-4">
+                  {navLinks.map((link) => {
+                    const isActive = pathname === link.href;
+                    const Icon = navIcons[link.href as keyof typeof navIcons];
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        }`}
+                      >
+                        {Icon && <Icon className="h-4 w-4" />}
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
               </div>
             </SheetContent>
           </Sheet>
