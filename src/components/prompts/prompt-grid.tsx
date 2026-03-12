@@ -38,7 +38,7 @@ export function PromptGrid({
   }
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {prompts.map((prompt) => (
         <PromptCard key={prompt.id} prompt={prompt} />
       ))}
