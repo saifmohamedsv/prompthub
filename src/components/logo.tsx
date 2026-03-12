@@ -11,7 +11,7 @@ const sizes = {
 
 export function Logo({ size = "md", className = "" }: LogoProps) {
   return (
-    <span dir="ltr" className={`inline-flex items-baseline font-semibold tracking-tight ${sizes[size]} ${className}`}>
+    <span dir="ltr" className={`inline-flex items-baseline font-extrabold tracking-tight ${sizes[size]} ${className}`}>
       <span className="text-foreground">prompt</span>
       <span className="text-primary">hub</span>
       <span className="mb-auto ml-0.5 h-1.5 w-1.5 rounded-full bg-primary" />
