@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { Locale } from "@/lib/config";
 import { Eye, Calendar } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
@@ -12,9 +13,9 @@ import type { PromptWithAuthor } from "@/types/prompt";
 export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   const locale = useLocale();
 
-  const categoryName = locale === "ar" ? prompt.categories?.name_ar : prompt.categories?.name;
-  const title = (locale === "ar" && prompt.title_ar) ? prompt.title_ar : prompt.title;
-  const description = (locale === "ar" && prompt.description_ar) ? prompt.description_ar : prompt.description;
+  const categoryName = locale === Locale.AR ? prompt.categories?.name_ar : prompt.categories?.name;
+  const title = (locale === Locale.AR && prompt.title_ar) ? prompt.title_ar : prompt.title;
+  const description = (locale === Locale.AR && prompt.description_ar) ? prompt.description_ar : prompt.description;
 
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 

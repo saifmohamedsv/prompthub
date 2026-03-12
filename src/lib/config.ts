@@ -2,6 +2,11 @@
 // App-wide configuration — single source of truth
 // ============================================
 
+export enum Locale {
+  AR = "ar",
+  EN = "en",
+}
+
 export const siteConfig = {
   name: "PromptHub",
   description: "Discover and share AI prompts",

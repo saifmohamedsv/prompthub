@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useCategories } from "@/hooks/use-categories";
+import { Locale } from "@/lib/config";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 
 export function CategoryFilter({ value, onChange }: { value?: string; onChange?: (slug: string) => void }) {
@@ -13,7 +14,7 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
     if (!value || value === "all") return t("allCategories");
     const cat = categories?.find((c) => c.slug === value);
     if (!cat) return t("allCategories");
-    return locale === "ar" ? cat.name_ar : cat.name;
+    return locale === Locale.AR ? cat.name_ar : cat.name;
   })();
 
   return (
@@ -25,7 +26,7 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
         <SelectItem value="all">{t("allCategories")}</SelectItem>
         {categories?.map((cat) => (
           <SelectItem key={cat.id} value={cat.slug}>
-            {locale === "ar" ? cat.name_ar : cat.name}
+            {locale === Locale.AR ? cat.name_ar : cat.name}
           </SelectItem>
         ))}
       </SelectContent>

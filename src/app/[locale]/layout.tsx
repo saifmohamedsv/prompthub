@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { inter, cairo } from "@/lib/fonts";
+import { Locale } from "@/lib/config";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -40,7 +41,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const messages = await getMessages();
-  const isArabic = locale === "ar";
+  const isArabic = locale === Locale.AR;
   const fontClass = isArabic ? cairo.variable : inter.variable;
 
   return (

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { Locale } from "@/lib/config";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { routes } from "@/lib/config";
@@ -78,7 +79,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
     if (!categoryId) return t("selectCategory");
     const cat = categories?.find((c) => c.id === categoryId);
     if (!cat) return t("selectCategory");
-    return locale === "ar" ? cat.name_ar : cat.name;
+    return locale === Locale.AR ? cat.name_ar : cat.name;
   })();
 
   function toggleTag(tagId: string) {
@@ -262,7 +263,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
               <SelectContent>
                 {categories?.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
-                    {locale === "ar" ? cat.name_ar : cat.name}
+                    {locale === Locale.AR ? cat.name_ar : cat.name}
                   </SelectItem>
                 ))}
               </SelectContent>

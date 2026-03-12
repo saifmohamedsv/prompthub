@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Languages } from "lucide-react";
+import { Locale } from "@/lib/config";
 
 export function LocaleSwitcher() {
   const locale = useLocale();
@@ -17,7 +18,7 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
   const t = useTranslations("locale");
 
-  function switchLocale(nextLocale: "en" | "ar") {
+  function switchLocale(nextLocale: Locale) {
     router.replace(pathname, { locale: nextLocale });
   }
 
@@ -28,16 +29,16 @@ export function LocaleSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem
-          onClick={() => switchLocale("en")}
-          disabled={locale === "en"}
+          onClick={() => switchLocale(Locale.EN)}
+          disabled={locale === Locale.EN}
         >
-          {t("en")}
+          {t(Locale.EN)}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => switchLocale("ar")}
-          disabled={locale === "ar"}
+          onClick={() => switchLocale(Locale.AR)}
+          disabled={locale === Locale.AR}
         >
-          {t("ar")}
+          {t(Locale.AR)}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
