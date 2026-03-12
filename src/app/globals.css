@@ -154,7 +154,13 @@
 .dark [data-slot="input"],
 .dark [data-slot="textarea"],
 .dark [data-slot="select-trigger"] {
-  background-color: color-mix(in srgb, var(--input) 60%, transparent) !important;
+  background-color: color-mix(in srgb, var(--foreground) 8%, var(--background)) !important;
+}
+
+.dark [data-slot="card"] [data-slot="input"],
+.dark [data-slot="card"] [data-slot="textarea"],
+.dark [data-slot="card"] [data-slot="select-trigger"] {
+  background-color: color-mix(in srgb, var(--foreground) 10%, var(--card)) !important;
 }
 
 /* Toast RTL support — fix Arabic text alignment */
