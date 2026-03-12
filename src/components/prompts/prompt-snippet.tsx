@@ -39,7 +39,7 @@ export function PromptSnippet({
   return (
     <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
       <div className={`flex items-center justify-between ${isCompact ? "px-3 pt-2" : "border-b border-border/50 px-4 py-2.5"}`}>
-        <span className="text-2xs font-semibold tracking-widest text-muted-foreground uppercase sm:text-xs">
+        <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {t("promptText")}
         </span>
         {isCompact ? (

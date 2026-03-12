@@ -145,38 +145,6 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-
-  /* ─── Custom typography scale ───
-   * Semantic sizes that auto-adjust for Arabic via RTL overrides.
-   * Components use text-label, text-body-sm, text-body, text-heading-sm
-   * instead of arbitrary text-[Npx] values.
-   */
-  --font-size-2xs: 0.6875rem;
-  --font-size-2xs--line-height: 1.45;
-  --font-size-label: var(--fs-label);
-  --font-size-label--line-height: 1.45;
-  --font-size-body-sm: var(--fs-body-sm);
-  --font-size-body-sm--line-height: 1.6;
-  --font-size-body: var(--fs-body);
-  --font-size-body--line-height: 1.5;
-  --font-size-heading-sm: var(--fs-heading-sm);
-  --font-size-heading-sm--line-height: 1.35;
-}
-
-/* ─── Typography scale values — EN (default) ─── */
-:root {
-  --fs-label: 0.6875rem;       /* 11px — tags, badges, meta */
-  --fs-body-sm: 0.8125rem;     /* 13px — card descriptions */
-  --fs-body: 0.875rem;         /* 14px — card titles, general body */
-  --fs-heading-sm: 0.9375rem;  /* 15px — card titles at sm: */
-}
-
-/* ─── Typography scale values — AR (RTL) ─── */
-html[dir="rtl"] {
-  --fs-label: 0.75rem;         /* 12px */
-  --fs-body-sm: 0.9375rem;     /* 15px */
-  --fs-body: 1rem;             /* 16px */
-  --fs-heading-sm: 1.0625rem;  /* 17px */
 }
 
 /* ─── Base layer ─── */
@@ -193,7 +161,7 @@ html[dir="rtl"] {
     font-feature-settings: "cv11", "ss01";
   }
   html[dir="rtl"] body {
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 

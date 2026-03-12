@@ -32,11 +32,11 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       {/* Top row: category + stats */}
       <div className="flex items-center justify-between px-3 pt-3 sm:px-4 sm:pt-4">
         {categoryName && (
-          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-label font-semibold tracking-wide text-primary uppercase">
+          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold tracking-wide text-primary uppercase">
             {categoryName}
           </span>
         )}
-        <div className="flex items-center gap-3 text-label text-muted-foreground">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1">
             <Eye className="size-3.5" />
             {prompt.views_count}
@@ -52,7 +52,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       {tags.length > 0 && (
         <div dir="ltr" className="flex flex-wrap gap-1.5 px-3 pt-2.5 sm:px-4">
           {tags.map((tag) => (
-            <span key={tag.id} className="rounded-md bg-secondary px-2 py-0.5 text-2xs font-medium text-secondary-foreground">
+            <span key={tag.id} className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
               {tag.name}
             </span>
           ))}
@@ -60,12 +60,12 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       )}
 
       {/* Title */}
-      <h3 className="line-clamp-2 px-3 pt-3 text-body font-semibold leading-snug sm:px-4 sm:text-heading-sm">
+      <h3 className="line-clamp-2 px-3 pt-3 text-base font-bold leading-snug sm:px-4 sm:text-lg">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="line-clamp-2 flex-1 px-3 pt-1.5 text-body-sm leading-relaxed text-muted-foreground sm:px-4">
+      <p className="line-clamp-2 flex-1 px-3 pt-1.5 text-sm font-medium leading-relaxed text-muted-foreground sm:px-4">
         {description}
       </p>
 
@@ -81,9 +81,9 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
         <div className="flex items-center gap-2">
           <Avatar className="size-6">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
-            <AvatarFallback className="text-2xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
+            <AvatarFallback className="text-xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <span className="text-label text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             {prompt.profiles?.full_name ?? prompt.profiles?.username}
           </span>
         </div>
