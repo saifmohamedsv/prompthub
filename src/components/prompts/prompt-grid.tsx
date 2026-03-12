@@ -16,7 +16,7 @@ export function PromptGrid({
 
   if (isLoading) {
     return (
-      <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <PromptCardSkeleton key={i} />
         ))}
