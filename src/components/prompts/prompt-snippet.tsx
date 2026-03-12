@@ -39,7 +39,7 @@ export function PromptSnippet({
   return (
     <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
       <div className={`flex items-center justify-between ${isCompact ? "px-3 pt-2" : "border-b border-border/50 px-4 py-2.5"}`}>
-        <span className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase sm:text-xs">
+        <span className="text-2xs font-semibold tracking-widest text-muted-foreground uppercase sm:text-xs">
           {t("promptText")}
         </span>
         {isCompact ? (
@@ -48,17 +48,17 @@ export function PromptSnippet({
             onClick={handleCopy}
             className="rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground"
           >
-            <Copy className="h-3.5 w-3.5" />
+            <Copy className="size-3.5" />
           </button>
         ) : (
           <Button variant="ghost" size="sm" onClick={handleCopy} className="h-7 gap-1.5 text-xs">
-            <Copy className="h-3.5 w-3.5" />
+            <Copy className="size-3.5" />
             {t("copyPrompt")}
           </Button>
         )}
       </div>
       {isCompact ? (
-        <p dir="ltr" className="px-3 pt-1 pb-2.5 font-mono text-[12px] leading-relaxed text-muted-foreground">
+        <p dir="ltr" className="px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
           {displayText}
         </p>
       ) : (

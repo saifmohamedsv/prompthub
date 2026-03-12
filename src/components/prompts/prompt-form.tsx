@@ -291,7 +291,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                     }`}
                   >
                     {tag.name}
-                    {isSelected && <X className="h-3 w-3" />}
+                    {isSelected && <X className="size-3" />}
                   </button>
                 );
               })}
@@ -315,7 +315,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                   }}
                   className="absolute top-2 right-2 rounded-full bg-black/60 p-1 text-white hover:bg-black/80"
                 >
-                  <X className="h-3.5 w-3.5" />
+                  <X className="size-3.5" />
                 </button>
               </div>
             )}

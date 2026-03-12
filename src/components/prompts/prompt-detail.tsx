@@ -66,7 +66,7 @@ export function PromptDetail({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-0">
       <Link href={routes.explore} className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" />
+        <ArrowLeft className="size-4" />
         {tNav("back")}
       </Link>
 
@@ -85,7 +85,7 @@ export function PromptDetail({ id }: { id: string }) {
               </div>
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-1">
-                  <Eye className="h-3.5 w-3.5" />
+                  <Eye className="size-3.5" />
                   {prompt.views_count} {t("views")}
                 </span>
                 <span>
@@ -102,7 +102,7 @@ export function PromptDetail({ id }: { id: string }) {
               {prompt.link && (
                 <Button variant="outline" size="sm">
                   <Link href={prompt.link} target="_blank" className="inline-flex items-center gap-1">
-                    <ExternalLink className="h-4 w-4" />
+                    <ExternalLink className="size-4" />
                     {t("tryIt")}
                   </Link>
                 </Button>
@@ -129,7 +129,7 @@ export function PromptDetail({ id }: { id: string }) {
           <Separator />
 
           <div className="flex items-center gap-3">
-            <Avatar className="h-10 w-10">
+            <Avatar className="size-10">
               <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
               <AvatarFallback>{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
             </Avatar>

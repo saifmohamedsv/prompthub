@@ -44,7 +44,7 @@ export function LikeButton({
       >
         <Heart
           className={cn(
-            "h-3.5 w-3.5 transition-colors",
+            "size-3.5 transition-colors",
             isLiked && "fill-red-500 text-red-500"
           )}
         />
@@ -63,7 +63,7 @@ export function LikeButton({
     >
       <Heart
         className={cn(
-          "h-4 w-4 transition-colors",
+          "size-4 transition-colors",
           isLiked && "fill-red-500 text-red-500"
         )}
       />

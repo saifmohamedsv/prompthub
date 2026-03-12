@@ -31,7 +31,7 @@ export function Navbar() {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm dark:shadow-lg dark:shadow-black/30">
+    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
       <nav className="container mx-auto flex h-14 items-center justify-between px-4 sm:h-16">
         <Link href={routes.home} className="flex items-center">
           <Logo size="sm" />
@@ -65,7 +65,7 @@ export function Navbar() {
               render={<Button variant="ghost" size="icon" />}
               className="md:hidden"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0">
               <div className="flex flex-col h-full">
@@ -92,7 +92,7 @@ export function Navbar() {
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         }`}
                       >
-                        {Icon && <Icon className="h-4 w-4" />}
+                        {Icon && <Icon className="size-4" />}
                         {link.label}
                       </Link>
                     );
