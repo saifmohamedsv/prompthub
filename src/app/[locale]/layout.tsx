@@ -4,7 +4,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { inter, balooBhaijaan } from "@/lib/fonts";
+import { inter, notoSansArabic } from "@/lib/fonts";
 import { Locale } from "@/lib/config";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
@@ -42,7 +42,7 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
   const isArabic = locale === Locale.AR;
-  const fontClass = isArabic ? balooBhaijaan.variable : inter.variable;
+  const fontClass = isArabic ? notoSansArabic.variable : inter.variable;
 
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>

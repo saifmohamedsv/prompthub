@@ -1,4 +1,4 @@
-import { Inter, Baloo_Bhaijaan_2 } from "next/font/google";
+import { Inter, Noto_Sans_Arabic } from "next/font/google";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -6,8 +6,8 @@ export const inter = Inter({
   display: "swap",
 });
 
-export const balooBhaijaan = Baloo_Bhaijaan_2({
-  subsets: ["arabic", "latin"],
+export const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
   variable: "--font-sans",
   display: "swap",
 });
