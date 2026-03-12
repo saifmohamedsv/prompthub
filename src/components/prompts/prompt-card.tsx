@@ -30,19 +30,19 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       className="group flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-md hover:ring-border/80"
     >
       {/* Top row: category + stats */}
-      <div className="flex items-center justify-between px-3 pt-3 sm:px-4 sm:pt-4">
+      <div className="flex items-center justify-between px-4 pt-4">
         {categoryName && (
-          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold tracking-wide text-primary uppercase">
+          <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold tracking-wide text-primary uppercase">
             {categoryName}
           </span>
         )}
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1">
-            <Eye className="size-3.5" />
+            <Eye className="size-4" />
             {prompt.views_count}
           </span>
           <span className="inline-flex items-center gap-1">
-            <Calendar className="size-3.5" />
+            <Calendar className="size-4" />
             {shortDate}
           </span>
         </div>
@@ -50,9 +50,9 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
       {/* Tags */}
       {tags.length > 0 && (
-        <div dir="ltr" className="flex flex-wrap gap-1.5 px-3 pt-2.5 sm:px-4">
+        <div dir="ltr" className="flex flex-wrap gap-2 px-4 pt-3">
           {tags.map((tag) => (
-            <span key={tag.id} className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
+            <span key={tag.id} className="rounded-md bg-secondary px-2.5 py-0.5 text-sm font-medium text-secondary-foreground">
               {tag.name}
             </span>
           ))}
@@ -60,30 +60,30 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
       )}
 
       {/* Title */}
-      <h3 className="line-clamp-2 px-3 pt-3 text-base font-bold leading-snug sm:px-4 sm:text-lg">
+      <h3 className="line-clamp-2 px-4 pt-3 text-lg font-bold leading-snug sm:text-xl">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="line-clamp-2 flex-1 px-3 pt-1.5 text-sm font-medium leading-relaxed text-muted-foreground sm:px-4">
+      <p className="line-clamp-2 flex-1 px-4 pt-2 text-base leading-relaxed text-muted-foreground">
         {description}
       </p>
 
       {/* Prompt snippet */}
       {prompt.prompt_text && (
-        <div className="mx-3 mt-3 sm:mx-4">
+        <div className="mx-4 mt-3">
           <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
       {/* Footer: author + likes */}
-      <div className="mt-auto flex items-center justify-between px-3 pt-3 pb-3 sm:px-4 sm:pb-4">
-        <div className="flex items-center gap-2">
-          <Avatar className="size-6">
+      <div className="mt-auto flex items-center justify-between px-4 pt-4 pb-4">
+        <div className="flex items-center gap-2.5">
+          <Avatar className="size-7">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
             <AvatarFallback className="text-xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-sm text-muted-foreground">
             {prompt.profiles?.full_name ?? prompt.profiles?.username}
           </span>
         </div>
