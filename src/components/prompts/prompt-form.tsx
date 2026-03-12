@@ -166,8 +166,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-3">
-              <label className="text-sm font-medium">{t("title")}</label>
+            <div className="flex flex-col">
+              <label className="mb-2 text-sm font-medium">{t("title")}</label>
               <Input
                 placeholder={t("titlePlaceholder")}
                 value={title}
@@ -180,8 +180,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 <p className="text-sm text-destructive">{errors.title}</p>
               )}
             </div>
-            <div className="space-y-3">
-              <label className="text-sm font-medium">{t("titleAr")}</label>
+            <div className="flex flex-col">
+              <label className="mb-2 text-sm font-medium">{t("titleAr")}</label>
               <Input
                 dir="rtl"
                 placeholder={t("titleArPlaceholder")}
@@ -192,8 +192,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-3">
-              <label className="text-sm font-medium">{t("description")}</label>
+            <div className="flex flex-col">
+              <label className="mb-2 text-sm font-medium">{t("description")}</label>
               <Textarea
                 placeholder={t("descriptionPlaceholder")}
                 className="min-h-24"
@@ -208,8 +208,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 <p className="text-sm text-destructive">{errors.description}</p>
               )}
             </div>
-            <div className="space-y-3">
-              <label className="text-sm font-medium">{t("descriptionAr")}</label>
+            <div className="flex flex-col">
+              <label className="mb-2 text-sm font-medium">{t("descriptionAr")}</label>
               <Textarea
                 dir="rtl"
                 placeholder={t("descriptionArPlaceholder")}
@@ -220,8 +220,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm font-medium">{t("promptText")}</label>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium">{t("promptText")}</label>
             <Textarea
               placeholder={t("promptTextPlaceholder")}
               className="min-h-32 font-mono text-sm"
@@ -231,8 +231,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             <p className="text-xs text-muted-foreground">{t("promptTextHint")}</p>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm font-medium">{t("link")}</label>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium">{t("link")}</label>
             <Input
               placeholder={t("linkPlaceholder")}
               type="url"
@@ -247,8 +247,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             )}
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm font-medium">{t("category")}</label>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium">{t("category")}</label>
             <Select
               value={categoryId}
               onValueChange={(v) => {
@@ -273,8 +273,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             )}
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm font-medium">{t("tags")}</label>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium">{t("tags")}</label>
             <div className="flex flex-wrap gap-2">
               {tags?.map((tag) => {
                 const isSelected = selectedTagIds.includes(tag.id);
@@ -297,8 +297,8 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <label className="text-sm font-medium">{t("image")}</label>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium">{t("image")}</label>
             {imagePreview && (
               <div className="relative">
                 <img
