@@ -154,5 +154,12 @@
 .dark [data-slot="input"],
 .dark [data-slot="textarea"],
 .dark [data-slot="select-trigger"] {
-  background-color: color-mix(in srgb, var(--input) 30%, transparent) !important;
+  background-color: color-mix(in srgb, var(--input) 60%, transparent) !important;
+}
+
+/* Toast RTL support — fix Arabic text alignment */
+[data-sonner-toaster][dir="rtl"] [data-sonner-toast] {
+  text-align: right;
+  direction: rtl;
+  font-family: var(--font-sans);
 }
