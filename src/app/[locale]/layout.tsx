@@ -18,21 +18,14 @@ export const metadata: Metadata = {
     default: "PromptHub",
     template: "%s | PromptHub",
   },
-  description:
-    "Discover and share the best AI prompts for ChatGPT, Claude, Midjourney, and more.",
+  description: "Discover and share the best AI prompts for ChatGPT, Claude, Midjourney, and more.",
 };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function LocaleLayout({ children, params }: { children: ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -48,13 +41,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={`${fontClass} font-sans antialiased`}>
-        <NextTopLoader color="#b45309" height={5} showSpinner={false} />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <NextTopLoader color="#b45309" height={5} showSpinner />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <QueryProvider>
             <AuthProvider>
               <NextIntlClientProvider messages={messages}>
