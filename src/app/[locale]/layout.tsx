@@ -48,7 +48,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={`${fontClass} font-sans antialiased`}>
-        <NextTopLoader color="#b45309" height={3} showSpinner={false} />
+        <NextTopLoader color="#b45309" height={5} showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
