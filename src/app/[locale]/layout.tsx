@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/hooks/use-auth";
+import NextTopLoader from "nextjs-toploader";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={`${fontClass} font-sans antialiased`}>
+        <NextTopLoader color="#b45309" height={3} showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
