@@ -28,7 +28,7 @@ Activate this skill when:
 
 ## Commit Conventions
 
-Follow these commit message conventions based on 97 analyzed commits.
+Follow these commit message conventions based on 108 analyzed commits.
 
 ### Commit Style: Conventional Commits
 
@@ -41,7 +41,7 @@ Follow these commit message conventions based on 97 analyzed commits.
 
 ### Message Guidelines
 
-- Average message length: ~57 characters
+- Average message length: ~58 characters
 - Keep first line concise and descriptive
 - Use imperative mood ("Add feature" not "Added feature")
 
@@ -49,7 +49,7 @@ Follow these commit message conventions based on 97 analyzed commits.
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/add-or-update-arabic-font.md)
+feat: add prompthub ECC bundle (.claude/commands/update-arabic-font-or-typography.md)
 ```
 
 *Commit message example*
@@ -79,7 +79,7 @@ chore: update i18n messages for new features
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/refactoring.md)
+feat: add prompthub ECC bundle (.claude/commands/add-or-update-ecc-bundle-file.md)
 ```
 
 *Commit message example*
@@ -182,7 +182,7 @@ These workflows were detected from analyzing commit patterns.
 
 Standard feature implementation workflow
 
-**Frequency**: ~20 times per month
+**Frequency**: ~25 times per month
 
 **Steps**:
 1. Add feature implementation
@@ -190,135 +190,116 @@ Standard feature implementation workflow
 3. Update documentation
 
 **Files typically involved**:
+- `src/components/prompts/*`
 - `src/app/[locale]/*`
 - `src/lib/*`
-- `src/components/*`
 
 **Example commit sequence**:
 ```
-feat: replace Cairo with Baloo Bhaijaan 2 for Arabic font
-fix: redesign mobile side menu with icons, active states, and branding
-fix: constrain prompt detail image height and improve form spacing
+fix: add explicit margin-bottom on form labels for visible spacing
+fix: redesign logo with modern minimal style
+fix: use font-extrabold for heavier logo weight
 ```
 
-### Add Or Update Ecc Bundle File
+### Add Or Update Ecc Bundle
 
-Adds or updates a configuration, command, skill, or agent file in ECC-related directories (.claude, .codex, .agents) to extend or modify the prompthub's capabilities.
+Adds or updates a set of ECC (Extensible Command/Component) bundle files for prompthub, including commands, skills, identity, and agent definitions.
 
-**Frequency**: ~10 times per month
+**Frequency**: ~3 times per month
 
 **Steps**:
-1. Create or update a file in one of the ECC directories (e.g., .claude/commands/, .codex/agents/, .agents/skills/).
-2. Commit the file with a message referencing the ECC bundle and the specific file.
-3. Optionally, repeat for related files (e.g., SKILL.md, identity.json, config.toml).
+1. Add or update one or more files in .claude/commands/*.md (such as feature-development.md, add-or-update-ecc-bundle-file.md, update-arabic-font-or-typography.md, refactoring.md, add-or-update-arabic-font.md)
+2. Add or update .claude/identity.json
+3. Add or update .claude/ecc-tools.json
+4. Add or update .claude/skills/prompthub/SKILL.md
+5. Add or update .agents/skills/prompthub/SKILL.md
+6. Add or update .agents/skills/prompthub/agents/openai.yaml
+7. Add or update .codex/agents/*.toml (docs-researcher.toml, reviewer.toml, explorer.toml)
+8. Add or update .codex/AGENTS.md and/or .codex/config.toml
 
 **Files typically involved**:
 - `.claude/commands/*.md`
-- `.claude/skills/prompthub/SKILL.md`
 - `.claude/identity.json`
 - `.claude/ecc-tools.json`
+- `.claude/skills/prompthub/SKILL.md`
+- `.agents/skills/prompthub/SKILL.md`
+- `.agents/skills/prompthub/agents/openai.yaml`
 - `.codex/agents/*.toml`
 - `.codex/AGENTS.md`
 - `.codex/config.toml`
-- `.agents/skills/prompthub/agents/openai.yaml`
-- `.agents/skills/prompthub/SKILL.md`
 
 **Example commit sequence**:
 ```
-Create or update a file in one of the ECC directories (e.g., .claude/commands/, .codex/agents/, .agents/skills/).
-Commit the file with a message referencing the ECC bundle and the specific file.
-Optionally, repeat for related files (e.g., SKILL.md, identity.json, config.toml).
+Add or update one or more files in .claude/commands/*.md (such as feature-development.md, add-or-update-ecc-bundle-file.md, update-arabic-font-or-typography.md, refactoring.md, add-or-update-arabic-font.md)
+Add or update .claude/identity.json
+Add or update .claude/ecc-tools.json
+Add or update .claude/skills/prompthub/SKILL.md
+Add or update .agents/skills/prompthub/SKILL.md
+Add or update .agents/skills/prompthub/agents/openai.yaml
+Add or update .codex/agents/*.toml (docs-researcher.toml, reviewer.toml, explorer.toml)
+Add or update .codex/AGENTS.md and/or .codex/config.toml
 ```
 
-### Update Arabic Font Or Typography
+### Arabic Font And Typography Adjustment
 
-Updates the Arabic font or typography system, including font family, weights, and related styling for RTL/Arabic locales.
-
-**Frequency**: ~3 times per month
-
-**Steps**:
-1. Edit src/app/[locale]/layout.tsx to change font imports or usage.
-2. Edit src/lib/fonts.ts to update font family or weights.
-3. Edit src/app/globals.css to adjust global font-weight or typography tokens.
-4. Optionally, update prompt card or related components for size/weight changes.
-
-**Files typically involved**:
-- `src/app/[locale]/layout.tsx`
-- `src/lib/fonts.ts`
-- `src/app/globals.css`
-- `src/components/prompts/prompt-card.tsx`
-
-**Example commit sequence**:
-```
-Edit src/app/[locale]/layout.tsx to change font imports or usage.
-Edit src/lib/fonts.ts to update font family or weights.
-Edit src/app/globals.css to adjust global font-weight or typography tokens.
-Optionally, update prompt card or related components for size/weight changes.
-```
-
-### Refactor Or Tweak Prompt Card Layout
-
-Refactors or tweaks the layout, sizing, or style of the prompt card component for improved UI/UX.
-
-**Frequency**: ~3 times per month
-
-**Steps**:
-1. Edit src/components/prompts/prompt-card.tsx to change sizes, padding, or layout.
-2. Optionally, update related components (prompt-snippet, prompt-detail) or global styles.
-3. Commit with a message describing the UI/UX improvement.
-
-**Files typically involved**:
-- `src/components/prompts/prompt-card.tsx`
-- `src/components/prompts/prompt-snippet.tsx`
-- `src/app/globals.css`
-
-**Example commit sequence**:
-```
-Edit src/components/prompts/prompt-card.tsx to change sizes, padding, or layout.
-Optionally, update related components (prompt-snippet, prompt-detail) or global styles.
-Commit with a message describing the UI/UX improvement.
-```
-
-### Adjust Form Label Spacing
-
-Tweaks the spacing between form labels and fields for improved form usability and appearance.
-
-**Frequency**: ~3 times per month
-
-**Steps**:
-1. Edit src/components/prompts/prompt-form.tsx to adjust margin or spacing utilities.
-2. Optionally, update related CSS or layout wrappers.
-3. Commit with a message referencing label-to-field spacing.
-
-**Files typically involved**:
-- `src/components/prompts/prompt-form.tsx`
-
-**Example commit sequence**:
-```
-Edit src/components/prompts/prompt-form.tsx to adjust margin or spacing utilities.
-Optionally, update related CSS or layout wrappers.
-Commit with a message referencing label-to-field spacing.
-```
-
-### Update Dark Mode Field Contrast
-
-Improves the contrast and visibility of form fields or backgrounds in dark mode.
+Updates Arabic font, typography tokens, and related UI for RTL/Arabic support, often involving global CSS and prompt card components.
 
 **Frequency**: ~2 times per month
 
 **Steps**:
-1. Edit src/app/globals.css to adjust background or field color values.
-2. Optionally, update related form or card components for color consistency.
-3. Commit with a message referencing dark mode or contrast.
+1. Edit src/app/globals.css to adjust font weights, typography tokens, or add global RTL overrides
+2. Edit src/components/prompts/prompt-card.tsx to update text sizes, icon sizes, or font-weight for Arabic
+3. Optionally edit src/components/prompts/prompt-snippet.tsx, src/components/prompts/prompt-detail.tsx, src/components/prompts/prompt-form.tsx for related RTL or font changes
+4. Optionally edit src/app/[locale]/layout.tsx and src/lib/fonts.ts to change font families (e.g., switch to Cairo)
+5. Commit with message referencing Arabic font, typography, or RTL
 
 **Files typically involved**:
 - `src/app/globals.css`
+- `src/components/prompts/prompt-card.tsx`
+- `src/components/prompts/prompt-snippet.tsx`
+- `src/components/prompts/prompt-detail.tsx`
+- `src/components/prompts/prompt-form.tsx`
+- `src/app/[locale]/layout.tsx`
+- `src/lib/fonts.ts`
 
 **Example commit sequence**:
 ```
-Edit src/app/globals.css to adjust background or field color values.
-Optionally, update related form or card components for color consistency.
-Commit with a message referencing dark mode or contrast.
+Edit src/app/globals.css to adjust font weights, typography tokens, or add global RTL overrides
+Edit src/components/prompts/prompt-card.tsx to update text sizes, icon sizes, or font-weight for Arabic
+Optionally edit src/components/prompts/prompt-snippet.tsx, src/components/prompts/prompt-detail.tsx, src/components/prompts/prompt-form.tsx for related RTL or font changes
+Optionally edit src/app/[locale]/layout.tsx and src/lib/fonts.ts to change font families (e.g., switch to Cairo)
+Commit with message referencing Arabic font, typography, or RTL
+```
+
+### Design Token And Theme Refactor
+
+Refactors the design token system, updates theme (e.g., color, typography), and normalizes component styles for consistency.
+
+**Frequency**: ~2 times per month
+
+**Steps**:
+1. Edit src/app/globals.css to update or add design tokens (colors, typography, shadows, etc.)
+2. Edit multiple files in src/components/ (logo.tsx, navbar.tsx, prompts/*) to consume new tokens and remove old inline styles
+3. Normalize component classNames and remove custom overrides
+4. Update logo or other branding assets as needed
+
+**Files typically involved**:
+- `src/app/globals.css`
+- `src/components/logo.tsx`
+- `src/components/navbar.tsx`
+- `src/components/prompts/like-button.tsx`
+- `src/components/prompts/prompt-card.tsx`
+- `src/components/prompts/prompt-detail.tsx`
+- `src/components/prompts/prompt-form.tsx`
+- `src/components/prompts/prompt-grid.tsx`
+- `src/components/prompts/prompt-snippet.tsx`
+
+**Example commit sequence**:
+```
+Edit src/app/globals.css to update or add design tokens (colors, typography, shadows, etc.)
+Edit multiple files in src/components/ (logo.tsx, navbar.tsx, prompts/*) to consume new tokens and remove old inline styles
+Normalize component classNames and remove custom overrides
+Update logo or other branding assets as needed
 ```
 
 
