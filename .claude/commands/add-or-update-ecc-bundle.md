@@ -10,16 +10,16 @@ Use this workflow when working on **add-or-update-ecc-bundle** in `prompthub`.
 
 ## Goal
 
-Adds or updates an ECC bundle for prompthub, including commands, skills, identity, and agent configuration files.
+Adds or updates an ECC bundle, including commands, identity, skills, and tools for prompthub.
 
 ## Common Files
 
-- `.claude/commands/*.md`
+- `.claude/commands/add-or-update-ecc-bundle.md`
 - `.claude/identity.json`
-- `.claude/ecc-tools.json`
 - `.claude/skills/prompthub/SKILL.md`
+- `.claude/ecc-tools.json`
 - `.agents/skills/prompthub/SKILL.md`
-- `.codex/agents/*.toml`
+- `.agents/skills/prompthub/agents/openai.yaml`
 
 ## Suggested Sequence
 
@@ -30,10 +30,10 @@ Adds or updates an ECC bundle for prompthub, including commands, skills, identit
 
 ## Typical Commit Signals
 
-- Add or update one or more files in .claude/commands/ (such as feature-development.md, add-or-update-ecc-bundle.md, update-arabic-font-or-typography.md, etc.)
+- Add or update .claude/commands/add-or-update-ecc-bundle.md
 - Add or update .claude/identity.json
-- Add or update .claude/ecc-tools.json
 - Add or update .claude/skills/prompthub/SKILL.md
+- Add or update .claude/ecc-tools.json
 - Add or update .agents/skills/prompthub/SKILL.md
 
 ## Notes
