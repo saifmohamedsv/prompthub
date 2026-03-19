@@ -14,9 +14,9 @@ Standard feature implementation workflow
 
 ## Common Files
 
+- `src/components/prompts/*`
 - `src/app/[locale]/*`
 - `src/lib/*`
-- `src/components/*`
 
 ## Suggested Sequence
 
