@@ -2,28 +2,24 @@
   "version": "1.3",
   "schemaVersion": "1.0",
   "generatedBy": "ecc-tools",
-  "generatedAt": "2026-03-19T02:29:53.746Z",
+  "generatedAt": "2026-03-19T02:30:36.511Z",
   "repo": "https://github.com/saifmohamedsv/prompthub",
   "profiles": {
-    "requested": "full",
-    "recommended": "full",
+    "requested": "developer",
+    "recommended": "developer",
     "effective": "developer",
-    "requestedAlias": "full",
-    "recommendedAlias": "full",
+    "requestedAlias": "developer",
+    "recommendedAlias": "developer",
     "effectiveAlias": "developer"
   },
-  "requestedProfile": "full",
+  "requestedProfile": "developer",
   "profile": "developer",
-  "recommendedProfile": "full",
+  "recommendedProfile": "developer",
   "effectiveProfile": "developer",
   "tier": "free",
   "requestedComponents": [
     "repo-baseline",
-    "workflow-automation",
-    "security-audits",
-    "research-tooling",
-    "team-rollout",
-    "governance-controls"
+    "workflow-automation"
   ],
   "selectedComponents": [
     "repo-baseline",
@@ -32,19 +28,10 @@
   "requestedAddComponents": [],
   "requestedRemoveComponents": [],
   "blockedRemovalComponents": [],
-  "tierFilteredComponents": [
-    "security-audits",
-    "research-tooling",
-    "team-rollout",
-    "governance-controls"
-  ],
+  "tierFilteredComponents": [],
   "requestedRootPackages": [
     "runtime-core",
-    "workflow-pack",
-    "agentshield-pack",
-    "research-pack",
-    "team-config-sync",
-    "enterprise-controls"
+    "workflow-pack"
   ],
   "selectedRootPackages": [
     "runtime-core",
@@ -52,11 +39,7 @@
   ],
   "requestedPackages": [
     "runtime-core",
-    "workflow-pack",
-    "agentshield-pack",
-    "research-pack",
-    "team-config-sync",
-    "enterprise-controls"
+    "workflow-pack"
   ],
   "requestedAddPackages": [],
   "requestedRemovePackages": [],
@@ -69,18 +52,8 @@
     "workflow-pack"
   ],
   "blockedRemovalPackages": [],
-  "tierFilteredRootPackages": [
-    "agentshield-pack",
-    "research-pack",
-    "team-config-sync",
-    "enterprise-controls"
-  ],
-  "tierFilteredPackages": [
-    "agentshield-pack",
-    "research-pack",
-    "team-config-sync",
-    "enterprise-controls"
-  ],
+  "tierFilteredRootPackages": [],
+  "tierFilteredPackages": [],
   "conflictingPackages": [],
   "dependencyGraph": {
     "runtime-core": [],
@@ -94,11 +67,7 @@
   ],
   "requestedModules": [
     "runtime-core",
-    "workflow-pack",
-    "agentshield-pack",
-    "research-pack",
-    "team-config-sync",
-    "enterprise-controls"
+    "workflow-pack"
   ],
   "selectedModules": [
     "runtime-core",
@@ -121,7 +90,7 @@
     ".claude/homunculus/instincts/inherited/prompthub-instincts.yaml",
     ".claude/commands/feature-development.md",
     ".claude/commands/refactoring.md",
-    ".claude/commands/update-arabic-font-or-typography.md"
+    ".claude/commands/add-or-update-arabic-font.md"
   ],
   "packageFiles": {
     "runtime-core": [
@@ -139,7 +108,7 @@
     "workflow-pack": [
       ".claude/commands/feature-development.md",
       ".claude/commands/refactoring.md",
-      ".claude/commands/update-arabic-font-or-typography.md"
+      ".claude/commands/add-or-update-arabic-font.md"
     ]
   },
   "moduleFiles": {
@@ -158,7 +127,7 @@
     "workflow-pack": [
       ".claude/commands/feature-development.md",
       ".claude/commands/refactoring.md",
-      ".claude/commands/update-arabic-font-or-typography.md"
+      ".claude/commands/add-or-update-arabic-font.md"
     ]
   },
   "files": [
@@ -224,8 +193,8 @@
     },
     {
       "moduleId": "workflow-pack",
-      "path": ".claude/commands/update-arabic-font-or-typography.md",
-      "description": "Workflow command scaffold for update-arabic-font-or-typography."
+      "path": ".claude/commands/add-or-update-arabic-font.md",
+      "description": "Workflow command scaffold for add-or-update-arabic-font."
     }
   ],
   "workflows": [
@@ -238,8 +207,8 @@
       "path": ".claude/commands/refactoring.md"
     },
     {
-      "command": "update-arabic-font-or-typography",
-      "path": ".claude/commands/update-arabic-font-or-typography.md"
+      "command": "add-or-update-arabic-font",
+      "path": ".claude/commands/add-or-update-arabic-font.md"
     }
   ],
   "adapters": {
@@ -249,7 +218,7 @@
       "commandPaths": [
         ".claude/commands/feature-development.md",
         ".claude/commands/refactoring.md",
-        ".claude/commands/update-arabic-font-or-typography.md"
+        ".claude/commands/add-or-update-arabic-font.md"
       ]
     },
     "codex": {

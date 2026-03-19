@@ -1,23 +1,21 @@
 ---
-name: feature-development
-description: Workflow command scaffold for feature-development in prompthub.
+name: add-or-update-arabic-font
+description: Workflow command scaffold for add-or-update-arabic-font in prompthub.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
-# /feature-development
+# /add-or-update-arabic-font
 
-Use this workflow when working on **feature-development** in `prompthub`.
+Use this workflow when working on **add-or-update-arabic-font** in `prompthub`.
 
 ## Goal
 
-Standard feature implementation workflow
+Switching the Arabic font used in the application for improved typography and readability.
 
 ## Common Files
 
-- `src/components/ui/*`
-- `src/hooks/*`
-- `src/app/[locale]/*`
-- `**/api/**`
+- `src/app/[locale]/layout.tsx`
+- `src/lib/fonts.ts`
 
 ## Suggested Sequence
 
@@ -28,9 +26,8 @@ Standard feature implementation workflow
 
 ## Typical Commit Signals
 
-- Add feature implementation
-- Add tests for feature
-- Update documentation
+- Update src/app/[locale]/layout.tsx to use the new font.
+- Update src/lib/fonts.ts to import and configure the new font.
 
 ## Notes
 
