@@ -10,7 +10,7 @@ Use this workflow when working on **add-or-update-command-md** in `prompthub`.
 
 ## Goal
 
-Adds or updates a specific command markdown file for prompthub ECC bundle functionality.
+Adds or updates a command markdown file in the .claude/commands directory.
 
 ## Common Files
 
@@ -25,7 +25,7 @@ Adds or updates a specific command markdown file for prompthub ECC bundle functi
 
 ## Typical Commit Signals
 
-- Add or update a file in .claude/commands/ with a descriptive name (e.g., feature-development.md, refactoring.md, arabic-font-and-typography-adjustment.md, etc.)
+- Add or update a .claude/commands/*.md file with the new or modified command.
 
 ## Notes
 
