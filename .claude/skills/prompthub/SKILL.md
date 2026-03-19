@@ -28,7 +28,7 @@ Activate this skill when:
 
 ## Commit Conventions
 
-Follow these commit message conventions based on 108 analyzed commits.
+Follow these commit message conventions based on 119 analyzed commits.
 
 ### Commit Style: Conventional Commits
 
@@ -41,7 +41,7 @@ Follow these commit message conventions based on 108 analyzed commits.
 
 ### Message Guidelines
 
-- Average message length: ~58 characters
+- Average message length: ~59 characters
 - Keep first line concise and descriptive
 - Use imperative mood ("Add feature" not "Added feature")
 
@@ -49,7 +49,7 @@ Follow these commit message conventions based on 108 analyzed commits.
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/update-arabic-font-or-typography.md)
+feat: add prompthub ECC bundle (.claude/commands/arabic-font-and-typography-adjustment.md)
 ```
 
 *Commit message example*
@@ -79,7 +79,7 @@ chore: update i18n messages for new features
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/add-or-update-ecc-bundle-file.md)
+feat: add prompthub ECC bundle (.claude/commands/add-or-update-ecc-bundle.md)
 ```
 
 *Commit message example*
@@ -182,7 +182,7 @@ These workflows were detected from analyzing commit patterns.
 
 Standard feature implementation workflow
 
-**Frequency**: ~25 times per month
+**Frequency**: ~29 times per month
 
 **Steps**:
 1. Add feature implementation
@@ -190,32 +190,31 @@ Standard feature implementation workflow
 3. Update documentation
 
 **Files typically involved**:
-- `src/components/prompts/*`
 - `src/app/[locale]/*`
-- `src/lib/*`
 
 **Example commit sequence**:
 ```
-fix: add explicit margin-bottom on form labels for visible spacing
-fix: redesign logo with modern minimal style
-fix: use font-extrabold for heavier logo weight
+feat: add top progress bar for route transitions
+fix: increase progress bar height to 5px
+fix: streamline LocaleLayout function and improve formatting
 ```
 
-### Add Or Update Ecc Bundle
+### Add Prompthub Ecc Bundle
 
-Adds or updates a set of ECC (Extensible Command/Component) bundle files for prompthub, including commands, skills, identity, and agent definitions.
+Adds or updates a set of ECC (Extensible Command/Capability) bundle files for the prompthub project, including commands, agent configs, skills, and related metadata.
 
 **Frequency**: ~3 times per month
 
 **Steps**:
-1. Add or update one or more files in .claude/commands/*.md (such as feature-development.md, add-or-update-ecc-bundle-file.md, update-arabic-font-or-typography.md, refactoring.md, add-or-update-arabic-font.md)
+1. Add or update one or more markdown files under .claude/commands/ (e.g., add-or-update-ecc-bundle.md, feature-development.md, refactoring.md, etc.)
 2. Add or update .claude/identity.json
 3. Add or update .claude/ecc-tools.json
 4. Add or update .claude/skills/prompthub/SKILL.md
 5. Add or update .agents/skills/prompthub/SKILL.md
 6. Add or update .agents/skills/prompthub/agents/openai.yaml
-7. Add or update .codex/agents/*.toml (docs-researcher.toml, reviewer.toml, explorer.toml)
+7. Add or update .codex/agents/*.toml
 8. Add or update .codex/AGENTS.md and/or .codex/config.toml
+9. Optionally add or update .claude/homunculus/instincts/inherited/prompthub-instincts.yaml
 
 **Files typically involved**:
 - `.claude/commands/*.md`
@@ -227,79 +226,86 @@ Adds or updates a set of ECC (Extensible Command/Component) bundle files for pro
 - `.codex/agents/*.toml`
 - `.codex/AGENTS.md`
 - `.codex/config.toml`
+- `.claude/homunculus/instincts/inherited/prompthub-instincts.yaml`
 
 **Example commit sequence**:
 ```
-Add or update one or more files in .claude/commands/*.md (such as feature-development.md, add-or-update-ecc-bundle-file.md, update-arabic-font-or-typography.md, refactoring.md, add-or-update-arabic-font.md)
+Add or update one or more markdown files under .claude/commands/ (e.g., add-or-update-ecc-bundle.md, feature-development.md, refactoring.md, etc.)
 Add or update .claude/identity.json
 Add or update .claude/ecc-tools.json
 Add or update .claude/skills/prompthub/SKILL.md
 Add or update .agents/skills/prompthub/SKILL.md
 Add or update .agents/skills/prompthub/agents/openai.yaml
-Add or update .codex/agents/*.toml (docs-researcher.toml, reviewer.toml, explorer.toml)
+Add or update .codex/agents/*.toml
 Add or update .codex/AGENTS.md and/or .codex/config.toml
+Optionally add or update .claude/homunculus/instincts/inherited/prompthub-instincts.yaml
 ```
 
-### Arabic Font And Typography Adjustment
+### Update Feature Development Command
 
-Updates Arabic font, typography tokens, and related UI for RTL/Arabic support, often involving global CSS and prompt card components.
+Adds or updates the feature-development command markdown file in .claude/commands/, often as part of ECC bundle updates.
+
+**Frequency**: ~3 times per month
+
+**Steps**:
+1. Add or update .claude/commands/feature-development.md
+
+**Files typically involved**:
+- `.claude/commands/feature-development.md`
+
+**Example commit sequence**:
+```
+Add or update .claude/commands/feature-development.md
+```
+
+### Update Arabic Font Or Typography Command
+
+Adds or updates markdown files related to Arabic font or typography adjustment commands in .claude/commands/.
 
 **Frequency**: ~2 times per month
 
 **Steps**:
-1. Edit src/app/globals.css to adjust font weights, typography tokens, or add global RTL overrides
-2. Edit src/components/prompts/prompt-card.tsx to update text sizes, icon sizes, or font-weight for Arabic
-3. Optionally edit src/components/prompts/prompt-snippet.tsx, src/components/prompts/prompt-detail.tsx, src/components/prompts/prompt-form.tsx for related RTL or font changes
-4. Optionally edit src/app/[locale]/layout.tsx and src/lib/fonts.ts to change font families (e.g., switch to Cairo)
-5. Commit with message referencing Arabic font, typography, or RTL
+1. Add or update .claude/commands/arabic-font-and-typography-adjustment.md
+2. Add or update .claude/commands/update-arabic-font-or-typography.md
+3. Optionally add or update .claude/commands/add-or-update-arabic-font.md
 
 **Files typically involved**:
-- `src/app/globals.css`
-- `src/components/prompts/prompt-card.tsx`
-- `src/components/prompts/prompt-snippet.tsx`
-- `src/components/prompts/prompt-detail.tsx`
-- `src/components/prompts/prompt-form.tsx`
-- `src/app/[locale]/layout.tsx`
-- `src/lib/fonts.ts`
+- `.claude/commands/arabic-font-and-typography-adjustment.md`
+- `.claude/commands/update-arabic-font-or-typography.md`
+- `.claude/commands/add-or-update-arabic-font.md`
 
 **Example commit sequence**:
 ```
-Edit src/app/globals.css to adjust font weights, typography tokens, or add global RTL overrides
-Edit src/components/prompts/prompt-card.tsx to update text sizes, icon sizes, or font-weight for Arabic
-Optionally edit src/components/prompts/prompt-snippet.tsx, src/components/prompts/prompt-detail.tsx, src/components/prompts/prompt-form.tsx for related RTL or font changes
-Optionally edit src/app/[locale]/layout.tsx and src/lib/fonts.ts to change font families (e.g., switch to Cairo)
-Commit with message referencing Arabic font, typography, or RTL
+Add or update .claude/commands/arabic-font-and-typography-adjustment.md
+Add or update .claude/commands/update-arabic-font-or-typography.md
+Optionally add or update .claude/commands/add-or-update-arabic-font.md
 ```
 
-### Design Token And Theme Refactor
+### Update Codex Agents
 
-Refactors the design token system, updates theme (e.g., color, typography), and normalizes component styles for consistency.
+Adds or updates agent definition files in .codex/agents/ (such as docs-researcher.toml, reviewer.toml, explorer.toml) and related metadata.
 
 **Frequency**: ~2 times per month
 
 **Steps**:
-1. Edit src/app/globals.css to update or add design tokens (colors, typography, shadows, etc.)
-2. Edit multiple files in src/components/ (logo.tsx, navbar.tsx, prompts/*) to consume new tokens and remove old inline styles
-3. Normalize component classNames and remove custom overrides
-4. Update logo or other branding assets as needed
+1. Add or update .codex/agents/docs-researcher.toml
+2. Add or update .codex/agents/reviewer.toml
+3. Add or update .codex/agents/explorer.toml
+4. Optionally update .codex/AGENTS.md and/or .codex/config.toml
 
 **Files typically involved**:
-- `src/app/globals.css`
-- `src/components/logo.tsx`
-- `src/components/navbar.tsx`
-- `src/components/prompts/like-button.tsx`
-- `src/components/prompts/prompt-card.tsx`
-- `src/components/prompts/prompt-detail.tsx`
-- `src/components/prompts/prompt-form.tsx`
-- `src/components/prompts/prompt-grid.tsx`
-- `src/components/prompts/prompt-snippet.tsx`
+- `.codex/agents/docs-researcher.toml`
+- `.codex/agents/reviewer.toml`
+- `.codex/agents/explorer.toml`
+- `.codex/AGENTS.md`
+- `.codex/config.toml`
 
 **Example commit sequence**:
 ```
-Edit src/app/globals.css to update or add design tokens (colors, typography, shadows, etc.)
-Edit multiple files in src/components/ (logo.tsx, navbar.tsx, prompts/*) to consume new tokens and remove old inline styles
-Normalize component classNames and remove custom overrides
-Update logo or other branding assets as needed
+Add or update .codex/agents/docs-researcher.toml
+Add or update .codex/agents/reviewer.toml
+Add or update .codex/agents/explorer.toml
+Optionally update .codex/AGENTS.md and/or .codex/config.toml
 ```
 
 

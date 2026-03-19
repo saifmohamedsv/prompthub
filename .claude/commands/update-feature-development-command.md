@@ -1,20 +1,20 @@
 ---
-name: feature-development
-description: Workflow command scaffold for feature-development in prompthub.
+name: update-feature-development-command
+description: Workflow command scaffold for update-feature-development-command in prompthub.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
-# /feature-development
+# /update-feature-development-command
 
-Use this workflow when working on **feature-development** in `prompthub`.
+Use this workflow when working on **update-feature-development-command** in `prompthub`.
 
 ## Goal
 
-Standard feature implementation workflow
+Adds or updates the feature-development command markdown file in .claude/commands/, often as part of ECC bundle updates.
 
 ## Common Files
 
-- `src/app/[locale]/*`
+- `.claude/commands/feature-development.md`
 
 ## Suggested Sequence
 
@@ -25,9 +25,7 @@ Standard feature implementation workflow
 
 ## Typical Commit Signals
 
-- Add feature implementation
-- Add tests for feature
-- Update documentation
+- Add or update .claude/commands/feature-development.md
 
 ## Notes
 
