@@ -28,7 +28,7 @@ Activate this skill when:
 
 ## Commit Conventions
 
-Follow these commit message conventions based on 152 analyzed commits.
+Follow these commit message conventions based on 163 analyzed commits.
 
 ### Commit Style: Conventional Commits
 
@@ -79,7 +79,7 @@ chore: update i18n messages for new features
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/add-prompthub-ecc-bundle.md)
+feat: add prompthub ECC bundle (.claude/commands/add-or-update-ecc-bundle.md)
 ```
 
 *Commit message example*
@@ -196,116 +196,146 @@ feat: add prompthub ECC bundle (.codex/agents/docs-researcher.toml)
 feat: add prompthub ECC bundle (.codex/agents/reviewer.toml)
 ```
 
-### Add Or Update Ecc Bundle
+### Add Or Update Command Md Workflow
 
-Adds or updates an ECC bundle, including commands, identity, skills, and tools for prompthub.
+Adds or updates a command markdown file for prompthub ECC bundle.
 
 **Frequency**: ~4 times per month
 
 **Steps**:
-1. Add or update .claude/commands/add-or-update-ecc-bundle.md
-2. Add or update .claude/identity.json
-3. Add or update .claude/skills/prompthub/SKILL.md
-4. Add or update .claude/ecc-tools.json
-5. Add or update .agents/skills/prompthub/SKILL.md
-6. Add or update .agents/skills/prompthub/agents/openai.yaml
-7. Add or update .codex/agents/docs-researcher.toml
-8. Add or update .codex/agents/reviewer.toml
-9. Add or update .codex/agents/explorer.toml
-
-**Files typically involved**:
-- `.claude/commands/add-or-update-ecc-bundle.md`
-- `.claude/identity.json`
-- `.claude/skills/prompthub/SKILL.md`
-- `.claude/ecc-tools.json`
-- `.agents/skills/prompthub/SKILL.md`
-- `.agents/skills/prompthub/agents/openai.yaml`
-- `.codex/agents/docs-researcher.toml`
-- `.codex/agents/reviewer.toml`
-- `.codex/agents/explorer.toml`
-
-**Example commit sequence**:
-```
-Add or update .claude/commands/add-or-update-ecc-bundle.md
-Add or update .claude/identity.json
-Add or update .claude/skills/prompthub/SKILL.md
-Add or update .claude/ecc-tools.json
-Add or update .agents/skills/prompthub/SKILL.md
-Add or update .agents/skills/prompthub/agents/openai.yaml
-Add or update .codex/agents/docs-researcher.toml
-Add or update .codex/agents/reviewer.toml
-Add or update .codex/agents/explorer.toml
-```
-
-### Add Or Update Command Md
-
-Adds or updates a command markdown file for prompthub ECC bundle.
-
-**Frequency**: ~3 times per month
-
-**Steps**:
-1. Add or update .claude/commands/add-or-update-command-md.md
+1. Create or update a file in .claude/commands/ with a name like add-or-update-command-md.md
+2. Commit the file with a message referencing the ECC bundle
 
 **Files typically involved**:
 - `.claude/commands/add-or-update-command-md.md`
 
 **Example commit sequence**:
 ```
-Add or update .claude/commands/add-or-update-command-md.md
+Create or update a file in .claude/commands/ with a name like add-or-update-command-md.md
+Commit the file with a message referencing the ECC bundle
 ```
 
-### Feature Development Command
+### Add Or Update Ecc Bundle Command Workflow
 
-Adds or updates the feature development command file for prompthub ECC bundle.
+Adds or updates a command file specifically for ECC bundle management.
 
-**Frequency**: ~4 times per month
+**Frequency**: ~3 times per month
 
 **Steps**:
-1. Add or update .claude/commands/feature-development.md
+1. Create or update a file in .claude/commands/ with a name like add-or-update-ecc-bundle.md
+2. Commit the file with a message referencing the ECC bundle
+
+**Files typically involved**:
+- `.claude/commands/add-or-update-ecc-bundle.md`
+
+**Example commit sequence**:
+```
+Create or update a file in .claude/commands/ with a name like add-or-update-ecc-bundle.md
+Commit the file with a message referencing the ECC bundle
+```
+
+### Feature Development Command Workflow
+
+Adds or updates the feature-development command file for prompthub ECC bundle.
+
+**Frequency**: ~5 times per month
+
+**Steps**:
+1. Create or update .claude/commands/feature-development.md
+2. Commit the file with a message referencing the ECC bundle
 
 **Files typically involved**:
 - `.claude/commands/feature-development.md`
 
 **Example commit sequence**:
 ```
-Add or update .claude/commands/feature-development.md
+Create or update .claude/commands/feature-development.md
+Commit the file with a message referencing the ECC bundle
 ```
 
-### Add Prompthub Ecc Bundle Command
+### Add Skill Md Workflow
 
-Adds or updates the add-prompthub-ecc-bundle command file for prompthub ECC bundle.
+Adds or updates SKILL.md files for prompthub skills in both .agents and .claude directories.
 
-**Frequency**: ~3 times per month
+**Frequency**: ~4 times per month
 
 **Steps**:
-1. Add or update .claude/commands/add-prompthub-ecc-bundle.md
+1. Create or update .agents/skills/prompthub/SKILL.md
+2. Create or update .claude/skills/prompthub/SKILL.md
+3. Commit both files with a message referencing the ECC bundle
 
 **Files typically involved**:
-- `.claude/commands/add-prompthub-ecc-bundle.md`
+- `.agents/skills/prompthub/SKILL.md`
+- `.claude/skills/prompthub/SKILL.md`
 
 **Example commit sequence**:
 ```
-Add or update .claude/commands/add-prompthub-ecc-bundle.md
+Create or update .agents/skills/prompthub/SKILL.md
+Create or update .claude/skills/prompthub/SKILL.md
+Commit both files with a message referencing the ECC bundle
 ```
 
-### Update Arabic Font Or Typography Command
+### Update Identity Json Workflow
 
-Adds or updates commands related to Arabic font and typography adjustments for prompthub ECC bundle.
+Adds or updates the .claude/identity.json file for the ECC bundle.
 
-**Frequency**: ~2 times per month
+**Frequency**: ~4 times per month
 
 **Steps**:
-1. Add or update .claude/commands/arabic-font-and-typography-adjustment.md
-2. Add or update .claude/commands/update-arabic-font-or-typography.md
+1. Create or update .claude/identity.json
+2. Commit the file with a message referencing the ECC bundle
 
 **Files typically involved**:
-- `.claude/commands/arabic-font-and-typography-adjustment.md`
-- `.claude/commands/update-arabic-font-or-typography.md`
+- `.claude/identity.json`
 
 **Example commit sequence**:
 ```
-Add or update .claude/commands/arabic-font-and-typography-adjustment.md
-Add or update .claude/commands/update-arabic-font-or-typography.md
+Create or update .claude/identity.json
+Commit the file with a message referencing the ECC bundle
+```
+
+### Update Ecc Tools Json Workflow
+
+Adds or updates the .claude/ecc-tools.json file for the ECC bundle.
+
+**Frequency**: ~4 times per month
+
+**Steps**:
+1. Create or update .claude/ecc-tools.json
+2. Commit the file with a message referencing the ECC bundle
+
+**Files typically involved**:
+- `.claude/ecc-tools.json`
+
+**Example commit sequence**:
+```
+Create or update .claude/ecc-tools.json
+Commit the file with a message referencing the ECC bundle
+```
+
+### Add Codex Agents Toml Workflow
+
+Adds or updates agent configuration files in .codex/agents/ for docs-researcher, reviewer, and explorer.
+
+**Frequency**: ~4 times per month
+
+**Steps**:
+1. Create or update .codex/agents/docs-researcher.toml
+2. Create or update .codex/agents/reviewer.toml
+3. Create or update .codex/agents/explorer.toml
+4. Commit with a message referencing the ECC bundle
+
+**Files typically involved**:
+- `.codex/agents/docs-researcher.toml`
+- `.codex/agents/reviewer.toml`
+- `.codex/agents/explorer.toml`
+
+**Example commit sequence**:
+```
+Create or update .codex/agents/docs-researcher.toml
+Create or update .codex/agents/reviewer.toml
+Create or update .codex/agents/explorer.toml
+Commit with a message referencing the ECC bundle
 ```
 
 
