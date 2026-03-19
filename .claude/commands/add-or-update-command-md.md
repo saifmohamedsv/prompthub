@@ -10,11 +10,11 @@ Use this workflow when working on **add-or-update-command-md** in `prompthub`.
 
 ## Goal
 
-Adds or updates a command markdown file in the .claude/commands directory.
+Adds or updates a command markdown file for prompthub ECC bundle.
 
 ## Common Files
 
-- `.claude/commands/*.md`
+- `.claude/commands/add-or-update-command-md.md`
 
 ## Suggested Sequence
 
@@ -25,7 +25,7 @@ Adds or updates a command markdown file in the .claude/commands directory.
 
 ## Typical Commit Signals
 
-- Add or update a .claude/commands/*.md file with the new or modified command.
+- Add or update .claude/commands/add-or-update-command-md.md
 
 ## Notes
 

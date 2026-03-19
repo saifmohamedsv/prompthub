@@ -28,7 +28,7 @@ Activate this skill when:
 
 ## Commit Conventions
 
-Follow these commit message conventions based on 141 analyzed commits.
+Follow these commit message conventions based on 152 analyzed commits.
 
 ### Commit Style: Conventional Commits
 
@@ -41,7 +41,7 @@ Follow these commit message conventions based on 141 analyzed commits.
 
 ### Message Guidelines
 
-- Average message length: ~60 characters
+- Average message length: ~61 characters
 - Keep first line concise and descriptive
 - Use imperative mood ("Add feature" not "Added feature")
 
@@ -79,7 +79,7 @@ chore: update i18n messages for new features
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/add-or-update-ecc-bundle.md)
+feat: add prompthub ECC bundle (.claude/commands/add-prompthub-ecc-bundle.md)
 ```
 
 *Commit message example*
@@ -192,120 +192,120 @@ Standard feature implementation workflow
 **Example commit sequence**:
 ```
 feat: add prompthub ECC bundle (.codex/agents/explorer.toml)
-feat: add prompthub ECC bundle (.codex/agents/reviewer.toml)
 feat: add prompthub ECC bundle (.codex/agents/docs-researcher.toml)
+feat: add prompthub ECC bundle (.codex/agents/reviewer.toml)
 ```
 
-### Add Prompthub Ecc Bundle
+### Add Or Update Ecc Bundle
 
-Adds a new ECC bundle for prompthub, including commands, skills, identity, and agent configuration files.
+Adds or updates an ECC bundle, including commands, identity, skills, and tools for prompthub.
 
 **Frequency**: ~4 times per month
 
 **Steps**:
-1. Add or update .claude/commands/*.md files for new commands or updates.
-2. Add or update .claude/skills/prompthub/SKILL.md.
-3. Add or update .agents/skills/prompthub/SKILL.md.
-4. Add or update .claude/ecc-tools.json.
-5. Add or update .claude/identity.json.
-6. Add or update .agents/skills/prompthub/agents/openai.yaml.
-7. Add or update .codex/agents/*.toml for agent definitions.
+1. Add or update .claude/commands/add-or-update-ecc-bundle.md
+2. Add or update .claude/identity.json
+3. Add or update .claude/skills/prompthub/SKILL.md
+4. Add or update .claude/ecc-tools.json
+5. Add or update .agents/skills/prompthub/SKILL.md
+6. Add or update .agents/skills/prompthub/agents/openai.yaml
+7. Add or update .codex/agents/docs-researcher.toml
+8. Add or update .codex/agents/reviewer.toml
+9. Add or update .codex/agents/explorer.toml
 
 **Files typically involved**:
-- `.claude/commands/*.md`
-- `.claude/skills/prompthub/SKILL.md`
-- `.agents/skills/prompthub/SKILL.md`
-- `.claude/ecc-tools.json`
+- `.claude/commands/add-or-update-ecc-bundle.md`
 - `.claude/identity.json`
+- `.claude/skills/prompthub/SKILL.md`
+- `.claude/ecc-tools.json`
+- `.agents/skills/prompthub/SKILL.md`
 - `.agents/skills/prompthub/agents/openai.yaml`
-- `.codex/agents/*.toml`
-
-**Example commit sequence**:
-```
-Add or update .claude/commands/*.md files for new commands or updates.
-Add or update .claude/skills/prompthub/SKILL.md.
-Add or update .agents/skills/prompthub/SKILL.md.
-Add or update .claude/ecc-tools.json.
-Add or update .claude/identity.json.
-Add or update .agents/skills/prompthub/agents/openai.yaml.
-Add or update .codex/agents/*.toml for agent definitions.
-```
-
-### Add Or Update Command Md
-
-Adds or updates a command markdown file in the .claude/commands directory.
-
-**Frequency**: ~6 times per month
-
-**Steps**:
-1. Add or update a .claude/commands/*.md file with the new or modified command.
-
-**Files typically involved**:
-- `.claude/commands/*.md`
-
-**Example commit sequence**:
-```
-Add or update a .claude/commands/*.md file with the new or modified command.
-```
-
-### Update Feature Development Command
-
-Updates the feature-development command markdown file, often as part of ECC bundle updates.
-
-**Frequency**: ~4 times per month
-
-**Steps**:
-1. Add or update .claude/commands/feature-development.md.
-
-**Files typically involved**:
-- `.claude/commands/feature-development.md`
-
-**Example commit sequence**:
-```
-Add or update .claude/commands/feature-development.md.
-```
-
-### Update Codex Agents
-
-Adds or updates agent configuration files in the .codex/agents directory.
-
-**Frequency**: ~4 times per month
-
-**Steps**:
-1. Add or update .codex/agents/docs-researcher.toml.
-2. Add or update .codex/agents/reviewer.toml.
-3. Add or update .codex/agents/explorer.toml.
-
-**Files typically involved**:
 - `.codex/agents/docs-researcher.toml`
 - `.codex/agents/reviewer.toml`
 - `.codex/agents/explorer.toml`
 
 **Example commit sequence**:
 ```
-Add or update .codex/agents/docs-researcher.toml.
-Add or update .codex/agents/reviewer.toml.
-Add or update .codex/agents/explorer.toml.
+Add or update .claude/commands/add-or-update-ecc-bundle.md
+Add or update .claude/identity.json
+Add or update .claude/skills/prompthub/SKILL.md
+Add or update .claude/ecc-tools.json
+Add or update .agents/skills/prompthub/SKILL.md
+Add or update .agents/skills/prompthub/agents/openai.yaml
+Add or update .codex/agents/docs-researcher.toml
+Add or update .codex/agents/reviewer.toml
+Add or update .codex/agents/explorer.toml
 ```
 
-### Update Identity And Tools
+### Add Or Update Command Md
 
-Updates the identity and ECC tools configuration for prompthub.
+Adds or updates a command markdown file for prompthub ECC bundle.
+
+**Frequency**: ~3 times per month
+
+**Steps**:
+1. Add or update .claude/commands/add-or-update-command-md.md
+
+**Files typically involved**:
+- `.claude/commands/add-or-update-command-md.md`
+
+**Example commit sequence**:
+```
+Add or update .claude/commands/add-or-update-command-md.md
+```
+
+### Feature Development Command
+
+Adds or updates the feature development command file for prompthub ECC bundle.
 
 **Frequency**: ~4 times per month
 
 **Steps**:
-1. Add or update .claude/identity.json.
-2. Add or update .claude/ecc-tools.json.
+1. Add or update .claude/commands/feature-development.md
 
 **Files typically involved**:
-- `.claude/identity.json`
-- `.claude/ecc-tools.json`
+- `.claude/commands/feature-development.md`
 
 **Example commit sequence**:
 ```
-Add or update .claude/identity.json.
-Add or update .claude/ecc-tools.json.
+Add or update .claude/commands/feature-development.md
+```
+
+### Add Prompthub Ecc Bundle Command
+
+Adds or updates the add-prompthub-ecc-bundle command file for prompthub ECC bundle.
+
+**Frequency**: ~3 times per month
+
+**Steps**:
+1. Add or update .claude/commands/add-prompthub-ecc-bundle.md
+
+**Files typically involved**:
+- `.claude/commands/add-prompthub-ecc-bundle.md`
+
+**Example commit sequence**:
+```
+Add or update .claude/commands/add-prompthub-ecc-bundle.md
+```
+
+### Update Arabic Font Or Typography Command
+
+Adds or updates commands related to Arabic font and typography adjustments for prompthub ECC bundle.
+
+**Frequency**: ~2 times per month
+
+**Steps**:
+1. Add or update .claude/commands/arabic-font-and-typography-adjustment.md
+2. Add or update .claude/commands/update-arabic-font-or-typography.md
+
+**Files typically involved**:
+- `.claude/commands/arabic-font-and-typography-adjustment.md`
+- `.claude/commands/update-arabic-font-or-typography.md`
+
+**Example commit sequence**:
+```
+Add or update .claude/commands/arabic-font-and-typography-adjustment.md
+Add or update .claude/commands/update-arabic-font-or-typography.md
 ```
 
 
