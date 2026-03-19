@@ -14,8 +14,8 @@ Standard feature implementation workflow
 
 ## Common Files
 
-- `src/app/[locale]/(dashboard)/my-prompts/*`
-- `src/app/[locale]/(public)/*`
+- `src/components/ui/*`
+- `src/hooks/*`
 - `src/app/[locale]/*`
 - `**/api/**`
 
