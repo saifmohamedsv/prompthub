@@ -14,10 +14,9 @@ Standard feature implementation workflow
 
 ## Common Files
 
-- `src/components/ui/*`
-- `src/hooks/*`
 - `src/app/[locale]/*`
-- `**/api/**`
+- `src/lib/*`
+- `src/components/*`
 
 ## Suggested Sequence
 

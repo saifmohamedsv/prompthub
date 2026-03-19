@@ -10,7 +10,7 @@ Use this workflow when working on **update-arabic-font-or-typography** in `promp
 
 ## Goal
 
-Update the Arabic font or adjust typography and font-weight for Arabic locale for improved readability and style consistency.
+Updates the Arabic font or typography system, including font family, weights, and related styling for RTL/Arabic locales.
 
 ## Common Files
 
@@ -18,7 +18,6 @@ Update the Arabic font or adjust typography and font-weight for Arabic locale fo
 - `src/lib/fonts.ts`
 - `src/app/globals.css`
 - `src/components/prompts/prompt-card.tsx`
-- `src/components/prompts/prompt-detail.tsx`
 
 ## Suggested Sequence
 
@@ -29,10 +28,10 @@ Update the Arabic font or adjust typography and font-weight for Arabic locale fo
 
 ## Typical Commit Signals
 
-- Edit src/app/[locale]/layout.tsx to update font-family or font logic.
-- Edit src/lib/fonts.ts to import or switch font definitions.
-- Edit src/app/globals.css to adjust global font-weight, font-size, or RTL-specific styles.
-- Optionally, update prompt card or detail components for per-component font/size tweaks.
+- Edit src/app/[locale]/layout.tsx to change font imports or usage.
+- Edit src/lib/fonts.ts to update font family or weights.
+- Edit src/app/globals.css to adjust global font-weight or typography tokens.
+- Optionally, update prompt card or related components for size/weight changes.
 
 ## Notes
 

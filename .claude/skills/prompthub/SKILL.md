@@ -28,7 +28,7 @@ Activate this skill when:
 
 ## Commit Conventions
 
-Follow these commit message conventions based on 86 analyzed commits.
+Follow these commit message conventions based on 97 analyzed commits.
 
 ### Commit Style: Conventional Commits
 
@@ -41,7 +41,7 @@ Follow these commit message conventions based on 86 analyzed commits.
 
 ### Message Guidelines
 
-- Average message length: ~56 characters
+- Average message length: ~57 characters
 - Keep first line concise and descriptive
 - Use imperative mood ("Add feature" not "Added feature")
 
@@ -49,7 +49,7 @@ Follow these commit message conventions based on 86 analyzed commits.
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/commands/update-arabic-font-or-typography.md)
+feat: add prompthub ECC bundle (.claude/commands/add-or-update-arabic-font.md)
 ```
 
 *Commit message example*
@@ -91,7 +91,7 @@ feat: add prompthub ECC bundle (.claude/commands/feature-development.md)
 *Commit message example*
 
 ```text
-feat: add prompthub ECC bundle (.claude/homunculus/instincts/inherited/prompthub-instincts.yaml)
+feat: add prompthub ECC bundle (.codex/agents/docs-researcher.toml)
 ```
 
 ## Architecture
@@ -182,7 +182,7 @@ These workflows were detected from analyzing commit patterns.
 
 Standard feature implementation workflow
 
-**Frequency**: ~19 times per month
+**Frequency**: ~20 times per month
 
 **Steps**:
 1. Add feature implementation
@@ -190,168 +190,135 @@ Standard feature implementation workflow
 3. Update documentation
 
 **Files typically involved**:
-- `src/components/ui/*`
-- `src/hooks/*`
 - `src/app/[locale]/*`
-- `**/api/**`
+- `src/lib/*`
+- `src/components/*`
 
 **Example commit sequence**:
 ```
-refactor: update UI components and global styles
-chore: update i18n messages for new features
-refactor: convert useAuth to context-based AuthProvider pattern
+feat: replace Cairo with Baloo Bhaijaan 2 for Arabic font
+fix: redesign mobile side menu with icons, active states, and branding
+fix: constrain prompt detail image height and improve form spacing
 ```
 
-### Refactoring
+### Add Or Update Ecc Bundle File
 
-Code refactoring and cleanup workflow
+Adds or updates a configuration, command, skill, or agent file in ECC-related directories (.claude, .codex, .agents) to extend or modify the prompthub's capabilities.
 
-**Frequency**: ~4 times per month
+**Frequency**: ~10 times per month
 
 **Steps**:
-1. Ensure tests pass before refactor
-2. Refactor code structure
-3. Verify tests still pass
+1. Create or update a file in one of the ECC directories (e.g., .claude/commands/, .codex/agents/, .agents/skills/).
+2. Commit the file with a message referencing the ECC bundle and the specific file.
+3. Optionally, repeat for related files (e.g., SKILL.md, identity.json, config.toml).
 
 **Files typically involved**:
-- `src/**/*`
+- `.claude/commands/*.md`
+- `.claude/skills/prompthub/SKILL.md`
+- `.claude/identity.json`
+- `.claude/ecc-tools.json`
+- `.codex/agents/*.toml`
+- `.codex/AGENTS.md`
+- `.codex/config.toml`
+- `.agents/skills/prompthub/agents/openai.yaml`
+- `.agents/skills/prompthub/SKILL.md`
 
 **Example commit sequence**:
 ```
-feat: v2.0.0 — bilingual prompts, infinite scroll, flexible search, config-driven architecture
-feat: add Locale enum and use across project
-fix: improve dark mode field contrast and toast RTL styling
+Create or update a file in one of the ECC directories (e.g., .claude/commands/, .codex/agents/, .agents/skills/).
+Commit the file with a message referencing the ECC bundle and the specific file.
+Optionally, repeat for related files (e.g., SKILL.md, identity.json, config.toml).
 ```
 
-### Add Or Update Arabic Font
+### Update Arabic Font Or Typography
 
-Switching the Arabic font used in the application for improved typography and readability.
+Updates the Arabic font or typography system, including font family, weights, and related styling for RTL/Arabic locales.
 
-**Frequency**: ~2 times per month
+**Frequency**: ~3 times per month
 
 **Steps**:
-1. Update src/app/[locale]/layout.tsx to use the new font.
-2. Update src/lib/fonts.ts to import and configure the new font.
+1. Edit src/app/[locale]/layout.tsx to change font imports or usage.
+2. Edit src/lib/fonts.ts to update font family or weights.
+3. Edit src/app/globals.css to adjust global font-weight or typography tokens.
+4. Optionally, update prompt card or related components for size/weight changes.
 
 **Files typically involved**:
 - `src/app/[locale]/layout.tsx`
 - `src/lib/fonts.ts`
-
-**Example commit sequence**:
-```
-Update src/app/[locale]/layout.tsx to use the new font.
-Update src/lib/fonts.ts to import and configure the new font.
-```
-
-### Adjust Arabic Font Weight And Rtl
-
-Tuning Arabic font weight and directionality for better UX and correct LTR/RTL rendering.
-
-**Frequency**: ~3 times per month
-
-**Steps**:
-1. Update src/app/globals.css to change base font-weight for Arabic.
-2. Update src/components/prompts/prompt-card.tsx and related prompt components to adjust font weights and set dir attributes.
-
-**Files typically involved**:
 - `src/app/globals.css`
 - `src/components/prompts/prompt-card.tsx`
-- `src/components/prompts/prompt-detail.tsx`
-- `src/components/prompts/prompt-form.tsx`
 
 **Example commit sequence**:
 ```
-Update src/app/globals.css to change base font-weight for Arabic.
-Update src/components/prompts/prompt-card.tsx and related prompt components to adjust font weights and set dir attributes.
+Edit src/app/[locale]/layout.tsx to change font imports or usage.
+Edit src/lib/fonts.ts to update font family or weights.
+Edit src/app/globals.css to adjust global font-weight or typography tokens.
+Optionally, update prompt card or related components for size/weight changes.
 ```
 
-### Refine Form Label Spacing
+### Refactor Or Tweak Prompt Card Layout
 
-Tweaking spacing between form labels and fields for better visual alignment.
+Refactors or tweaks the layout, sizing, or style of the prompt card component for improved UI/UX.
 
 **Frequency**: ~3 times per month
 
 **Steps**:
-1. Update src/components/prompts/prompt-form.tsx to change spacing utilities (e.g., mb-2, space-y-2, space-y-3).
+1. Edit src/components/prompts/prompt-card.tsx to change sizes, padding, or layout.
+2. Optionally, update related components (prompt-snippet, prompt-detail) or global styles.
+3. Commit with a message describing the UI/UX improvement.
 
 **Files typically involved**:
-- `src/components/prompts/prompt-form.tsx`
-
-**Example commit sequence**:
-```
-Update src/components/prompts/prompt-form.tsx to change spacing utilities (e.g., mb-2, space-y-2, space-y-3).
-```
-
-### Update Global Css And Prompt Components For Theme Or Typography
-
-Making broad theme, typography, or dark mode changes that affect multiple prompt-related components and global styles.
-
-**Frequency**: ~2 times per month
-
-**Steps**:
-1. Update src/app/globals.css with new theme variables or typography.
-2. Update multiple src/components/prompts/*.tsx files to use new tokens or classes.
-3. Update src/components/logo.tsx and/or navbar.tsx if branding is affected.
-
-**Files typically involved**:
-- `src/app/globals.css`
 - `src/components/prompts/prompt-card.tsx`
 - `src/components/prompts/prompt-snippet.tsx`
-- `src/components/prompts/prompt-detail.tsx`
-- `src/components/prompts/prompt-form.tsx`
-- `src/components/prompts/prompt-grid.tsx`
-- `src/components/logo.tsx`
-- `src/components/navbar.tsx`
-
-**Example commit sequence**:
-```
-Update src/app/globals.css with new theme variables or typography.
-Update multiple src/components/prompts/*.tsx files to use new tokens or classes.
-Update src/components/logo.tsx and/or navbar.tsx if branding is affected.
-```
-
-### Add Feature With I18n Support
-
-Adding a new feature or UI element that requires updates to both English and Arabic translations.
-
-**Frequency**: ~2 times per month
-
-**Steps**:
-1. Update messages/ar.json and messages/en.json with new strings.
-2. Update or create relevant src/components/*.tsx files to use the new translations.
-3. Update src/lib/supabase/queries.ts or similar data files if the feature involves data queries.
-
-**Files typically involved**:
-- `messages/ar.json`
-- `messages/en.json`
-- `src/components/explore-view.tsx`
-- `src/lib/supabase/queries.ts`
-
-**Example commit sequence**:
-```
-Update messages/ar.json and messages/en.json with new strings.
-Update or create relevant src/components/*.tsx files to use the new translations.
-Update src/lib/supabase/queries.ts or similar data files if the feature involves data queries.
-```
-
-### Add Or Update Prompt Card Layout
-
-Making visual or layout changes to the prompt card component, often in conjunction with global style or theme changes.
-
-**Frequency**: ~4 times per month
-
-**Steps**:
-1. Update src/components/prompts/prompt-card.tsx for layout, size, or style changes.
-2. Optionally update src/app/globals.css and related prompt components for consistency.
-
-**Files typically involved**:
-- `src/components/prompts/prompt-card.tsx`
 - `src/app/globals.css`
 
 **Example commit sequence**:
 ```
-Update src/components/prompts/prompt-card.tsx for layout, size, or style changes.
-Optionally update src/app/globals.css and related prompt components for consistency.
+Edit src/components/prompts/prompt-card.tsx to change sizes, padding, or layout.
+Optionally, update related components (prompt-snippet, prompt-detail) or global styles.
+Commit with a message describing the UI/UX improvement.
+```
+
+### Adjust Form Label Spacing
+
+Tweaks the spacing between form labels and fields for improved form usability and appearance.
+
+**Frequency**: ~3 times per month
+
+**Steps**:
+1. Edit src/components/prompts/prompt-form.tsx to adjust margin or spacing utilities.
+2. Optionally, update related CSS or layout wrappers.
+3. Commit with a message referencing label-to-field spacing.
+
+**Files typically involved**:
+- `src/components/prompts/prompt-form.tsx`
+
+**Example commit sequence**:
+```
+Edit src/components/prompts/prompt-form.tsx to adjust margin or spacing utilities.
+Optionally, update related CSS or layout wrappers.
+Commit with a message referencing label-to-field spacing.
+```
+
+### Update Dark Mode Field Contrast
+
+Improves the contrast and visibility of form fields or backgrounds in dark mode.
+
+**Frequency**: ~2 times per month
+
+**Steps**:
+1. Edit src/app/globals.css to adjust background or field color values.
+2. Optionally, update related form or card components for color consistency.
+3. Commit with a message referencing dark mode or contrast.
+
+**Files typically involved**:
+- `src/app/globals.css`
+
+**Example commit sequence**:
+```
+Edit src/app/globals.css to adjust background or field color values.
+Optionally, update related form or card components for color consistency.
+Commit with a message referencing dark mode or contrast.
 ```
 
 
