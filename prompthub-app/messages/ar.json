@@ -1,0 +1,107 @@
+{
+  "common": {
+    "appName": "PromptHub",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "search": "بحث",
+    "submit": "إرسال",
+    "back": "رجوع"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "explore": "استكشف",
+    "myPrompts": "برومبتاتي",
+    "likes": "المفضلة",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "title": "اكتشف وشارك برومبتات الذكاء الاصطناعي",
+    "subtitle": "اعثر على أفضل البرومبتات لـ ChatGPT و Claude و Midjourney والمزيد. شارك المفضلة لديك مع المجتمع.",
+    "exploreButton": "استكشف البرومبتات",
+    "shareButton": "شارك برومبت"
+  },
+  "explore": {
+    "title": "استكشف البرومبتات",
+    "searchPlaceholder": "ابحث عن برومبتات...",
+    "allCategories": "جميع الفئات",
+    "noResults": "لم يتم العثور على برومبتات",
+    "noResultsDescription": "حاول تعديل البحث أو الفلاتر.",
+    "sortRecent": "الأحدث",
+    "sortMostViewed": "الأكثر مشاهدة",
+    "sortMostLiked": "الأكثر إعجاباً",
+    "tagFilter": "الوسم: {name}",
+    "clearTag": "مسح"
+  },
+  "prompt": {
+    "by": "بواسطة",
+    "likes": "إعجاب",
+    "views": "مشاهدة",
+    "share": "مشاركة",
+    "copyPrompt": "نسخ البرومبت",
+    "linkCopied": "تم النسخ!",
+    "tryIt": "جربه",
+    "addNew": "إضافة برومبت جديد",
+    "editPrompt": "تعديل البرومبت",
+    "deletePrompt": "حذف البرومبت",
+    "deleteConfirm": "هل أنت متأكد من حذف هذا البرومبت؟",
+    "title": "العنوان (إنجليزي)",
+    "titlePlaceholder": "أعطِ برومبتك عنواناً جذاباً",
+    "titleAr": "العنوان (عربي)",
+    "titleArPlaceholder": "العنوان بالعربي",
+    "description": "الوصف (إنجليزي)",
+    "descriptionPlaceholder": "اوصف ما يفعله هذا البرومبت...",
+    "descriptionAr": "الوصف (عربي)",
+    "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
+    "link": "الرابط",
+    "linkPlaceholder": "https://...",
+    "category": "الفئة",
+    "selectCategory": "اختر فئة",
+    "promptText": "نص البرومبت",
+    "promptTextPlaceholder": "الصق نص البرومبت الفعلي هنا...",
+    "promptTextHint": "النص الفعلي الذي يمكن للمستخدمين نسخه واستخدامه. اختياري لكن يُنصح به بشدة.",
+    "tags": "الوسوم",
+    "image": "الصورة",
+    "uploadImage": "رفع صورة",
+    "titleRequired": "العنوان مطلوب",
+    "descriptionRequired": "الوصف مطلوب",
+    "categoryRequired": "يرجى اختيار فئة",
+    "invalidUrl": "يرجى إدخال رابط صحيح",
+    "createSuccess": "تم إنشاء البرومبت بنجاح!",
+    "updateSuccess": "تم تحديث البرومبت بنجاح!",
+    "saving": "جاري الحفظ...",
+    "addArabicVersion": "إضافة نسخة عربية",
+    "removeArabicVersion": "إزالة النسخة العربية"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "joined": "انضم في {date}",
+    "totalPrompts": "البرومبتات",
+    "totalLikes": "إجمالي الإعجابات",
+    "promptsBy": "برومبتات {name}",
+    "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد."
+  },
+  "auth": {
+    "loginTitle": "مرحباً بك في PromptHub",
+    "loginSubtitle": "سجّل دخولك لمشاركة البرومبتات والإعجاب بها",
+    "continueWithGoogle": "المتابعة مع Google",
+    "continueWithGitHub": "المتابعة مع GitHub"
+  },
+  "dashboard": {
+    "myPrompts": "برومبتاتي",
+    "myPromptsEmpty": "لم تشارك أي برومبتات بعد.",
+    "likedPrompts": "البرومبتات المفضلة",
+    "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد."
+  },
+  "footer": {
+    "madeBy": "صُنع بواسطة"
+  },
+  "locale": {
+    "en": "English",
+    "ar": "العربية"
+  }
+}
