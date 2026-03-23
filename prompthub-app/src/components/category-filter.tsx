@@ -18,7 +18,7 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
         onClick={() => onChange?.("all")}
         className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
           current === "all"
-            ? "bg-primary text-primary-foreground"
+            ? "bg-accent text-accent-foreground"
             : "bg-surface-high text-muted-foreground hover:text-foreground"
         }`}
       >
@@ -31,7 +31,7 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
           onClick={() => onChange?.(cat.slug)}
           className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
             current === cat.slug
-              ? "bg-primary text-primary-foreground"
+              ? "bg-accent text-accent-foreground"
               : "bg-surface-high text-muted-foreground hover:text-foreground"
           }`}
         >

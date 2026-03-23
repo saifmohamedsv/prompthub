@@ -28,7 +28,7 @@ export function HeroLanding() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
           <div className="flex flex-col items-center text-center space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/20 bg-surface-high px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-secondary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/20 bg-surface-high px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
               {t("badge")}
             </div>
 

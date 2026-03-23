@@ -113,13 +113,18 @@
     "loginTitle": "مرحباً بك في PromptHub",
     "loginSubtitle": "سجّل دخولك لمشاركة البرومبتات والإعجاب بها",
     "continueWithGoogle": "المتابعة مع Google",
-    "continueWithGitHub": "المتابعة مع GitHub"
+    "continueWithGitHub": "المتابعة مع GitHub",
+    "termsText": "بالمتابعة، فإنك توافق على شروط الخدمة وسياسة الخصوصية."
   },
   "dashboard": {
     "myPrompts": "برومبتاتي",
+    "myPromptsSubtitle": "إدارة وتتبع البرومبتات التي شاركتها.",
     "myPromptsEmpty": "لم تشارك أي برومبتات بعد.",
+    "myPromptsEmptyDesc": "أنشئ أول برومبت وشاركه مع المجتمع.",
     "likedPrompts": "البرومبتات المفضلة",
-    "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد."
+    "likedPromptsSubtitle": "البرومبتات التي حفظتها للاطلاع عليها لاحقاً.",
+    "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد.",
+    "likedPromptsEmptyDesc": "استكشف البرومبتات وأعجب بما تجده مفيداً."
   },
   "sidebar": {
     "title": "PromptHub",
@@ -128,7 +133,8 @@
     "settings": "الإعدادات"
   },
   "footer": {
-    "madeBy": "صُنع بواسطة"
+    "madeBy": "صُنع بواسطة",
+    "version": "v1.0.0"
   },
   "locale": {
     "en": "English",

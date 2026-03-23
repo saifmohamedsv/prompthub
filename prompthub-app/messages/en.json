@@ -113,13 +113,18 @@
     "loginTitle": "Welcome to PromptHub",
     "loginSubtitle": "Sign in to share and like prompts",
     "continueWithGoogle": "Continue with Google",
-    "continueWithGitHub": "Continue with GitHub"
+    "continueWithGitHub": "Continue with GitHub",
+    "termsText": "By continuing, you agree to our Terms of Service and Privacy Policy."
   },
   "dashboard": {
     "myPrompts": "My Prompts",
+    "myPromptsSubtitle": "Manage and track your shared prompts.",
     "myPromptsEmpty": "You haven't shared any prompts yet.",
+    "myPromptsEmptyDesc": "Create your first prompt and share it with the community.",
     "likedPrompts": "Liked Prompts",
-    "likedPromptsEmpty": "You haven't liked any prompts yet."
+    "likedPromptsSubtitle": "Prompts you've saved for later.",
+    "likedPromptsEmpty": "You haven't liked any prompts yet.",
+    "likedPromptsEmptyDesc": "Explore prompts and like the ones you find useful."
   },
   "sidebar": {
     "title": "PromptHub",
@@ -128,7 +133,8 @@
     "settings": "Settings"
   },
   "footer": {
-    "madeBy": "Made by"
+    "madeBy": "Made by",
+    "version": "v1.0.0"
   },
   "locale": {
     "en": "English",

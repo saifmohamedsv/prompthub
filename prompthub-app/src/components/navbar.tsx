@@ -36,7 +36,7 @@ export function Navbar({ variant = "full" }: NavbarProps) {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 glass shadow-[0_8px_30px_rgba(16,19,26,0.4)]">
       <nav className="container mx-auto flex h-14 items-center justify-between px-4 sm:h-16">
         <div className="flex items-center gap-2">
           {variant === "slim" && <MobileSidebar />}
