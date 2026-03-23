@@ -3,33 +3,41 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useCategories } from "@/hooks/use-categories";
 import { Locale } from "@/lib/config";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 
 export function CategoryFilter({ value, onChange }: { value?: string; onChange?: (slug: string) => void }) {
   const t = useTranslations("explore");
   const locale = useLocale();
   const { data: categories } = useCategories();
 
-  const selectedLabel = (() => {
-    if (!value || value === "all") return t("allCategories");
-    const cat = categories?.find((c) => c.slug === value);
-    if (!cat) return t("allCategories");
-    return locale === Locale.AR ? cat.name_ar : cat.name;
-  })();
+  const current = value ?? "all";
 
   return (
-    <Select value={value ?? "all"} onValueChange={(v) => onChange?.(v ?? "all")}>
-      <SelectTrigger className="w-full sm:w-48">
-        <span>{selectedLabel}</span>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="all">{t("allCategories")}</SelectItem>
-        {categories?.map((cat) => (
-          <SelectItem key={cat.id} value={cat.slug}>
-            {locale === Locale.AR ? cat.name_ar : cat.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+      <button
+        type="button"
+        onClick={() => onChange?.("all")}
+        className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
+          current === "all"
+            ? "bg-primary text-primary-foreground"
+            : "bg-surface-high text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        {t("allCategories")}
+      </button>
+      {categories?.map((cat) => (
+        <button
+          key={cat.id}
+          type="button"
+          onClick={() => onChange?.(cat.slug)}
+          className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
+            current === cat.slug
+              ? "bg-primary text-primary-foreground"
+              : "bg-surface-high text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          {locale === Locale.AR ? cat.name_ar : cat.name}
+        </button>
+      ))}
+    </div>
   );
 }

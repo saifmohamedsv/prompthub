@@ -18,7 +18,6 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 
 export function ExploreView() {
@@ -57,7 +56,6 @@ export function ExploreView() {
 
   const prompts = data?.pages.flat();
 
-  // Infinite scroll observer
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const handleObserver = useCallback(
@@ -81,29 +79,47 @@ export function ExploreView() {
   }, [handleObserver]);
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8">
-      <h1 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl">{t("title")}</h1>
+    <div className="py-6 sm:py-8">
+      {/* Heading */}
+      <h1 className="mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-2xl font-extrabold text-transparent sm:text-4xl">
+        {t("title")}
+      </h1>
 
-      <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:gap-4">
+      {/* Subtitle */}
+      <p className="mb-6 text-sm text-muted-foreground sm:text-base">
+        {t("noResultsDescription").replace(".", "")}
+      </p>
+
+      {/* Search */}
+      <div className="mb-4">
         <SearchBar value={search} onChange={setSearch} />
-        <CategoryFilter value={category} onChange={setCategory} />
-        <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
-          <SelectTrigger className="w-full sm:w-44">
-            <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
-          </SelectTrigger>
-          <SelectContent>
-            {sortOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
       </div>
 
+      {/* Filter row: CategoryFilter + Sort */}
+      <div className="mb-4 flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <CategoryFilter value={category} onChange={setCategory} />
+        </div>
+        <div className="shrink-0">
+          <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
+            <SelectTrigger className="w-full sm:w-44">
+              <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
+            </SelectTrigger>
+            <SelectContent>
+              {sortOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {/* Active tag badge */}
       {tag && (
         <div className="mb-4 flex items-center gap-2">
-          <Badge variant="secondary" className="gap-1 px-3 py-1.5 text-sm">
+          <span className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-3 py-1.5 text-sm text-secondary">
             {t("tagFilter", { name: activeTagName })}
             <button
               type="button"
@@ -113,7 +129,7 @@ export function ExploreView() {
               <X className="size-3.5" />
               <span className="sr-only">{t("clearTag")}</span>
             </button>
-          </Badge>
+          </span>
         </div>
       )}
 

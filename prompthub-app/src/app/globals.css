@@ -247,4 +247,13 @@
   .dark .glass-sm {
     background-color: oklch(0.15 0.04 260 / 0.8);
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

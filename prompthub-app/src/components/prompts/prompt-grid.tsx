@@ -48,34 +48,34 @@ export function PromptGrid({
 
 function PromptCardSkeleton() {
   return (
-    <div className="flex flex-col rounded-xl bg-card shadow-sm ring-1 ring-border">
-      <div className="flex items-center justify-between px-4 pt-4">
+    <div className="flex flex-col rounded-xl border border-border/5 bg-surface-low p-5 sm:p-6">
+      <div className="flex items-center justify-between">
         <Skeleton className="h-5 w-16 rounded-full" />
         <div className="flex gap-3">
           <Skeleton className="h-3 w-12" />
           <Skeleton className="h-3 w-12" />
         </div>
       </div>
-      <div className="flex gap-1.5 px-4 pt-2.5">
-        <Skeleton className="h-5 w-12 rounded-md" />
-        <Skeleton className="h-5 w-14 rounded-md" />
+      <div className="flex gap-2 pt-3">
+        <Skeleton className="h-3 w-10" />
+        <Skeleton className="h-3 w-12" />
       </div>
-      <div className="space-y-2 px-4 pt-3">
+      <div className="space-y-2 pt-3">
         <Skeleton className="h-5 w-3/4" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-2/3" />
       </div>
-      <div className="mx-4 mt-3 rounded-lg bg-muted/70 p-3 dark:bg-muted/40">
+      <div className="mt-3 rounded-lg bg-surface-lowest p-3">
         <Skeleton className="mb-2 h-3 w-16" />
         <Skeleton className="h-3 w-full" />
         <Skeleton className="mt-1 h-3 w-4/5" />
       </div>
-      <div className="flex items-center justify-between px-4 pt-3 pb-4">
+      <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Skeleton className="size-6 rounded-full" />
           <Skeleton className="h-3 w-20" />
         </div>
-        <Skeleton className="h-8 w-14 rounded-md" />
+        <Skeleton className="h-7 w-14 rounded-full" />
       </div>
     </div>
   );

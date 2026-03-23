@@ -14,16 +14,9 @@ type PromptSnippetProps = {
   maxLength?: number;
 };
 
-function truncate(text: string, max: number): string {
-  if (text.length <= max) return text;
-  const cut = text.lastIndexOf(" ", max);
-  return text.slice(0, cut > 0 ? cut : max) + "…";
-}
-
 export function PromptSnippet({
   text,
   variant = "compact",
-  maxLength = 200,
 }: PromptSnippetProps) {
   const t = useTranslations("prompt");
   const [copied, setCopied] = useState(false);
@@ -38,11 +31,10 @@ export function PromptSnippet({
   }, [text, t]);
 
   const isCompact = variant === "compact";
-  const displayText = isCompact ? truncate(text, maxLength) : text;
   const CopyIcon = copied ? Check : Copy;
 
   return (
-    <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
+    <div className={`overflow-hidden rounded-lg ${isCompact ? "bg-surface-lowest" : "bg-muted/70 dark:bg-muted/40"}`}>
       <div className={`flex items-center justify-between ${isCompact ? "px-3 pt-2" : "border-b border-border/50 px-4 py-2.5"}`}>
         <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {t("promptText")}
@@ -63,12 +55,12 @@ export function PromptSnippet({
         )}
       </div>
       {isCompact ? (
-        <p dir="ltr" className="px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
-          {displayText}
+        <p dir="ltr" className="line-clamp-3 px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
+          {text}
         </p>
       ) : (
         <pre dir="ltr" className="text-justify whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-relaxed text-foreground">
-          {displayText}
+          {text}
         </pre>
       )}
     </div>

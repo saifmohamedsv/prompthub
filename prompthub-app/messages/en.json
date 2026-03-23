@@ -23,7 +23,9 @@
     "title": "Discover & Share AI Prompts",
     "subtitle": "Find the best prompts for ChatGPT, Claude, Midjourney, and more. Share your favorites with the community.",
     "exploreButton": "Explore Prompts",
-    "shareButton": "Share a Prompt"
+    "shareButton": "Share a Prompt",
+    "badge": "Next Generation Prompt Engineering",
+    "titleAr": "اكتشف وشارك أفضل برومبتات الذكاء الاصطناعي"
   },
   "explore": {
     "title": "Explore Prompts",
@@ -35,7 +37,8 @@
     "sortMostViewed": "Most Viewed",
     "sortMostLiked": "Most Liked",
     "tagFilter": "Tag: {name}",
-    "clearTag": "Clear"
+    "clearTag": "Clear",
+    "sortLabel": "Sort by"
   },
   "prompt": {
     "by": "by",
