@@ -26,10 +26,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   });
 
   return (
-    <Link
-      href={routes.promptDetail(prompt.id)}
-      className="group flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-md hover:ring-border/80"
-    >
+    <article className="group relative flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-md hover:ring-border/80">
       {/* Top row: category + stats */}
       <div className="flex items-center justify-between px-4 pt-4">
         {categoryName && (
@@ -51,16 +48,12 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
       {/* Tags */}
       {tags.length > 0 && (
-        <div dir="ltr" className="flex flex-wrap gap-2 px-4 pt-3">
+        <div className="relative z-10 flex flex-wrap gap-2 px-4 pt-3">
           {tags.map((tag) => (
             <button
               key={tag.id}
               type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                router.push(routes.explore + "?tag=" + tag.slug);
-              }}
+              onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
               className="rounded-md bg-secondary px-2.5 py-0.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               {tag.name}
@@ -69,9 +62,14 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
         </div>
       )}
 
-      {/* Title */}
+      {/* Title — stretched link covers the entire card */}
       <h3 className="line-clamp-2 px-4 pt-3 text-lg font-bold leading-snug sm:text-xl">
-        {title}
+        <Link
+          href={routes.promptDetail(prompt.id)}
+          className="after:absolute after:inset-0 after:content-['']"
+        >
+          {title}
+        </Link>
       </h3>
 
       {/* Description */}
@@ -81,32 +79,28 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
       {/* Prompt snippet */}
       {prompt.prompt_text && (
-        <div className="mx-4 mt-3">
+        <div className="relative z-10 mx-4 mt-3">
           <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
       {/* Footer: author + likes */}
-      <div className="mt-auto flex items-center justify-between px-4 pt-4 pb-4">
+      <div className="relative z-10 mt-auto flex items-center justify-between px-4 pt-4 pb-4">
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            router.push(routes.userProfile(prompt.user_id));
-          }}
-          className="flex items-center gap-2.5"
+          onClick={() => router.push(routes.userProfile(prompt.user_id))}
+          className="group/author flex cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1 -mx-1.5 -my-1 transition-colors hover:bg-muted/60"
         >
-          <Avatar className="size-7">
+          <Avatar className="size-7 ring-2 ring-transparent transition-all group-hover/author:ring-primary/30">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
             <AvatarFallback className="text-xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <span className="text-sm text-muted-foreground hover:underline">
+          <span className="text-sm text-muted-foreground transition-colors group-hover/author:text-foreground group-hover/author:underline">
             {prompt.profiles?.full_name ?? prompt.profiles?.username}
           </span>
         </button>
         <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} />
       </div>
-    </Link>
+    </article>
   );
 }

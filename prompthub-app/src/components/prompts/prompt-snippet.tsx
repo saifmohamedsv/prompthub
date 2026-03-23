@@ -1,15 +1,16 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Copy } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type PromptSnippetProps = {
   text: string;
   /** "compact" truncates to a preview; "full" shows the entire text */
   variant?: "compact" | "full";
-  /** Max characters for compact mode (default 130) */
+  /** Max characters for compact mode (default 200) */
   maxLength?: number;
 };
 
@@ -22,19 +23,23 @@ function truncate(text: string, max: number): string {
 export function PromptSnippet({
   text,
   variant = "compact",
-  maxLength = 130,
+  maxLength = 200,
 }: PromptSnippetProps) {
   const t = useTranslations("prompt");
+  const [copied, setCopied] = useState(false);
 
-  function handleCopy(e: React.MouseEvent) {
+  const handleCopy = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     navigator.clipboard.writeText(text);
     toast.success(t("linkCopied"));
-  }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [text, t]);
 
-  const displayText = variant === "compact" ? truncate(text, maxLength) : text;
   const isCompact = variant === "compact";
+  const displayText = isCompact ? truncate(text, maxLength) : text;
+  const CopyIcon = copied ? Check : Copy;
 
   return (
     <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
@@ -46,14 +51,14 @@ export function PromptSnippet({
           <button
             type="button"
             onClick={handleCopy}
-            className="rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground"
+            className={`rounded p-0.5 transition-colors ${copied ? "text-green-500" : "text-muted-foreground hover:text-foreground"}`}
           >
-            <Copy className="size-3.5" />
+            <CopyIcon className="size-3.5 transition-transform duration-200" />
           </button>
         ) : (
-          <Button variant="ghost" size="sm" onClick={handleCopy} className="h-7 gap-1.5 text-xs">
-            <Copy className="size-3.5" />
-            {t("copyPrompt")}
+          <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
+            <CopyIcon className="size-3.5 transition-transform duration-200" />
+            {copied ? t("linkCopied") : t("copyPrompt")}
           </Button>
         )}
       </div>

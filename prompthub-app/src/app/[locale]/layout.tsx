@@ -47,7 +47,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
             <AuthProvider>
               <NextIntlClientProvider messages={messages}>
                 {children}
-                <Toaster dir={isArabic ? "rtl" : "ltr"} position={isArabic ? "bottom-left" : "bottom-right"} />
+                <Toaster dir={isArabic ? "rtl" : "ltr"} position="top-center" />
               </NextIntlClientProvider>
             </AuthProvider>
           </QueryProvider>
