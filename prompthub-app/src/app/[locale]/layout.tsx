@@ -41,7 +41,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={`${fontClass} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <NextTopLoader color="#d3bbff" height={5} showSpinner={false} />
+        <NextTopLoader color="#aac7ff" height={5} showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <QueryProvider>
             <AuthProvider>

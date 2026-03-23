@@ -79,9 +79,9 @@ export function ExploreView() {
   }, [handleObserver]);
 
   return (
-    <div className="py-6 sm:py-8">
+    <div className="mx-auto max-w-6xl px-2 sm:px-4 lg:px-6 py-6 sm:py-8">
       {/* Heading */}
-      <h1 className="mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-2xl font-extrabold text-transparent sm:text-4xl">
+      <h1 className="mb-1 bg-gradient-to-r from-primary to-secondary bg-clip-text text-2xl font-extrabold text-transparent sm:text-4xl">
         {t("title")}
       </h1>
 
@@ -91,12 +91,12 @@ export function ExploreView() {
       </p>
 
       {/* Search */}
-      <div className="mb-4">
+      <div className="mb-6">
         <SearchBar value={search} onChange={setSearch} />
       </div>
 
       {/* Filter row: CategoryFilter + Sort */}
-      <div className="mb-4 flex items-start gap-3">
+      <div className="mb-6 flex items-start gap-3">
         <div className="min-w-0 flex-1">
           <CategoryFilter value={category} onChange={setCategory} />
         </div>

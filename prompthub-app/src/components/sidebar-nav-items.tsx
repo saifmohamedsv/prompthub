@@ -42,7 +42,7 @@ export function SidebarNavItems({ onNavigate }: SidebarNavItemsProps) {
 
   return (
     <>
-      <nav className="flex flex-col gap-1">
+      <nav className="flex flex-col gap-1.5">
         {navItems.map((item) => {
           const active = isActive(item.href, item.exact);
           return (
@@ -51,7 +51,7 @@ export function SidebarNavItems({ onNavigate }: SidebarNavItemsProps) {
               href={resolveHref(item)}
               onClick={onNavigate}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 active
                   ? "bg-sidebar-primary/10 text-sidebar-primary"
                   : "text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground"
@@ -68,7 +68,7 @@ export function SidebarNavItems({ onNavigate }: SidebarNavItemsProps) {
         <Link
           href={isAuthenticated ? routes.newPrompt : routes.login}
           onClick={onNavigate}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent/90"
         >
           <Plus className="size-4" />
           {tSidebar("createPrompt")}

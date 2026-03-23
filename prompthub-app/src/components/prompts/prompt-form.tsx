@@ -365,7 +365,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       </div>
 
       <div className="flex gap-3 pt-2">
-        <Button type="submit" disabled={isPending} className="rounded-xl px-8 py-3">
+        <Button type="submit" disabled={isPending} className="rounded-lg px-8 py-3">
           {isPending
             ? t("saving")
             : promptId

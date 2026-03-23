@@ -54,27 +54,30 @@
   --surface-mid: oklch(0.96 0.01 93.48);
   --surface-high: oklch(0.94 0.01 93.48);
   --surface-highest: oklch(0.92 0.01 93.48);
+
+  --tertiary: #e3711f;
+  --tertiary-foreground: #ffffff;
 }
 
 .dark {
-  --background: oklch(0.15 0.04 260);
-  --foreground: oklch(0.91 0.03 265);
-  --card: oklch(0.20 0.03 260);
-  --card-foreground: oklch(0.91 0.03 265);
-  --popover: oklch(0.17 0.03 260);
-  --popover-foreground: oklch(0.91 0.03 265);
-  --primary: oklch(0.82 0.10 300);
-  --primary-foreground: oklch(0.15 0.04 260);
-  --secondary: oklch(0.83 0.14 70);
-  --secondary-foreground: oklch(0.33 0.10 65);
-  --muted: oklch(0.24 0.03 260);
-  --muted-foreground: oklch(0.82 0.03 300);
-  --accent: oklch(0.42 0.24 290);
-  --accent-foreground: oklch(0.84 0.09 300);
+  --background: #10131a;
+  --foreground: #e0e2ec;
+  --card: #1c2026;
+  --card-foreground: #e0e2ec;
+  --popover: #181c22;
+  --popover-foreground: #e0e2ec;
+  --primary: #aac7ff;
+  --primary-foreground: #002f64;
+  --secondary: #afc7f7;
+  --secondary-foreground: #153058;
+  --muted: #272a31;
+  --muted-foreground: #c1c6d5;
+  --accent: #4090fe;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.64 0.21 25.39);
-  --border: oklch(0.37 0.03 300);
-  --input: oklch(0.37 0.03 300);
-  --ring: oklch(0.42 0.24 290);
+  --border: #414753;
+  --input: #414753;
+  --ring: #4090fe;
 
   --chart-1: oklch(0.56 0.13 42.95);
   --chart-2: oklch(0.69 0.16 290.29);
@@ -82,29 +85,32 @@
   --chart-4: oklch(0.31 0.05 289.74);
   --chart-5: oklch(0.56 0.13 41.94);
 
-  --sidebar: oklch(0.12 0.04 260);
-  --sidebar-foreground: oklch(0.91 0.03 265);
-  --sidebar-primary: oklch(0.42 0.24 290);
-  --sidebar-primary-foreground: oklch(0.84 0.09 300);
-  --sidebar-accent: oklch(0.24 0.03 260);
-  --sidebar-accent-foreground: oklch(0.91 0.03 265);
-  --sidebar-border: oklch(0.37 0.03 300);
-  --sidebar-ring: oklch(0.42 0.24 290);
+  --sidebar: #0b0e15;
+  --sidebar-foreground: #e0e2ec;
+  --sidebar-primary: #4090fe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #272a31;
+  --sidebar-accent-foreground: #e0e2ec;
+  --sidebar-border: #414753;
+  --sidebar-ring: #4090fe;
 
-  --shadow-2xs: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.15);
-  --shadow-xs: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.20);
-  --shadow-sm: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.25), 0 1px 2px -1px oklch(0.15 0.04 260 / 0.25);
-  --shadow: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.30), 0 1px 2px -1px oklch(0.15 0.04 260 / 0.30);
-  --shadow-md: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.30), 0 2px 4px -1px oklch(0.15 0.04 260 / 0.30);
-  --shadow-lg: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.30), 0 4px 6px -1px oklch(0.15 0.04 260 / 0.30);
-  --shadow-xl: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.30), 0 8px 10px -1px oklch(0.15 0.04 260 / 0.30);
-  --shadow-2xl: 0 1px 3px 0px oklch(0.15 0.04 260 / 0.50);
+  --shadow-2xs: 0 1px 3px 0px rgba(16, 19, 26, 0.15);
+  --shadow-xs: 0 1px 3px 0px rgba(16, 19, 26, 0.20);
+  --shadow-sm: 0 1px 3px 0px rgba(16, 19, 26, 0.25), 0 1px 2px -1px rgba(16, 19, 26, 0.25);
+  --shadow: 0 1px 3px 0px rgba(16, 19, 26, 0.30), 0 1px 2px -1px rgba(16, 19, 26, 0.30);
+  --shadow-md: 0 1px 3px 0px rgba(16, 19, 26, 0.30), 0 2px 4px -1px rgba(16, 19, 26, 0.30);
+  --shadow-lg: 0 1px 3px 0px rgba(16, 19, 26, 0.30), 0 4px 6px -1px rgba(16, 19, 26, 0.30);
+  --shadow-xl: 0 1px 3px 0px rgba(16, 19, 26, 0.30), 0 8px 10px -1px rgba(16, 19, 26, 0.30);
+  --shadow-2xl: 0 1px 3px 0px rgba(16, 19, 26, 0.50);
 
-  --surface-lowest: oklch(0.12 0.04 260);
-  --surface-low: oklch(0.17 0.03 260);
-  --surface-mid: oklch(0.20 0.03 260);
-  --surface-high: oklch(0.24 0.03 260);
-  --surface-highest: oklch(0.27 0.03 260);
+  --surface-lowest: #0b0e15;
+  --surface-low: #181c22;
+  --surface-mid: #1c2026;
+  --surface-high: #272a31;
+  --surface-highest: #32353c;
+
+  --tertiary: #ffb68c;
+  --tertiary-foreground: #532200;
 }
 
 /* ─── Tailwind theme mapping ─── */
@@ -141,6 +147,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
 
   --color-surface-lowest: var(--surface-lowest);
   --color-surface-low: var(--surface-low);
@@ -241,11 +250,11 @@
   }
 
   .dark .glass {
-    background-color: oklch(0.15 0.04 260 / 0.7);
+    background-color: rgba(16, 19, 26, 0.7);
   }
 
   .dark .glass-sm {
-    background-color: oklch(0.15 0.04 260 / 0.8);
+    background-color: rgba(16, 19, 26, 0.8);
   }
 
   .scrollbar-hide {

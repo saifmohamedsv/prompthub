@@ -100,7 +100,7 @@ export function PromptDetail({ id }: { id: string }) {
           <Link
             href={prompt.link}
             target="_blank"
-            className="inline-flex items-center gap-1 rounded-xl bg-accent px-6 py-3 text-sm font-bold text-accent-foreground shadow-md transition-all hover:brightness-110"
+            className="inline-flex items-center gap-1 rounded-lg bg-accent px-6 py-3 text-sm font-bold text-accent-foreground shadow-md transition-all hover:brightness-110"
           >
             <ExternalLink className="size-4" />
             {t("tryIt")}
@@ -139,7 +139,7 @@ export function PromptDetail({ id }: { id: string }) {
         </Link>
         <button
           type="button"
-          className="hidden rounded-xl border border-border px-4 py-2 text-sm font-medium md:flex"
+          className="hidden rounded-lg border border-border px-4 py-2 text-sm font-medium md:flex"
         >
           {t("followCreator")}
         </button>

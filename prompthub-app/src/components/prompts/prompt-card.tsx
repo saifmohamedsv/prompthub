@@ -54,7 +54,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
               key={tag.id}
               type="button"
               onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
-              className="text-[10px] font-bold uppercase tracking-wider text-secondary transition-colors hover:text-primary"
+              className="text-[10px] font-bold uppercase tracking-wider text-tertiary transition-colors hover:text-primary"
             >
               {tag.name}
             </button>
