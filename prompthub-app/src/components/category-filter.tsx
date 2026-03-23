@@ -12,14 +12,14 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
   const current = value ?? "all";
 
   return (
-    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+    <div className="-mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0 flex gap-2 overflow-x-auto scrollbar-hide">
       <button
         type="button"
         onClick={() => onChange?.("all")}
-        className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
+        className={`whitespace-nowrap rounded-full px-6 py-2 text-sm transition-colors active:scale-95 transition-transform ${
           current === "all"
-            ? "bg-accent text-accent-foreground"
-            : "bg-surface-high text-muted-foreground hover:text-foreground"
+            ? "bg-accent text-accent-foreground font-bold"
+            : "bg-surface-high text-muted-foreground font-medium hover:text-foreground"
         }`}
       >
         {t("allCategories")}
@@ -29,10 +29,10 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
           key={cat.id}
           type="button"
           onClick={() => onChange?.(cat.slug)}
-          className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 ${
+          className={`whitespace-nowrap rounded-full px-6 py-2 text-sm transition-colors active:scale-95 transition-transform ${
             current === cat.slug
-              ? "bg-accent text-accent-foreground"
-              : "bg-surface-high text-muted-foreground hover:text-foreground"
+              ? "bg-accent text-accent-foreground font-bold"
+              : "bg-surface-high text-muted-foreground font-medium hover:text-foreground"
           }`}
         >
           {locale === Locale.AR ? cat.name_ar : cat.name}

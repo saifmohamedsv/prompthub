@@ -84,7 +84,7 @@ export function LikeButton({
       onClick={handleClick}
       disabled={isPending}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition-colors",
+        "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-colors",
         isLiked
           ? "bg-red-500/10 text-red-500"
           : "bg-surface-high text-muted-foreground hover:bg-surface-highest hover:text-foreground"

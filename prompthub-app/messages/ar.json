@@ -45,7 +45,11 @@
     "sortMostLiked": "الأكثر إعجاباً",
     "tagFilter": "الوسم: {name}",
     "clearTag": "مسح",
-    "sortLabel": "ترتيب حسب"
+    "sortLabel": "ترتيب حسب",
+    "titlePrefix": "استكشف",
+    "titleHighlight": "معرض البرومبتات",
+    "subtitle": "اكتشف برومبتات عالية الأداء مُصممة لأقوى نماذج الذكاء الاصطناعي في العالم.",
+    "cmdK": "⌘K"
   },
   "prompt": {
     "by": "بواسطة",

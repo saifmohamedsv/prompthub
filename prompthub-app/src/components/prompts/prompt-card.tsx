@@ -26,7 +26,7 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   });
 
   return (
-    <article className="group relative flex h-full flex-col rounded-xl border border-border/5 bg-surface-low p-5 transition-colors hover:bg-surface-high sm:p-6">
+    <article className="group relative flex h-full flex-col gap-5 rounded-xl border border-border/5 bg-surface-low p-5 transition-colors hover:bg-surface-high sm:gap-6 sm:p-6">
       {/* Top row: category + stats */}
       <div className="flex items-center justify-between">
         {categoryName && (
@@ -46,46 +46,46 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
         </div>
       </div>
 
-      {/* Tags */}
-      {tags.length > 0 && (
-        <div className="relative z-10 flex flex-wrap gap-2 pt-3">
-          {tags.map((tag) => (
-            <button
-              key={tag.id}
-              type="button"
-              onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
-              className="text-[10px] font-bold uppercase tracking-wider text-tertiary transition-colors hover:text-primary"
-            >
-              {tag.name}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* Tags + Title + Description */}
+      <div className="space-y-3">
+        {tags.length > 0 && (
+          <div className="relative z-10 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <button
+                key={tag.id}
+                type="button"
+                onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
+                className="text-[10px] font-bold uppercase tracking-wider text-tertiary transition-colors hover:text-primary"
+              >
+                {tag.name}
+              </button>
+            ))}
+          </div>
+        )}
 
-      {/* Title — stretched link covers the entire card */}
-      <h3 className="line-clamp-2 pt-3 text-lg font-extrabold leading-snug transition-colors group-hover:text-primary sm:text-xl">
-        <Link
-          href={routes.promptDetail(prompt.id)}
-          className="after:absolute after:inset-0 after:content-['']"
-        >
-          {title}
-        </Link>
-      </h3>
+        <h3 className="line-clamp-2 text-lg font-extrabold leading-snug transition-colors group-hover:text-primary sm:text-xl">
+          <Link
+            href={routes.promptDetail(prompt.id)}
+            className="after:absolute after:inset-0 after:content-['']"
+          >
+            {title}
+          </Link>
+        </h3>
 
-      {/* Description */}
-      <p className="line-clamp-2 flex-1 pt-2 text-sm leading-relaxed text-muted-foreground">
-        {description}
-      </p>
+        <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      </div>
 
       {/* Prompt snippet */}
       {prompt.prompt_text && (
-        <div className="relative z-10 mt-3">
+        <div className="relative z-10">
           <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
       {/* Footer: author + likes */}
-      <div className="relative z-10 mt-4 flex items-center justify-between">
+      <div className="relative z-10 mt-auto flex items-center justify-between">
         <button
           type="button"
           onClick={() => router.push(routes.userProfile(prompt.user_id))}

@@ -79,70 +79,83 @@ export function ExploreView() {
   }, [handleObserver]);
 
   return (
-    <div className="mx-auto max-w-6xl px-2 sm:px-4 lg:px-6 py-6 sm:py-8">
-      {/* Heading */}
-      <h1 className="mb-1 bg-gradient-to-r from-primary to-secondary bg-clip-text text-2xl font-extrabold text-transparent sm:text-4xl">
-        {t("title")}
-      </h1>
+    <div className="mx-auto max-w-7xl px-4 lg:px-12 py-8">
+      <section className="space-y-8 mb-12">
+        {/* Heading */}
+        <div className="space-y-2">
+          <h1 className="text-3xl lg:text-5xl font-black tracking-tight">
+            {t("titlePrefix")}{" "}
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t("titleHighlight")}
+            </span>
+          </h1>
+          <p className="text-muted-foreground max-w-2xl">
+            {t("subtitle")}
+          </p>
+        </div>
 
-      {/* Subtitle */}
-      <p className="mb-6 text-sm text-muted-foreground sm:text-base">
-        {t("noResultsDescription").replace(".", "")}
-      </p>
-
-      {/* Search */}
-      <div className="mb-6">
+        {/* Search */}
         <SearchBar value={search} onChange={setSearch} />
-      </div>
 
-      {/* Filter row: CategoryFilter + Sort */}
-      <div className="mb-6 flex items-start gap-3">
-        <div className="min-w-0 flex-1">
-          <CategoryFilter value={category} onChange={setCategory} />
+        {/* Filters */}
+        <div className="flex flex-col gap-6">
+          {/* Filter row: CategoryFilter + Sort */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="min-w-0 flex-1">
+              <CategoryFilter value={category} onChange={setCategory} />
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                {t("sortLabel")}
+              </span>
+              <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
+                <SelectTrigger className="w-full sm:w-44">
+                  <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
+                </SelectTrigger>
+                <SelectContent>
+                  {sortOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Active tag badge */}
+          {tag && (
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-lg border border-secondary/30 bg-secondary/20 px-3 py-1.5 text-sm text-secondary">
+                <span className="text-xs font-bold uppercase tracking-wide text-secondary">
+                  {t("tagFilter", { name: activeTagName })}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => router.replace(routes.explore)}
+                  className="ms-1 rounded-full hover:bg-muted"
+                >
+                  <X className="size-3.5" />
+                  <span className="sr-only">{t("clearTag")}</span>
+                </button>
+              </span>
+            </div>
+          )}
         </div>
-        <div className="shrink-0">
-          <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
-            <SelectTrigger className="w-full sm:w-44">
-              <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
-            </SelectTrigger>
-            <SelectContent>
-              {sortOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
+      </section>
 
-      {/* Active tag badge */}
-      {tag && (
-        <div className="mb-4 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-3 py-1.5 text-sm text-secondary">
-            {t("tagFilter", { name: activeTagName })}
-            <button
-              type="button"
-              onClick={() => router.replace(routes.explore)}
-              className="ms-1 rounded-full hover:bg-muted"
-            >
-              <X className="size-3.5" />
-              <span className="sr-only">{t("clearTag")}</span>
-            </button>
-          </span>
-        </div>
-      )}
+      <section className="max-w-7xl">
+        <PromptGrid prompts={prompts} isLoading={isLoading} />
 
-      <PromptGrid prompts={prompts} isLoading={isLoading} />
+        {/* Infinite scroll sentinel */}
+        <div ref={sentinelRef} className="h-1" />
 
-      {/* Infinite scroll sentinel */}
-      <div ref={sentinelRef} className="h-1" />
-
-      {isFetchingNextPage && (
-        <div className="flex justify-center py-6">
-          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-        </div>
-      )}
+        {isFetchingNextPage && (
+          <div className="flex justify-center py-6">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          </div>
+        )}
+      </section>
     </div>
   );
 }

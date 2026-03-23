@@ -16,7 +16,7 @@ export function PromptGrid({
 
   if (isLoading) {
     return (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <PromptCardSkeleton key={i} />
         ))}
@@ -38,7 +38,7 @@ export function PromptGrid({
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {prompts.map((prompt) => (
         <PromptCard key={prompt.id} prompt={prompt} />
       ))}

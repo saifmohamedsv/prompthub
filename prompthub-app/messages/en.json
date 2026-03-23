@@ -45,7 +45,11 @@
     "sortMostLiked": "Most Liked",
     "tagFilter": "Tag: {name}",
     "clearTag": "Clear",
-    "sortLabel": "Sort by"
+    "sortLabel": "Sort by",
+    "titlePrefix": "Explore the",
+    "titleHighlight": "Syntax Gallery",
+    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models.",
+    "cmdK": "⌘K"
   },
   "prompt": {
     "by": "by",
