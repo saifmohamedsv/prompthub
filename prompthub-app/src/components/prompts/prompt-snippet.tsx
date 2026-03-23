@@ -33,13 +33,13 @@ export function PromptSnippet({
   const isCompact = variant === "compact";
   const CopyIcon = copied ? Check : Copy;
 
-  return (
-    <div className={`overflow-hidden rounded-lg ${isCompact ? "bg-surface-lowest" : "bg-muted/70 dark:bg-muted/40"}`}>
-      <div className={`flex items-center justify-between ${isCompact ? "px-3 pt-2" : "border-b border-border/50 px-4 py-2.5"}`}>
-        <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
-          {t("promptText")}
-        </span>
-        {isCompact ? (
+  if (isCompact) {
+    return (
+      <div className="overflow-hidden rounded-lg bg-surface-lowest">
+        <div className="flex items-center justify-between px-3 pt-2">
+          <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+            {t("promptText")}
+          </span>
           <button
             type="button"
             onClick={handleCopy}
@@ -47,22 +47,30 @@ export function PromptSnippet({
           >
             <CopyIcon className="size-3.5 transition-transform duration-200" />
           </button>
-        ) : (
+        </div>
+        <p dir="ltr" className="line-clamp-3 px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
+          {text}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 p-px">
+      <div className="rounded-xl bg-surface-lowest">
+        <div className="flex items-center justify-between px-4 py-2.5">
+          <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+            {t("promptText")}
+          </span>
           <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
             <CopyIcon className="size-3.5 transition-transform duration-200" />
             {copied ? t("linkCopied") : t("copyPrompt")}
           </Button>
-        )}
-      </div>
-      {isCompact ? (
-        <p dir="ltr" className="line-clamp-3 px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
-          {text}
-        </p>
-      ) : (
+        </div>
         <pre dir="ltr" className="text-justify whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-relaxed text-foreground">
           {text}
         </pre>
-      )}
+      </div>
     </div>
   );
 }

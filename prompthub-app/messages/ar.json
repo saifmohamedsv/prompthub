@@ -9,7 +9,8 @@
     "edit": "تعديل",
     "search": "بحث",
     "submit": "إرسال",
-    "back": "رجوع"
+    "back": "رجوع",
+    "backToExplore": "العودة للاستكشاف"
   },
   "nav": {
     "home": "الرئيسية",
@@ -62,7 +63,7 @@
     "titlePlaceholder": "أعطِ برومبتك عنواناً جذاباً",
     "titleAr": "العنوان (عربي)",
     "titleArPlaceholder": "العنوان بالعربي",
-    "description": "الوصف (إنجليزي)",
+    "description": "الوصف",
     "descriptionPlaceholder": "اوصف ما يفعله هذا البرومبت...",
     "descriptionAr": "الوصف (عربي)",
     "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
@@ -84,7 +85,18 @@
     "updateSuccess": "تم تحديث البرومبت بنجاح!",
     "saving": "جاري الحفظ...",
     "addArabicVersion": "إضافة نسخة عربية",
-    "removeArabicVersion": "إزالة النسخة العربية"
+    "removeArabicVersion": "إزالة النسخة العربية",
+    "followCreator": "متابعة المبدع",
+    "addNewSubtitle": "أنشئ برومبت يفيد المجتمع.",
+    "promptSyntax": "صيغة البرومبت",
+    "dropImage": "اسحب صورة هنا أو انقر للرفع",
+    "imageHint": "PNG أو JPG حتى 5 ميجابايت",
+    "tip1Title": "كن محدداً",
+    "tip1Desc": "البرومبتات الواضحة تحقق نتائج أفضل",
+    "tip2Title": "أضف سياقاً",
+    "tip2Desc": "ساعد الآخرين على فهم متى يستخدمونه",
+    "tip3Title": "اختر الوسوم بعناية",
+    "tip3Desc": "الوسوم الجيدة تساعد الناس على اكتشاف برومبتك"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -92,7 +104,10 @@
     "totalPrompts": "البرومبتات",
     "totalLikes": "إجمالي الإعجابات",
     "promptsBy": "برومبتات {name}",
-    "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد."
+    "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد.",
+    "contributions": "المساهمات",
+    "editProfile": "تعديل الملف",
+    "shareProfile": "مشاركة"
   },
   "auth": {
     "loginTitle": "مرحباً بك في PromptHub",

@@ -18,8 +18,11 @@ function NewPromptView() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <h1 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl">{t("addNew")}</h1>
-      <PromptForm />
+      <h1 className="text-3xl font-extrabold tracking-tight">{t("addNew")}</h1>
+      <p className="pt-2 text-muted-foreground">{t("addNewSubtitle")}</p>
+      <div className="pt-6">
+        <PromptForm />
+      </div>
     </div>
   );
 }

@@ -9,7 +9,8 @@
     "edit": "Edit",
     "search": "Search",
     "submit": "Submit",
-    "back": "Back"
+    "back": "Back",
+    "backToExplore": "Back to Explore"
   },
   "nav": {
     "home": "Home",
@@ -62,7 +63,7 @@
     "titlePlaceholder": "Give your prompt a catchy title",
     "titleAr": "Title (Arabic)",
     "titleArPlaceholder": "العنوان بالعربي",
-    "description": "Description (English)",
+    "description": "Description",
     "descriptionPlaceholder": "Describe what this prompt does...",
     "descriptionAr": "Description (Arabic)",
     "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
@@ -84,7 +85,18 @@
     "updateSuccess": "Prompt updated successfully!",
     "saving": "Saving...",
     "addArabicVersion": "Add Arabic version",
-    "removeArabicVersion": "Remove Arabic version"
+    "removeArabicVersion": "Remove Arabic version",
+    "followCreator": "Follow Creator",
+    "addNewSubtitle": "Craft a prompt that helps the community.",
+    "promptSyntax": "Prompt Syntax",
+    "dropImage": "Drop an image here or click to upload",
+    "imageHint": "PNG, JPG up to 5MB",
+    "tip1Title": "Be Specific",
+    "tip1Desc": "Clear prompts get better results",
+    "tip2Title": "Add Context",
+    "tip2Desc": "Help others understand when to use it",
+    "tip3Title": "Tag Wisely",
+    "tip3Desc": "Good tags help people discover your prompt"
   },
   "profile": {
     "title": "User Profile",
@@ -92,7 +104,10 @@
     "totalPrompts": "Prompts",
     "totalLikes": "Total Likes",
     "promptsBy": "Prompts by {name}",
-    "noPrompts": "This user hasn't shared any prompts yet."
+    "noPrompts": "This user hasn't shared any prompts yet.",
+    "contributions": "Contributions",
+    "editProfile": "Edit Profile",
+    "shareProfile": "Share"
   },
   "auth": {
     "loginTitle": "Welcome to PromptHub",
