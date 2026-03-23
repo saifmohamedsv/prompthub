@@ -123,13 +123,13 @@ export function PromptDetail({ id }: { id: string }) {
           </div>
 
           {/* Action buttons row */}
-          <div className="flex gap-4 pt-4">
-            <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" />
+          <div className="flex flex-wrap gap-4 pt-4">
+            <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" label={t("likePrompt")} />
             {prompt.link && (
               <Link
                 href={prompt.link}
                 target="_blank"
-                className="flex items-center gap-3 rounded-lg bg-accent px-8 py-4 font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:brightness-110 active:scale-95"
+                className="flex flex-1 items-center justify-center gap-3 rounded-lg bg-accent px-8 py-4 font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:bg-primary active:scale-95 md:flex-none"
               >
                 <ExternalLink className="size-5" />
                 {t("tryIt")}

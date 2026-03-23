@@ -12,11 +12,13 @@ export function LikeButton({
   initialCount,
   floating,
   size = "default",
+  label,
 }: {
   promptId: string;
   initialCount: number;
   floating?: boolean;
   size?: "default" | "lg";
+  label?: string;
 }) {
   const { isAuthenticated } = useAuth();
   const { data: likedIds } = useUserLikes();
@@ -61,7 +63,7 @@ export function LikeButton({
         onClick={handleClick}
         disabled={isPending}
         className={cn(
-          "flex items-center gap-3 rounded-lg px-8 py-4 text-base font-bold transition-all active:scale-95",
+          "flex flex-1 items-center justify-center gap-3 rounded-lg px-8 py-4 text-base font-bold transition-all active:scale-95 md:flex-none",
           isLiked
             ? "bg-red-500/10 text-red-500"
             : "bg-surface-highest text-foreground hover:bg-surface-high"
@@ -70,10 +72,10 @@ export function LikeButton({
         <Heart
           className={cn(
             "size-5 transition-colors",
-            isLiked && "fill-red-500 text-red-500"
+            isLiked ? "fill-red-500 text-red-500" : "fill-current"
           )}
         />
-        <span>{initialCount}</span>
+        <span>{label ?? initialCount}</span>
       </button>
     );
   }
