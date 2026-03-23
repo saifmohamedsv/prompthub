@@ -97,6 +97,12 @@
     "likedPrompts": "Liked Prompts",
     "likedPromptsEmpty": "You haven't liked any prompts yet."
   },
+  "sidebar": {
+    "title": "PromptHub",
+    "subtitle": "Prompt Gallery",
+    "createPrompt": "Create Prompt",
+    "settings": "Settings"
+  },
   "footer": {
     "madeBy": "Made by"
   },

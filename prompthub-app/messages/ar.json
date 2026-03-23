@@ -97,6 +97,12 @@
     "likedPrompts": "البرومبتات المفضلة",
     "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد."
   },
+  "sidebar": {
+    "title": "PromptHub",
+    "subtitle": "معرض البرومبتات",
+    "createPrompt": "إنشاء برومبت",
+    "settings": "الإعدادات"
+  },
   "footer": {
     "madeBy": "صُنع بواسطة"
   },
