@@ -20,12 +20,18 @@
     "logout": "Log out"
   },
   "home": {
-    "title": "Discover & Share AI Prompts",
-    "subtitle": "Find the best prompts for ChatGPT, Claude, Midjourney, and more. Share your favorites with the community.",
+    "title": "Discover & Share the Best",
+    "titleHighlight": "AI Prompts",
+    "subtitle": "The ultimate library for the prompt era. Curated high-performance prompts for ChatGPT, Claude, Midjourney, and Stable Diffusion.",
+    "badge": "Next Generation Prompt Engineering",
     "exploreButton": "Explore Prompts",
     "shareButton": "Share a Prompt",
-    "badge": "Next Generation Prompt Engineering",
-    "titleAr": "اكتشف وشارك أفضل برومبتات الذكاء الاصطناعي"
+    "trustedBy": "Trusted by engineers at",
+    "featuredTitle": "Handpicked Artifacts",
+    "featuredSubtitle": "The syntax that shaped the creative frontier this week.",
+    "viewGallery": "View Gallery",
+    "featuredTag": "Featured",
+    "featuredUses": "Uses"
   },
   "explore": {
     "title": "Explore Prompts",
