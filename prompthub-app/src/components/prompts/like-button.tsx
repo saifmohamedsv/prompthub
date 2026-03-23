@@ -11,10 +11,12 @@ export function LikeButton({
   promptId,
   initialCount,
   floating,
+  size = "default",
 }: {
   promptId: string;
   initialCount: number;
   floating?: boolean;
+  size?: "default" | "lg";
 }) {
   const { isAuthenticated } = useAuth();
   const { data: likedIds } = useUserLikes();
@@ -48,6 +50,30 @@ export function LikeButton({
           )}
         />
         <span className="text-xs font-medium">{initialCount}</span>
+      </button>
+    );
+  }
+
+  if (size === "lg") {
+    return (
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={isPending}
+        className={cn(
+          "flex items-center gap-3 rounded-lg px-8 py-4 text-base font-bold transition-all active:scale-95",
+          isLiked
+            ? "bg-red-500/10 text-red-500"
+            : "bg-surface-highest text-foreground hover:bg-surface-high"
+        )}
+      >
+        <Heart
+          className={cn(
+            "size-5 transition-colors",
+            isLiked && "fill-red-500 text-red-500"
+          )}
+        />
+        <span>{initialCount}</span>
       </button>
     );
   }

@@ -96,7 +96,9 @@
     "tip2Title": "Add Context",
     "tip2Desc": "Help others understand when to use it",
     "tip3Title": "Tag Wisely",
-    "tip3Desc": "Good tags help people discover your prompt"
+    "tip3Desc": "Good tags help people discover your prompt",
+    "similarSyntaxes": "Similar Syntaxes",
+    "likePrompt": "Like Prompt"
   },
   "profile": {
     "title": "User Profile",

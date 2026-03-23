@@ -30,10 +30,9 @@ export function PromptSnippet({
     setTimeout(() => setCopied(false), 2000);
   }, [text, t]);
 
-  const isCompact = variant === "compact";
   const CopyIcon = copied ? Check : Copy;
 
-  if (isCompact) {
+  if (variant === "compact") {
     return (
       <div className="overflow-hidden rounded-lg bg-surface-lowest">
         <div className="flex items-center justify-between px-3 pt-2">
@@ -56,21 +55,19 @@ export function PromptSnippet({
   }
 
   return (
-    <div className="rounded-xl bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 p-px">
-      <div className="rounded-xl bg-surface-lowest">
-        <div className="flex items-center justify-between px-4 py-2.5">
-          <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
-            {t("promptText")}
-          </span>
-          <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
-            <CopyIcon className="size-3.5 transition-transform duration-200" />
-            {copied ? t("linkCopied") : t("copyPrompt")}
-          </Button>
-        </div>
-        <pre dir="ltr" className="text-justify whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-relaxed text-foreground">
-          {text}
-        </pre>
+    <div className="rounded-xl border border-border/5 bg-surface-lowest">
+      <div className="flex items-center justify-between px-8 py-3">
+        <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+          {t("promptText")}
+        </span>
+        <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
+          <CopyIcon className="size-3.5 transition-transform duration-200" />
+          {copied ? t("linkCopied") : t("copyPrompt")}
+        </Button>
       </div>
+      <pre dir="ltr" className="whitespace-pre-wrap px-8 pb-8 font-mono leading-loose text-primary/90">
+        {text}
+      </pre>
     </div>
   );
 }
