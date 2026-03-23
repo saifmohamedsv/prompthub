@@ -68,7 +68,7 @@ export function SidebarNavItems({ onNavigate }: SidebarNavItemsProps) {
         <Link
           href={isAuthenticated ? routes.newPrompt : routes.login}
           onClick={onNavigate}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent/90"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 text-sm font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:brightness-110 active:scale-[0.98]"
         >
           <Plus className="size-4" />
           {tSidebar("createPrompt")}

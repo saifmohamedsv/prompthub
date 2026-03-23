@@ -50,7 +50,7 @@ export function HeroLanding() {
             <div className="flex flex-col items-center gap-4 pt-4 sm:flex-row">
               <Link
                 href={routes.explore}
-                className="w-full rounded-lg bg-accent px-8 py-4 text-base font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:brightness-110 active:scale-95 sm:w-auto"
+                className="w-full rounded-lg bg-accent px-8 py-4 text-base font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:shadow-[0_0_20px_rgba(64,144,254,0.5)] active:scale-95 sm:w-auto"
               >
                 {t("exploreButton")}
               </Link>
