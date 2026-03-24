@@ -18,7 +18,6 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 import { Loader2, X } from "lucide-react";
 
 export function ExploreView() {
@@ -57,7 +56,6 @@ export function ExploreView() {
 
   const prompts = data?.pages.flat();
 
-  // Infinite scroll observer
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const handleObserver = useCallback(
@@ -81,52 +79,83 @@ export function ExploreView() {
   }, [handleObserver]);
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8">
-      <h1 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl">{t("title")}</h1>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+      <section className="space-y-5 mb-8">
+        {/* Heading */}
+        <div className="space-y-2">
+          <h1 className="text-3xl lg:text-5xl font-black tracking-tight">
+            {t("titlePrefix")}{" "}
+            <span className="text-primary">
+              {t("titleHighlight")}
+            </span>
+          </h1>
+          <p className="text-muted-foreground max-w-2xl">
+            {t("subtitle")}
+          </p>
+        </div>
 
-      <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:gap-4">
+        {/* Search */}
         <SearchBar value={search} onChange={setSearch} />
-        <CategoryFilter value={category} onChange={setCategory} />
-        <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
-          <SelectTrigger className="w-full sm:w-44">
-            <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
-          </SelectTrigger>
-          <SelectContent>
-            {sortOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
 
-      {tag && (
-        <div className="mb-4 flex items-center gap-2">
-          <Badge variant="secondary" className="gap-1 px-3 py-1.5 text-sm">
-            {t("tagFilter", { name: activeTagName })}
-            <button
-              type="button"
-              onClick={() => router.replace(routes.explore)}
-              className="ms-1 rounded-full hover:bg-muted"
-            >
-              <X className="size-3.5" />
-              <span className="sr-only">{t("clearTag")}</span>
-            </button>
-          </Badge>
+        {/* Filters */}
+        <div className="flex flex-col gap-4">
+          {/* Filter row: CategoryFilter + Sort */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="min-w-0 flex-1">
+              <CategoryFilter value={category} onChange={setCategory} />
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                {t("sortLabel")}
+              </span>
+              <Select value={sort} onValueChange={(v) => setSort(v as SortOption)}>
+                <SelectTrigger className="w-full sm:w-44">
+                  <span>{sortOptions.find((o) => o.value === sort)?.label}</span>
+                </SelectTrigger>
+                <SelectContent>
+                  {sortOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Active tag badge */}
+          {tag && (
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-lg border border-brand/20 bg-brand-muted px-3 py-1.5 text-sm text-brand">
+                <span className="text-xs font-bold uppercase tracking-wide text-brand">
+                  {t("tagFilter", { name: activeTagName })}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => router.replace(routes.home)}
+                  className="ms-1 rounded-full hover:bg-muted"
+                >
+                  <X className="size-3.5" />
+                  <span className="sr-only">{t("clearTag")}</span>
+                </button>
+              </span>
+            </div>
+          )}
         </div>
-      )}
+      </section>
 
-      <PromptGrid prompts={prompts} isLoading={isLoading} />
+      <section className="max-w-7xl">
+        <PromptGrid prompts={prompts} isLoading={isLoading} />
 
-      {/* Infinite scroll sentinel */}
-      <div ref={sentinelRef} className="h-1" />
+        {/* Infinite scroll sentinel */}
+        <div ref={sentinelRef} className="h-1" />
 
-      {isFetchingNextPage && (
-        <div className="flex justify-center py-6">
-          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-        </div>
-      )}
+        {isFetchingNextPage && (
+          <div className="flex justify-center py-6">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          </div>
+        )}
+      </section>
     </div>
   );
 }

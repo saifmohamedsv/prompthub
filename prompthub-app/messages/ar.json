@@ -9,7 +9,8 @@
     "edit": "تعديل",
     "search": "بحث",
     "submit": "إرسال",
-    "back": "رجوع"
+    "back": "رجوع",
+    "backToExplore": "العودة للاستكشاف"
   },
   "nav": {
     "home": "الرئيسية",
@@ -20,10 +21,18 @@
     "logout": "تسجيل الخروج"
   },
   "home": {
-    "title": "اكتشف وشارك برومبتات الذكاء الاصطناعي",
-    "subtitle": "اعثر على أفضل البرومبتات لـ ChatGPT و Claude و Midjourney والمزيد. شارك المفضلة لديك مع المجتمع.",
+    "title": "اكتشف وشارك أفضل",
+    "titleHighlight": "برومبتات الذكاء الاصطناعي",
+    "subtitle": "المكتبة المثالية لعصر البرومبتات. برومبتات عالية الأداء لـ ChatGPT وClaude وMidjourney وStable Diffusion.",
+    "badge": "الجيل القادم من هندسة البرومبتات",
     "exploreButton": "استكشف البرومبتات",
-    "shareButton": "شارك برومبت"
+    "shareButton": "شارك برومبت",
+    "trustedBy": "موثوق من مهندسين في",
+    "featuredTitle": "مختارات مميزة",
+    "featuredSubtitle": "البرومبتات التي شكّلت الحدود الإبداعية هذا الأسبوع.",
+    "viewGallery": "عرض المعرض",
+    "featuredTag": "مميز",
+    "featuredUses": "استخدام"
   },
   "explore": {
     "title": "استكشف البرومبتات",
@@ -35,7 +44,11 @@
     "sortMostViewed": "الأكثر مشاهدة",
     "sortMostLiked": "الأكثر إعجاباً",
     "tagFilter": "الوسم: {name}",
-    "clearTag": "مسح"
+    "clearTag": "مسح",
+    "sortLabel": "ترتيب حسب",
+    "titlePrefix": "استكشف",
+    "titleHighlight": "معرض البرومبتات",
+    "subtitle": "اكتشف برومبتات عالية الأداء مُصممة لأقوى نماذج الذكاء الاصطناعي في العالم."
   },
   "prompt": {
     "by": "بواسطة",
@@ -45,6 +58,8 @@
     "copyPrompt": "نسخ البرومبت",
     "linkCopied": "تم النسخ!",
     "tryIt": "جربه",
+    "forgeTitle": "اصنع صيغة جديدة",
+    "forgeSubtitle": "صمّم قطعتك الذكية بدقة. كل حرف مهم في معرض البرومبتات.",
     "addNew": "إضافة برومبت جديد",
     "editPrompt": "تعديل البرومبت",
     "deletePrompt": "حذف البرومبت",
@@ -53,7 +68,7 @@
     "titlePlaceholder": "أعطِ برومبتك عنواناً جذاباً",
     "titleAr": "العنوان (عربي)",
     "titleArPlaceholder": "العنوان بالعربي",
-    "description": "الوصف (إنجليزي)",
+    "description": "الوصف",
     "descriptionPlaceholder": "اوصف ما يفعله هذا البرومبت...",
     "descriptionAr": "الوصف (عربي)",
     "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
@@ -75,7 +90,23 @@
     "updateSuccess": "تم تحديث البرومبت بنجاح!",
     "saving": "جاري الحفظ...",
     "addArabicVersion": "إضافة نسخة عربية",
-    "removeArabicVersion": "إزالة النسخة العربية"
+    "removeArabicVersion": "إزالة النسخة العربية",
+    "followCreator": "متابعة المبدع",
+    "addNewSubtitle": "أنشئ برومبت يفيد المجتمع.",
+    "promptSyntax": "صيغة البرومبت",
+    "dropImage": "اسحب صورة هنا أو انقر للرفع",
+    "imageHint": "PNG أو JPG حتى 5 ميجابايت",
+    "tip1Title": "التنوع",
+    "tip1Desc": "صمّم برومبتات تتكيف عبر النماذج والاستخدامات المختلفة",
+    "tip2Title": "الجودة",
+    "tip2Desc": "البرومبتات الواضحة والمحددة تحقق نتائج أفضل باستمرار",
+    "tip3Title": "قابلية الاكتشاف",
+    "tip3Desc": "الوسوم والأوصاف الجيدة تساعد الآخرين على إيجاد عملك",
+    "detailedObjective": "الهدف التفصيلي",
+    "promptSyntaxLabel": "صيغة البرومبت",
+    "charCount": "{count} حرف",
+    "similarSyntaxes": "صيغ مشابهة",
+    "likePrompt": "إعجاب بالبرومبت"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -83,19 +114,33 @@
     "totalPrompts": "البرومبتات",
     "totalLikes": "إجمالي الإعجابات",
     "promptsBy": "برومبتات {name}",
-    "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد."
+    "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد.",
+    "contributions": "المساهمات",
+    "editProfile": "تعديل الملف",
+    "shareProfile": "مشاركة"
   },
   "auth": {
     "loginTitle": "مرحباً بك في PromptHub",
     "loginSubtitle": "سجّل دخولك لمشاركة البرومبتات والإعجاب بها",
     "continueWithGoogle": "المتابعة مع Google",
-    "continueWithGitHub": "المتابعة مع GitHub"
+    "continueWithGitHub": "المتابعة مع GitHub",
+    "termsText": "بالمتابعة، فإنك توافق على شروط الخدمة وسياسة الخصوصية."
   },
   "dashboard": {
     "myPrompts": "برومبتاتي",
+    "myPromptsSubtitle": "إدارة وتتبع البرومبتات التي شاركتها.",
     "myPromptsEmpty": "لم تشارك أي برومبتات بعد.",
+    "myPromptsEmptyDesc": "أنشئ أول برومبت وشاركه مع المجتمع.",
     "likedPrompts": "البرومبتات المفضلة",
-    "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد."
+    "likedPromptsSubtitle": "البرومبتات التي حفظتها للاطلاع عليها لاحقاً.",
+    "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد.",
+    "likedPromptsEmptyDesc": "استكشف البرومبتات وأعجب بما تجده مفيداً."
+  },
+  "sidebar": {
+    "title": "PromptHub",
+    "subtitle": "معرض البرومبتات",
+    "createPrompt": "إنشاء برومبت",
+    "settings": "الإعدادات"
   },
   "footer": {
     "madeBy": "صُنع بواسطة"

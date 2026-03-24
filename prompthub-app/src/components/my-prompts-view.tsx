@@ -6,17 +6,26 @@ import { Button } from "@/components/ui/button";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { useMyPrompts } from "@/hooks/use-prompts";
 import { routes } from "@/lib/config";
-import { Plus } from "lucide-react";
+import { Plus, FileText } from "lucide-react";
 
 export function MyPromptsView() {
   const t = useTranslations();
   const { data: prompts, isLoading } = useMyPrompts();
 
+  const isEmpty = !isLoading && (!prompts || prompts.length === 0);
+
   return (
-    <div>
-      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold sm:text-3xl">{t("dashboard.myPrompts")}</h1>
-        <Button>
+    <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-extrabold tracking-tight">
+            {t("dashboard.myPrompts")}
+          </h1>
+          <p className="text-muted-foreground pt-2">
+            {t("dashboard.myPromptsSubtitle")}
+          </p>
+        </div>
+        <Button className="bg-brand text-brand-foreground rounded-lg px-4 py-2 text-sm font-bold hover:bg-brand-hover">
           <Link className="flex items-center" href={routes.newPrompt}>
             <Plus className="me-1 h-5 w-5" />
             {t("prompt.addNew")}
@@ -24,7 +33,28 @@ export function MyPromptsView() {
         </Button>
       </div>
 
-      <PromptGrid prompts={prompts} isLoading={isLoading} />
+      {isEmpty ? (
+        <div className="flex flex-col items-center justify-center rounded-lg bg-surface-1 p-5 text-center shadow-sm">
+          <div className="rounded-lg bg-surface-3 p-3">
+            <FileText className="size-6 text-muted-foreground" />
+          </div>
+          <h3 className="pt-4 text-lg font-bold">
+            {t("dashboard.myPromptsEmpty")}
+          </h3>
+          <p className="pt-2 text-sm text-muted-foreground">
+            {t("dashboard.myPromptsEmptyDesc")}
+          </p>
+          <Link
+            href={routes.newPrompt}
+            className="mt-6 inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-bold text-brand-foreground transition-all hover:bg-brand-hover"
+          >
+            <Plus className="me-1 h-4 w-4" />
+            {t("prompt.addNew")}
+          </Link>
+        </div>
+      ) : (
+        <PromptGrid prompts={prompts} isLoading={isLoading} />
+      )}
     </div>
   );
 }

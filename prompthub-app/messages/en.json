@@ -9,7 +9,8 @@
     "edit": "Edit",
     "search": "Search",
     "submit": "Submit",
-    "back": "Back"
+    "back": "Back",
+    "backToExplore": "Back to Explore"
   },
   "nav": {
     "home": "Home",
@@ -20,10 +21,18 @@
     "logout": "Log out"
   },
   "home": {
-    "title": "Discover & Share AI Prompts",
-    "subtitle": "Find the best prompts for ChatGPT, Claude, Midjourney, and more. Share your favorites with the community.",
+    "title": "Discover & Share the Best",
+    "titleHighlight": "AI Prompts",
+    "subtitle": "The ultimate library for the prompt era. Curated high-performance prompts for ChatGPT, Claude, Midjourney, and Stable Diffusion.",
+    "badge": "Next Generation Prompt Engineering",
     "exploreButton": "Explore Prompts",
-    "shareButton": "Share a Prompt"
+    "shareButton": "Share a Prompt",
+    "trustedBy": "Trusted by engineers at",
+    "featuredTitle": "Handpicked Artifacts",
+    "featuredSubtitle": "The syntax that shaped the creative frontier this week.",
+    "viewGallery": "View Gallery",
+    "featuredTag": "Featured",
+    "featuredUses": "Uses"
   },
   "explore": {
     "title": "Explore Prompts",
@@ -35,7 +44,11 @@
     "sortMostViewed": "Most Viewed",
     "sortMostLiked": "Most Liked",
     "tagFilter": "Tag: {name}",
-    "clearTag": "Clear"
+    "clearTag": "Clear",
+    "sortLabel": "Sort by",
+    "titlePrefix": "Explore the",
+    "titleHighlight": "Syntax Gallery",
+    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models."
   },
   "prompt": {
     "by": "by",
@@ -45,6 +58,8 @@
     "copyPrompt": "Copy Prompt",
     "linkCopied": "Copied!",
     "tryIt": "Try it",
+    "forgeTitle": "Forge a New Syntax",
+    "forgeSubtitle": "Craft your AI artifact with precision. Every character matters in the gallery of prompts.",
     "addNew": "Add New Prompt",
     "editPrompt": "Edit Prompt",
     "deletePrompt": "Delete Prompt",
@@ -53,7 +68,7 @@
     "titlePlaceholder": "Give your prompt a catchy title",
     "titleAr": "Title (Arabic)",
     "titleArPlaceholder": "العنوان بالعربي",
-    "description": "Description (English)",
+    "description": "Description",
     "descriptionPlaceholder": "Describe what this prompt does...",
     "descriptionAr": "Description (Arabic)",
     "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
@@ -75,7 +90,23 @@
     "updateSuccess": "Prompt updated successfully!",
     "saving": "Saving...",
     "addArabicVersion": "Add Arabic version",
-    "removeArabicVersion": "Remove Arabic version"
+    "removeArabicVersion": "Remove Arabic version",
+    "followCreator": "Follow Creator",
+    "addNewSubtitle": "Craft a prompt that helps the community.",
+    "promptSyntax": "Prompt Syntax",
+    "dropImage": "Drop an image here or click to upload",
+    "imageHint": "PNG, JPG up to 5MB",
+    "tip1Title": "Versatility",
+    "tip1Desc": "Design prompts that adapt across models and use cases",
+    "tip2Title": "Quality",
+    "tip2Desc": "Clear, specific prompts consistently deliver better results",
+    "tip3Title": "Discoverability",
+    "tip3Desc": "Good tags and descriptions help others find your work",
+    "detailedObjective": "Detailed Objective",
+    "promptSyntaxLabel": "Prompt Syntax",
+    "charCount": "{count} characters",
+    "similarSyntaxes": "Similar Syntaxes",
+    "likePrompt": "Like Prompt"
   },
   "profile": {
     "title": "User Profile",
@@ -83,19 +114,33 @@
     "totalPrompts": "Prompts",
     "totalLikes": "Total Likes",
     "promptsBy": "Prompts by {name}",
-    "noPrompts": "This user hasn't shared any prompts yet."
+    "noPrompts": "This user hasn't shared any prompts yet.",
+    "contributions": "Contributions",
+    "editProfile": "Edit Profile",
+    "shareProfile": "Share"
   },
   "auth": {
     "loginTitle": "Welcome to PromptHub",
     "loginSubtitle": "Sign in to share and like prompts",
     "continueWithGoogle": "Continue with Google",
-    "continueWithGitHub": "Continue with GitHub"
+    "continueWithGitHub": "Continue with GitHub",
+    "termsText": "By continuing, you agree to our Terms of Service and Privacy Policy."
   },
   "dashboard": {
     "myPrompts": "My Prompts",
+    "myPromptsSubtitle": "Manage and track your shared prompts.",
     "myPromptsEmpty": "You haven't shared any prompts yet.",
+    "myPromptsEmptyDesc": "Create your first prompt and share it with the community.",
     "likedPrompts": "Liked Prompts",
-    "likedPromptsEmpty": "You haven't liked any prompts yet."
+    "likedPromptsSubtitle": "Prompts you've saved for later.",
+    "likedPromptsEmpty": "You haven't liked any prompts yet.",
+    "likedPromptsEmptyDesc": "Explore prompts and like the ones you find useful."
+  },
+  "sidebar": {
+    "title": "PromptHub",
+    "subtitle": "Prompt Gallery",
+    "createPrompt": "Create Prompt",
+    "settings": "Settings"
   },
   "footer": {
     "madeBy": "Made by"

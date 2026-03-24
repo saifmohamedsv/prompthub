@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/hooks/use-auth";
 import { useUserLikes, useToggleLike } from "@/hooks/use-prompts";
-import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "@/i18n/navigation";
@@ -12,10 +11,14 @@ export function LikeButton({
   promptId,
   initialCount,
   floating,
+  size = "default",
+  label,
 }: {
   promptId: string;
   initialCount: number;
   floating?: boolean;
+  size?: "default" | "lg";
+  label?: string;
 }) {
   const { isAuthenticated } = useAuth();
   const { data: likedIds } = useUserLikes();
@@ -53,21 +56,49 @@ export function LikeButton({
     );
   }
 
+  if (size === "lg") {
+    return (
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={isPending}
+        className={cn(
+          "inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all active:scale-[0.98]",
+          isLiked
+            ? "bg-red-500/10 text-red-500"
+            : "bg-surface-3 text-foreground hover:bg-surface-4"
+        )}
+      >
+        <Heart
+          className={cn(
+            "size-4 transition-colors",
+            isLiked ? "fill-red-500 text-red-500" : ""
+          )}
+          strokeWidth={1.5}
+        />
+        <span>{label ?? initialCount}</span>
+      </button>
+    );
+  }
+
   return (
-    <Button
-      variant="ghost"
-      size="sm"
+    <button
+      type="button"
       onClick={handleClick}
       disabled={isPending}
-      className="gap-1.5"
+      className={cn(
+        "inline-flex items-center gap-1 text-[11px] text-foreground-tertiary transition-colors hover:text-foreground",
+        isLiked && "text-red-500 hover:text-red-400"
+      )}
     >
       <Heart
         className={cn(
           "size-4 transition-colors",
-          isLiked && "fill-red-500 text-red-500"
+          isLiked ? "fill-red-500 text-red-500" : "text-foreground-tertiary"
         )}
+        strokeWidth={1.5}
       />
-      <span className="text-xs">{initialCount}</span>
-    </Button>
+      <span className="font-medium">{initialCount}</span>
+    </button>
   );
 }

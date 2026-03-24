@@ -2,7 +2,6 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { usePublicProfile, useUserPublicPrompts } from "@/hooks/use-profile";
-import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
@@ -24,19 +23,13 @@ export function UserProfileView({ userId }: { userId: string }) {
 
   if (profileLoading) {
     return (
-      <div className="mx-auto max-w-4xl space-y-6">
-        <Card>
-          <CardContent className="flex items-center gap-5 pt-6">
-            <Skeleton className="size-20 rounded-full" />
-            <div className="space-y-2">
-              <Skeleton className="h-6 w-40" />
-              <Skeleton className="h-4 w-28" />
-            </div>
-          </CardContent>
-        </Card>
-        <div className="grid grid-cols-2 gap-4">
-          <Skeleton className="h-20 rounded-xl" />
-          <Skeleton className="h-20 rounded-xl" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex items-center gap-4 pt-6">
+          <Skeleton className="size-16 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-28" />
+          </div>
         </div>
       </div>
     );
@@ -51,48 +44,41 @@ export function UserProfileView({ userId }: { userId: string }) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
       {/* Profile header */}
-      <Card>
-        <CardContent className="flex items-center gap-5 pt-6">
-          <Avatar className="size-20">
-            <AvatarImage src={profile.avatar_url ?? undefined} />
-            <AvatarFallback className="text-2xl">{displayName[0]}</AvatarFallback>
-          </Avatar>
-          <div>
-            <h1 className="text-xl font-bold sm:text-2xl">{displayName}</h1>
-            {profile.username && (
-              <p className="text-sm text-muted-foreground">@{profile.username}</p>
-            )}
-            {joinDate && (
-              <p className="mt-1 text-xs text-muted-foreground">
-                {t("joined", { date: joinDate })}
-              </p>
-            )}
+      <div className="flex flex-col items-center gap-4 pt-6 sm:flex-row sm:items-start">
+        <Avatar className="size-16 ring-2 ring-brand/20">
+          <AvatarImage src={profile.avatar_url ?? undefined} />
+          <AvatarFallback className="text-xl">{displayName[0]}</AvatarFallback>
+        </Avatar>
+        <div className="text-center sm:text-start">
+          <h1 className="text-xl font-extrabold sm:text-2xl">{displayName}</h1>
+          {profile.username && (
+            <p className="text-sm text-muted-foreground">@{profile.username}</p>
+          )}
+          {joinDate && (
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {t("joined", { date: joinDate })}
+            </p>
+          )}
+          {/* Stat chips */}
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs">
+              <span className="font-bold">{prompts?.length ?? 0}</span>
+              <span className="text-muted-foreground">{t("totalPrompts")}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs">
+              <span className="font-bold">{totalLikes}</span>
+              <span className="text-muted-foreground">{t("totalLikes")}</span>
+            </span>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 gap-4">
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-2xl font-bold">{prompts?.length ?? 0}</p>
-            <p className="text-sm text-muted-foreground">{t("totalPrompts")}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-2xl font-bold">{totalLikes}</p>
-            <p className="text-sm text-muted-foreground">{t("totalLikes")}</p>
-          </CardContent>
-        </Card>
+        </div>
       </div>
 
       {/* Prompts section */}
       <div>
-        <h2 className="mb-4 text-lg font-semibold">
-          {t("promptsBy", { name: displayName })}
+        <h2 className="mb-4 text-xl font-bold">
+          {t("contributions")}
         </h2>
         {prompts?.length === 0 && !promptsLoading ? (
           <p className="py-8 text-center text-muted-foreground">{t("noPrompts")}</p>

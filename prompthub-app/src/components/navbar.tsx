@@ -14,7 +14,7 @@ import { Menu, Compass, FileText, Heart } from "lucide-react";
 import { useState } from "react";
 
 const navIcons = {
-  [routes.explore]: Compass,
+  [routes.home]: Compass,
   [routes.myPrompts]: FileText,
   [routes.likes]: Heart,
 } as const;
@@ -25,28 +25,27 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: routes.explore, label: t("explore") },
+    { href: routes.home, label: t("explore") },
     { href: routes.myPrompts, label: t("myPrompts") },
     { href: routes.likes, label: t("likes") },
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
-      <nav className="container mx-auto flex h-14 items-center justify-between px-4 sm:h-16">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/10">
+      <nav className="mx-auto max-w-7xl flex h-12 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href={routes.home} className="flex items-center">
           <Logo size="sm" />
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-[13px] font-medium transition-colors hover:text-foreground ${
                 pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                  ? "text-brand"
+                  : "text-foreground-secondary"
               }`}
             >
               {link.label}
@@ -59,7 +58,6 @@ export function Navbar() {
           <ThemeToggle />
           <UserAvatar />
 
-          {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               render={<Button variant="ghost" size="icon" />}
@@ -69,14 +67,12 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0">
               <div className="flex flex-col h-full">
-                {/* Sheet header */}
                 <div className="px-5 pt-6 pb-4">
                   <Logo size="md" />
                 </div>
 
                 <Separator />
 
-                {/* Nav links */}
                 <nav className="flex flex-col gap-1 px-3 py-4">
                   {navLinks.map((link) => {
                     const isActive = pathname === link.href;
@@ -88,7 +84,7 @@ export function Navbar() {
                         onClick={() => setOpen(false)}
                         className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-primary/10 text-primary"
+                            ? "bg-brand-muted text-brand"
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         }`}
                       >

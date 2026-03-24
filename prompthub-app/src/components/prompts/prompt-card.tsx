@@ -2,8 +2,8 @@
 
 import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Locale } from "@/lib/config";
-import { Eye, Calendar } from "lucide-react";
+import { Locale, getCategoryBadgeClass } from "@/lib/config";
+import { Eye } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
@@ -26,35 +26,33 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   });
 
   return (
-    <article className="group relative flex h-full flex-col rounded-xl bg-card shadow-sm ring-1 ring-border transition-all hover:shadow-md hover:ring-border/80">
-      {/* Top row: category + stats */}
-      <div className="flex items-center justify-between px-4 pt-4">
+    <article className="group relative flex h-full flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card transition-all hover:border-brand/20 hover:shadow-md">
+      {/* Row 1: Category badge + stats — single line, 11px */}
+      <div className="flex items-center justify-between">
         {categoryName && (
-          <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold tracking-wide text-primary uppercase">
+          <span className={`rounded-full px-2 py-px text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>
             {categoryName}
           </span>
         )}
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
-            <Eye className="size-4" />
+        <div className="flex items-center gap-2 text-[11px] text-foreground-tertiary">
+          <span className="inline-flex items-center gap-0.5">
+            <Eye className="size-3" />
             {prompt.views_count}
           </span>
-          <span className="inline-flex items-center gap-1">
-            <Calendar className="size-4" />
-            {shortDate}
-          </span>
+          <span>·</span>
+          <span>{shortDate}</span>
         </div>
       </div>
 
-      {/* Tags */}
+      {/* Row 2: Tags — compact chip row */}
       {tags.length > 0 && (
-        <div className="relative z-10 flex flex-wrap gap-2 px-4 pt-3">
+        <div className="relative z-10 mt-2 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
             <button
               key={tag.id}
               type="button"
-              onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
-              className="rounded-md bg-secondary px-2.5 py-0.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+              onClick={() => router.push(routes.home + "?tag=" + tag.slug)}
+              className="rounded-md bg-surface-3 px-2 py-px text-[10px] font-medium text-foreground-secondary transition-colors hover:bg-brand-muted hover:text-brand"
             >
               {tag.name}
             </button>
@@ -62,8 +60,8 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
         </div>
       )}
 
-      {/* Title — stretched link covers the entire card */}
-      <h3 className="line-clamp-2 px-4 pt-3 text-lg font-bold leading-snug sm:text-xl">
+      {/* Row 3: Title — 14px, weight 500, 2-line clamp, tight leading */}
+      <h3 className="mt-2 line-clamp-2 text-sm font-medium leading-tight transition-colors group-hover:text-brand">
         <Link
           href={routes.promptDetail(prompt.id)}
           className="after:absolute after:inset-0 after:content-['']"
@@ -72,30 +70,30 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
         </Link>
       </h3>
 
-      {/* Description */}
-      <p className="line-clamp-2 flex-1 px-4 pt-2 text-base leading-relaxed text-muted-foreground">
+      {/* Row 4: Description — 12px, secondary color, 2-line clamp */}
+      <p className="mt-1 line-clamp-2 flex-1 text-xs leading-relaxed text-foreground-secondary">
         {description}
       </p>
 
-      {/* Prompt snippet */}
+      {/* Row 5: Prompt snippet — max 70px, monospace, fade mask, brand left border */}
       {prompt.prompt_text && (
-        <div className="relative z-10 mx-4 mt-3">
+        <div className="relative z-10 mt-2">
           <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
-      {/* Footer: author + likes */}
-      <div className="relative z-10 mt-auto flex items-center justify-between px-4 pt-4 pb-4">
+      {/* Row 6: Footer — 20px avatar + 11px author left, heart + count right */}
+      <div className="relative z-10 mt-2 flex items-center justify-between">
         <button
           type="button"
           onClick={() => router.push(routes.userProfile(prompt.user_id))}
-          className="group/author flex cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1 -mx-1.5 -my-1 transition-colors hover:bg-muted/60"
+          className="group/author flex items-center gap-1.5 transition-colors"
         >
-          <Avatar className="size-7 ring-2 ring-transparent transition-all group-hover/author:ring-primary/30">
+          <Avatar className="size-5 ring-1 ring-transparent transition-all group-hover/author:ring-brand/30">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
-            <AvatarFallback className="text-xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
+            <AvatarFallback className="text-[8px]">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <span className="text-sm text-muted-foreground transition-colors group-hover/author:text-foreground group-hover/author:underline">
+          <span className="text-[11px] text-foreground-tertiary transition-colors group-hover/author:text-foreground">
             {prompt.profiles?.full_name ?? prompt.profiles?.username}
           </span>
         </button>

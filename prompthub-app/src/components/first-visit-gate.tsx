@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  useSyncExternalStore,
-  useCallback,
-  createContext,
-  useContext,
-  type ReactNode,
-} from "react";
+import { type ReactNode, useSyncExternalStore, useEffect, useRef } from "react";
+import { useRouter } from "@/i18n/navigation";
+import { routes } from "@/lib/config";
 
 const STORAGE_KEY = "prompthub_visited";
 
@@ -20,40 +16,22 @@ function getSnapshot() {
 }
 
 function getServerSnapshot() {
-  return "true"; // On server, assume visited (show children)
+  return "true";
 }
 
-const DismissContext = createContext<(() => void) | null>(null);
-
-export function FirstVisitGate({
-  landing,
-  children,
-}: {
-  landing: ReactNode;
-  children: ReactNode;
-}) {
+export function FirstVisitGate({ children }: { children: ReactNode }) {
   const visited = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const router = useRouter();
+  const redirected = useRef(false);
 
-  const dismiss = useCallback(() => {
-    localStorage.setItem(STORAGE_KEY, "true");
-    window.dispatchEvent(new StorageEvent("storage"));
-  }, []);
+  useEffect(() => {
+    if (visited === null && !redirected.current) {
+      redirected.current = true;
+      localStorage.setItem(STORAGE_KEY, "true");
+      router.replace(routes.landing);
+    }
+  }, [visited, router]);
 
-  if (!visited) {
-    return (
-      <DismissContext.Provider value={dismiss}>
-        {landing}
-      </DismissContext.Provider>
-    );
-  }
-
+  if (visited === null) return null;
   return <>{children}</>;
-}
-
-export function useDismissLanding() {
-  const dismiss = useContext(DismissContext);
-  if (!dismiss) {
-    throw new Error("useDismissLanding must be used within FirstVisitGate");
-  }
-  return dismiss;
 }

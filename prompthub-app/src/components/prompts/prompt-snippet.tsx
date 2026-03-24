@@ -16,8 +16,7 @@ type PromptSnippetProps = {
 
 function truncate(text: string, max: number): string {
   if (text.length <= max) return text;
-  const cut = text.lastIndexOf(" ", max);
-  return text.slice(0, cut > 0 ? cut : max) + "…";
+  return text.slice(0, max).trimEnd() + "\u2026";
 }
 
 export function PromptSnippet({
@@ -37,40 +36,40 @@ export function PromptSnippet({
     setTimeout(() => setCopied(false), 2000);
   }, [text, t]);
 
-  const isCompact = variant === "compact";
-  const displayText = isCompact ? truncate(text, maxLength) : text;
   const CopyIcon = copied ? Check : Copy;
 
+  if (variant === "compact") {
+    return (
+      <div className="relative overflow-hidden rounded-md bg-surface-2" onClick={handleCopy} role="button" tabIndex={0}>
+        <div className="flex items-center justify-between px-2.5 pt-1.5">
+          <span className="text-[9px] font-semibold tracking-widest text-foreground-tertiary uppercase">
+            {t("promptText")}
+          </span>
+          <span className={`text-[9px] transition-colors ${copied ? "text-green-500" : "text-foreground-tertiary"}`}>
+            {copied ? "✓" : ""}
+          </span>
+        </div>
+        <div dir="ltr" className="prompt-code mx-2 mb-1.5 mt-0.5 bg-transparent">
+          {text}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="overflow-hidden rounded-lg bg-muted/70 dark:bg-muted/40">
-      <div className={`flex items-center justify-between ${isCompact ? "px-3 pt-2" : "border-b border-border/50 px-4 py-2.5"}`}>
+    <div className="rounded-xl border border-border/5 bg-background">
+      <div className="flex items-center justify-between px-8 py-3">
         <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {t("promptText")}
         </span>
-        {isCompact ? (
-          <button
-            type="button"
-            onClick={handleCopy}
-            className={`rounded p-0.5 transition-colors ${copied ? "text-green-500" : "text-muted-foreground hover:text-foreground"}`}
-          >
-            <CopyIcon className="size-3.5 transition-transform duration-200" />
-          </button>
-        ) : (
-          <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
-            <CopyIcon className="size-3.5 transition-transform duration-200" />
-            {copied ? t("linkCopied") : t("copyPrompt")}
-          </Button>
-        )}
+        <Button variant="ghost" size="sm" onClick={handleCopy} className={`h-7 gap-1.5 text-xs ${copied ? "text-green-500 hover:text-green-500" : ""}`}>
+          <CopyIcon className="size-3.5 transition-transform duration-200" />
+          {copied ? t("linkCopied") : t("copyPrompt")}
+        </Button>
       </div>
-      {isCompact ? (
-        <p dir="ltr" className="px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
-          {displayText}
-        </p>
-      ) : (
-        <pre dir="ltr" className="text-justify whitespace-pre-wrap px-4 py-3 font-mono text-sm leading-relaxed text-foreground">
-          {displayText}
-        </pre>
-      )}
+      <pre dir="ltr" className="whitespace-pre-wrap px-8 pb-8 font-mono leading-loose text-primary/90">
+        {text}
+      </pre>
     </div>
   );
 }
