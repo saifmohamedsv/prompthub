@@ -48,8 +48,7 @@
     "sortLabel": "Sort by",
     "titlePrefix": "Explore the",
     "titleHighlight": "Syntax Gallery",
-    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models.",
-    "cmdK": "⌘K"
+    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models."
   },
   "prompt": {
     "by": "by",
@@ -59,6 +58,8 @@
     "copyPrompt": "Copy Prompt",
     "linkCopied": "Copied!",
     "tryIt": "Try it",
+    "forgeTitle": "Forge a New Syntax",
+    "forgeSubtitle": "Craft your AI artifact with precision. Every character matters in the gallery of prompts.",
     "addNew": "Add New Prompt",
     "editPrompt": "Edit Prompt",
     "deletePrompt": "Delete Prompt",
@@ -95,12 +96,15 @@
     "promptSyntax": "Prompt Syntax",
     "dropImage": "Drop an image here or click to upload",
     "imageHint": "PNG, JPG up to 5MB",
-    "tip1Title": "Be Specific",
-    "tip1Desc": "Clear prompts get better results",
-    "tip2Title": "Add Context",
-    "tip2Desc": "Help others understand when to use it",
-    "tip3Title": "Tag Wisely",
-    "tip3Desc": "Good tags help people discover your prompt",
+    "tip1Title": "Versatility",
+    "tip1Desc": "Design prompts that adapt across models and use cases",
+    "tip2Title": "Quality",
+    "tip2Desc": "Clear, specific prompts consistently deliver better results",
+    "tip3Title": "Discoverability",
+    "tip3Desc": "Good tags and descriptions help others find your work",
+    "detailedObjective": "Detailed Objective",
+    "promptSyntaxLabel": "Prompt Syntax",
+    "charCount": "{count} characters",
     "similarSyntaxes": "Similar Syntaxes",
     "likePrompt": "Like Prompt"
   },
@@ -139,8 +143,7 @@
     "settings": "Settings"
   },
   "footer": {
-    "madeBy": "Made by",
-    "version": "v1.0.0"
+    "madeBy": "Made by"
   },
   "locale": {
     "en": "English",

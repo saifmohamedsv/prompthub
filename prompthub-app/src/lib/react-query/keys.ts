@@ -10,6 +10,7 @@ export const queryKeys = {
     detail: (id: string) => ["prompts", "detail", id] as const,
     my: ["prompts", "my"] as const,
     liked: ["prompts", "liked"] as const,
+    featured: ["prompts", "featured"] as const,
     userPublic: (id: string) => ["prompts", "user", id] as const,
   },
   profiles: {

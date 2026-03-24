@@ -11,6 +11,7 @@ import { pagination } from "@/lib/config";
 import {
   fetchPrompts,
   fetchPromptById,
+  fetchFeaturedPrompts,
   fetchUserPrompts,
   fetchLikedPrompts,
   fetchUserLikes,
@@ -44,6 +45,15 @@ export function usePrompts(filters?: Omit<PromptFilters, "limit" | "page">) {
       return loaded < lastPage.totalCount ? allPages.length : undefined;
     },
     staleTime: 2 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  });
+}
+
+export function useFeaturedPrompts(limit = 3) {
+  return useQuery({
+    queryKey: queryKeys.prompts.featured,
+    queryFn: () => fetchFeaturedPrompts(limit),
+    staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });
 }
