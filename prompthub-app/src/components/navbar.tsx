@@ -9,106 +9,94 @@ import { UserAvatar } from "@/components/auth/user-avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/logo";
-import { MobileSidebar } from "@/components/mobile-sidebar";
 import { routes } from "@/lib/config";
 import { Menu, Compass, FileText, Heart } from "lucide-react";
 import { useState } from "react";
 
 const navIcons = {
-  [routes.explore]: Compass,
+  [routes.home]: Compass,
   [routes.myPrompts]: FileText,
   [routes.likes]: Heart,
 } as const;
 
-type NavbarProps = {
-  variant?: "full" | "slim";
-};
-
-export function Navbar({ variant = "full" }: NavbarProps) {
+export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: routes.explore, label: t("explore") },
+    { href: routes.home, label: t("explore") },
     { href: routes.myPrompts, label: t("myPrompts") },
     { href: routes.likes, label: t("likes") },
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 glass shadow-[0_8px_30px_rgba(16,19,26,0.4)]">
-      <nav className="container mx-auto flex h-14 items-center justify-between px-4 sm:h-16">
-        <div className="flex items-center gap-2">
-          {variant === "slim" && <MobileSidebar />}
-          <Link href={routes.home} className="flex items-center">
-            <Logo size="sm" />
-          </Link>
-        </div>
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border/10">
+      <nav className="mx-auto max-w-7xl flex h-12 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href={routes.home} className="flex items-center">
+          <Logo size="sm" />
+        </Link>
 
-        {variant !== "slim" && (
-          <div className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="hidden items-center gap-6 md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`text-[13px] font-medium transition-colors hover:text-foreground ${
+                pathname === link.href
+                  ? "text-brand"
+                  : "text-foreground-secondary"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
           <LocaleSwitcher />
           <ThemeToggle />
           <UserAvatar />
 
-          {variant !== "slim" && (
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger
-                render={<Button variant="ghost" size="icon" />}
-                className="md:hidden"
-              >
-                <Menu className="size-5" />
-              </SheetTrigger>
-              <SheetContent side="left" className="w-72 p-0">
-                <div className="flex flex-col h-full">
-                  <div className="px-5 pt-6 pb-4">
-                    <Logo size="md" />
-                  </div>
-
-                  <Separator />
-
-                  <nav className="flex flex-col gap-1 px-3 py-4">
-                    {navLinks.map((link) => {
-                      const isActive = pathname === link.href;
-                      const Icon = navIcons[link.href as keyof typeof navIcons];
-                      return (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          onClick={() => setOpen(false)}
-                          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                            isActive
-                              ? "bg-primary/10 text-primary"
-                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                          }`}
-                        >
-                          {Icon && <Icon className="size-4" />}
-                          {link.label}
-                        </Link>
-                      );
-                    })}
-                  </nav>
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              render={<Button variant="ghost" size="icon" />}
+              className="md:hidden"
+            >
+              <Menu className="size-5" />
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72 p-0">
+              <div className="flex flex-col h-full">
+                <div className="px-5 pt-6 pb-4">
+                  <Logo size="md" />
                 </div>
-              </SheetContent>
-            </Sheet>
-          )}
+
+                <Separator />
+
+                <nav className="flex flex-col gap-1 px-3 py-4">
+                  {navLinks.map((link) => {
+                    const isActive = pathname === link.href;
+                    const Icon = navIcons[link.href as keyof typeof navIcons];
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "bg-brand-muted text-brand"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        }`}
+                      >
+                        {Icon && <Icon className="size-4" />}
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </header>

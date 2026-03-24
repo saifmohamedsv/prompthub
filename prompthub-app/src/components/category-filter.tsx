@@ -16,23 +16,23 @@ export function CategoryFilter({ value, onChange }: { value?: string; onChange?:
       <button
         type="button"
         onClick={() => onChange?.("all")}
-        className={`whitespace-nowrap rounded-full px-6 py-2 text-sm transition-colors active:scale-95 transition-transform ${
+        className={`whitespace-nowrap rounded-full px-3.5 py-1 text-xs transition-colors active:scale-95 transition-transform ${
           current === "all"
-            ? "bg-accent text-accent-foreground font-bold"
-            : "bg-surface-high text-muted-foreground font-medium hover:text-foreground"
+            ? "bg-brand text-brand-foreground font-bold"
+            : "bg-surface-3 text-muted-foreground font-medium hover:text-foreground"
         }`}
       >
         {t("allCategories")}
       </button>
-      {categories?.map((cat) => (
+      {categories?.slice().sort((a, b) => a.slug === "other" ? 1 : b.slug === "other" ? -1 : 0).map((cat) => (
         <button
           key={cat.id}
           type="button"
           onClick={() => onChange?.(cat.slug)}
-          className={`whitespace-nowrap rounded-full px-6 py-2 text-sm transition-colors active:scale-95 transition-transform ${
+          className={`whitespace-nowrap rounded-full px-3.5 py-1 text-xs transition-colors active:scale-95 transition-transform ${
             current === cat.slug
-              ? "bg-accent text-accent-foreground font-bold"
-              : "bg-surface-high text-muted-foreground font-medium hover:text-foreground"
+              ? "bg-brand text-brand-foreground font-bold"
+              : "bg-surface-3 text-muted-foreground font-medium hover:text-foreground"
           }`}
         >
           {locale === Locale.AR ? cat.name_ar : cat.name}

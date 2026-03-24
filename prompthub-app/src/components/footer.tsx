@@ -7,8 +7,8 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t border-border/50 bg-surface-lowest">
-      <div className="container mx-auto flex flex-col items-center gap-4 px-4 py-6 text-center">
+    <footer className="border-t border-border/50 bg-background">
+      <div className="mx-auto max-w-7xl flex flex-col items-center gap-4 px-4 sm:px-6 lg:px-8 py-6 text-center">
         <div className="flex items-center gap-2">
           <Logo size="sm" />
         </div>
@@ -48,10 +48,6 @@ export function Footer() {
           </a>
         </p>
 
-        {/* Version */}
-        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/50">
-          {t("version")}
-        </span>
       </div>
     </footer>
   );

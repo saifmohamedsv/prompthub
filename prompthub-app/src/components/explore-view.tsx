@@ -79,13 +79,13 @@ export function ExploreView() {
   }, [handleObserver]);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 lg:px-12 py-8">
-      <section className="space-y-8 mb-12">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+      <section className="space-y-5 mb-8">
         {/* Heading */}
         <div className="space-y-2">
           <h1 className="text-3xl lg:text-5xl font-black tracking-tight">
             {t("titlePrefix")}{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <span className="text-primary">
               {t("titleHighlight")}
             </span>
           </h1>
@@ -98,7 +98,7 @@ export function ExploreView() {
         <SearchBar value={search} onChange={setSearch} />
 
         {/* Filters */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           {/* Filter row: CategoryFilter + Sort */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="min-w-0 flex-1">
@@ -126,13 +126,13 @@ export function ExploreView() {
           {/* Active tag badge */}
           {tag && (
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-lg border border-secondary/30 bg-secondary/20 px-3 py-1.5 text-sm text-secondary">
-                <span className="text-xs font-bold uppercase tracking-wide text-secondary">
+              <span className="inline-flex items-center gap-2 rounded-lg border border-brand/20 bg-brand-muted px-3 py-1.5 text-sm text-brand">
+                <span className="text-xs font-bold uppercase tracking-wide text-brand">
                   {t("tagFilter", { name: activeTagName })}
                 </span>
                 <button
                   type="button"
-                  onClick={() => router.replace(routes.explore)}
+                  onClick={() => router.replace(routes.home)}
                   className="ms-1 rounded-full hover:bg-muted"
                 >
                   <X className="size-3.5" />

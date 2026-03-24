@@ -18,9 +18,9 @@ function NewPromptView() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <h1 className="text-3xl font-extrabold tracking-tight">{t("addNew")}</h1>
-      <p className="pt-2 text-muted-foreground">{t("addNewSubtitle")}</p>
-      <div className="pt-6">
+      <h1 className="text-3xl font-extrabold tracking-tight">{t("forgeTitle")}</h1>
+      <p className="pt-2 text-muted-foreground">{t("forgeSubtitle")}</p>
+      <div className="pt-8">
         <PromptForm />
       </div>
     </div>

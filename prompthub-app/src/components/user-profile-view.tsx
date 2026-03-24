@@ -23,15 +23,13 @@ export function UserProfileView({ userId }: { userId: string }) {
 
   if (profileLoading) {
     return (
-      <div className="mx-auto max-w-4xl space-y-6">
-        <div className="flex flex-col items-center pt-6">
-          <Skeleton className="size-24 rounded-full" />
-          <Skeleton className="mt-4 h-8 w-48" />
-          <Skeleton className="mt-2 h-4 w-28" />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <Skeleton className="h-24 rounded-2xl" />
-          <Skeleton className="h-24 rounded-2xl" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex items-center gap-4 pt-6">
+          <Skeleton className="size-16 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-28" />
+          </div>
         </div>
       </div>
     );
@@ -46,33 +44,34 @@ export function UserProfileView({ userId }: { userId: string }) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
       {/* Profile header */}
-      <div className="pt-6">
-        <Avatar className="mx-auto size-24 ring-4 ring-primary/20">
+      <div className="flex flex-col items-center gap-4 pt-6 sm:flex-row sm:items-start">
+        <Avatar className="size-16 ring-2 ring-brand/20">
           <AvatarImage src={profile.avatar_url ?? undefined} />
-          <AvatarFallback className="text-3xl">{displayName[0]}</AvatarFallback>
+          <AvatarFallback className="text-xl">{displayName[0]}</AvatarFallback>
         </Avatar>
-        <h1 className="pt-4 text-center text-2xl font-extrabold sm:text-3xl">{displayName}</h1>
-        {profile.username && (
-          <p className="text-center text-sm text-muted-foreground">@{profile.username}</p>
-        )}
-        {joinDate && (
-          <p className="mt-1 text-center text-xs text-muted-foreground">
-            {t("joined", { date: joinDate })}
-          </p>
-        )}
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="rounded-2xl bg-surface-low p-6 text-center">
-          <p className="text-4xl font-extrabold">{prompts?.length ?? 0}</p>
-          <p className="pt-1 text-sm text-muted-foreground">{t("totalPrompts")}</p>
-        </div>
-        <div className="rounded-2xl bg-surface-low p-6 text-center">
-          <p className="text-4xl font-extrabold">{totalLikes}</p>
-          <p className="pt-1 text-sm text-muted-foreground">{t("totalLikes")}</p>
+        <div className="text-center sm:text-start">
+          <h1 className="text-xl font-extrabold sm:text-2xl">{displayName}</h1>
+          {profile.username && (
+            <p className="text-sm text-muted-foreground">@{profile.username}</p>
+          )}
+          {joinDate && (
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {t("joined", { date: joinDate })}
+            </p>
+          )}
+          {/* Stat chips */}
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs">
+              <span className="font-bold">{prompts?.length ?? 0}</span>
+              <span className="text-muted-foreground">{t("totalPrompts")}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs">
+              <span className="font-bold">{totalLikes}</span>
+              <span className="text-muted-foreground">{t("totalLikes")}</span>
+            </span>
+          </div>
         </div>
       </div>
 
