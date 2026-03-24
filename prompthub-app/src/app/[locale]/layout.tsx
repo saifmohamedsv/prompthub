@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/hooks/use-auth";
+import { FabCreate } from "@/components/fab-create";
 import NextTopLoader from "nextjs-toploader";
 import "../globals.css";
 
@@ -41,12 +42,13 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale} dir={isArabic ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={`${fontClass} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <NextTopLoader color="#aac7ff" height={5} showSpinner={false} />
+        <NextTopLoader color="#D97706" height={3} showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <QueryProvider>
             <AuthProvider>
               <NextIntlClientProvider messages={messages}>
                 {children}
+                <FabCreate />
                 <Toaster dir={isArabic ? "rtl" : "ltr"} position={isArabic ? "bottom-left" : "bottom-right"} />
               </NextIntlClientProvider>
             </AuthProvider>
