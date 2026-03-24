@@ -2,8 +2,8 @@
 
 import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Locale } from "@/lib/config";
-import { Eye, Calendar } from "lucide-react";
+import { Locale, getCategoryBadgeClass } from "@/lib/config";
+import { Eye } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
@@ -26,76 +26,74 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   });
 
   return (
-    <article className="group relative flex h-full flex-col gap-5 rounded-xl border border-border/5 bg-surface-low p-5 transition-colors hover:bg-surface-high sm:gap-6 sm:p-6">
-      {/* Top row: category + stats */}
+    <article className="group relative flex h-full flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card transition-all hover:border-brand/20 hover:shadow-md">
+      {/* Row 1: Category badge + stats — single line, 11px */}
       <div className="flex items-center justify-between">
         {categoryName && (
-          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary sm:text-xs">
+          <span className={`rounded-full px-2 py-px text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>
             {categoryName}
           </span>
         )}
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
-            <Eye className="size-3.5" />
+        <div className="flex items-center gap-2 text-[11px] text-foreground-tertiary">
+          <span className="inline-flex items-center gap-0.5">
+            <Eye className="size-3" />
             {prompt.views_count}
           </span>
-          <span className="inline-flex items-center gap-1">
-            <Calendar className="size-3.5" />
-            {shortDate}
-          </span>
+          <span>·</span>
+          <span>{shortDate}</span>
         </div>
       </div>
 
-      {/* Tags + Title + Description */}
-      <div className="space-y-3">
-        {tags.length > 0 && (
-          <div className="relative z-10 flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <button
-                key={tag.id}
-                type="button"
-                onClick={() => router.push(routes.explore + "?tag=" + tag.slug)}
-                className="text-[10px] font-bold uppercase tracking-wider text-tertiary transition-colors hover:text-primary"
-              >
-                {tag.name}
-              </button>
-            ))}
-          </div>
-        )}
+      {/* Row 2: Tags — compact chip row */}
+      {tags.length > 0 && (
+        <div className="relative z-10 mt-2 flex flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <button
+              key={tag.id}
+              type="button"
+              onClick={() => router.push(routes.home + "?tag=" + tag.slug)}
+              className="rounded-md bg-surface-3 px-2 py-px text-[10px] font-medium text-foreground-secondary transition-colors hover:bg-brand-muted hover:text-brand"
+            >
+              {tag.name}
+            </button>
+          ))}
+        </div>
+      )}
 
-        <h3 className="line-clamp-2 text-lg font-extrabold leading-snug transition-colors group-hover:text-primary sm:text-xl">
-          <Link
-            href={routes.promptDetail(prompt.id)}
-            className="after:absolute after:inset-0 after:content-['']"
-          >
-            {title}
-          </Link>
-        </h3>
+      {/* Row 3: Title — 14px, weight 500, 2-line clamp, tight leading */}
+      <h3 className="mt-2 line-clamp-2 text-sm font-medium leading-tight transition-colors group-hover:text-brand">
+        <Link
+          href={routes.promptDetail(prompt.id)}
+          className="after:absolute after:inset-0 after:content-['']"
+        >
+          {title}
+        </Link>
+      </h3>
 
-        <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-          {description}
-        </p>
-      </div>
+      {/* Row 4: Description — 12px, secondary color, 2-line clamp */}
+      <p className="mt-1 line-clamp-2 flex-1 text-xs leading-relaxed text-foreground-secondary">
+        {description}
+      </p>
 
-      {/* Prompt snippet */}
+      {/* Row 5: Prompt snippet — max 70px, monospace, fade mask, brand left border */}
       {prompt.prompt_text && (
-        <div className="relative z-10">
+        <div className="relative z-10 mt-2">
           <PromptSnippet text={prompt.prompt_text} variant="compact" />
         </div>
       )}
 
-      {/* Footer: author + likes */}
-      <div className="relative z-10 mt-auto flex items-center justify-between">
+      {/* Row 6: Footer — 20px avatar + 11px author left, heart + count right */}
+      <div className="relative z-10 mt-2 flex items-center justify-between">
         <button
           type="button"
           onClick={() => router.push(routes.userProfile(prompt.user_id))}
-          className="group/author -mx-1.5 -my-1 flex cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1 transition-colors hover:bg-muted/60"
+          className="group/author flex items-center gap-1.5 transition-colors"
         >
-          <Avatar className="size-7 ring-2 ring-transparent transition-all group-hover/author:ring-primary/30">
+          <Avatar className="size-5 ring-1 ring-transparent transition-all group-hover/author:ring-brand/30">
             <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
-            <AvatarFallback className="text-xs">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
+            <AvatarFallback className="text-[8px]">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <span className="text-sm text-muted-foreground transition-colors group-hover/author:text-foreground group-hover/author:underline">
+          <span className="text-[11px] text-foreground-tertiary transition-colors group-hover/author:text-foreground">
             {prompt.profiles?.full_name ?? prompt.profiles?.username}
           </span>
         </button>

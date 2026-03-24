@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Locale } from "@/lib/config";
-import { usePromptDetail, useIncrementViews } from "@/hooks/use-prompts";
+import { Locale, getCategoryBadgeClass } from "@/lib/config";
+import { usePromptDetail, useIncrementViews, useFeaturedPrompts } from "@/hooks/use-prompts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
@@ -26,18 +26,17 @@ export function PromptDetail({ id }: { id: string }) {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-5xl space-y-6 px-4 pt-8 sm:pt-12 md:px-8">
-        <Skeleton className="h-5 w-32" />
-        <Skeleton className="h-12 w-3/4" />
-        <div className="rounded-xl border border-border/5 bg-surface-low p-8 md:p-12">
-          <Skeleton className="mb-6 h-[300px] w-full rounded-xl" />
-          <div className="flex gap-2">
-            <Skeleton className="h-7 w-20 rounded-full" />
-            <Skeleton className="h-7 w-16 rounded-full" />
+      <div className="mx-auto max-w-4xl space-y-4 px-4 pt-6 sm:px-6 lg:px-8">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-8 w-3/4" />
+        <div className="rounded-xl border border-card-border bg-surface-1 p-4 sm:p-6">
+          <Skeleton className="mb-4 h-[200px] w-full rounded-lg" />
+          <div className="flex gap-1.5">
+            <Skeleton className="h-5 w-16 rounded-full" />
+            <Skeleton className="h-5 w-12 rounded-full" />
           </div>
-          <Skeleton className="mt-6 h-4 w-full" />
-          <Skeleton className="mt-3 h-4 w-3/4" />
-          <Skeleton className="mt-3 h-4 w-1/2" />
+          <Skeleton className="mt-4 h-3 w-full" />
+          <Skeleton className="mt-2 h-3 w-3/4" />
         </div>
       </div>
     );
@@ -57,129 +56,123 @@ export function PromptDetail({ id }: { id: string }) {
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pt-8 pb-20 sm:pt-12 md:px-8">
-      {/* Header — outside card */}
-      <header className="mb-10">
+    <main className="mx-auto max-w-4xl px-4 pt-6 pb-12 sm:px-6 lg:px-8">
+      {/* Header */}
+      <header className="mb-5">
         <Link
-          href={routes.explore}
-          className="group flex w-fit items-center gap-2 font-medium text-primary transition-transform hover:-translate-x-1"
+          href={routes.home}
+          className="group inline-flex items-center gap-1.5 text-[13px] text-foreground-secondary transition-colors hover:text-brand"
         >
-          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          <ArrowLeft className="size-3.5" />
           {tCommon("backToExplore")}
         </Link>
 
-        <h1 className="pt-4 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           {title}
         </h1>
       </header>
 
       {/* Article card */}
-      <article className="overflow-hidden rounded-xl border border-border/5 bg-surface-low shadow-2xl">
-        {/* Hero image — flush with card top */}
+      <article className="overflow-hidden rounded-xl border border-card-border bg-surface-1 shadow-card">
+        {/* Hero image */}
         {prompt.image_url && (
-          <div className="max-h-[400px] w-full overflow-hidden">
+          <div className="max-h-[280px] w-full overflow-hidden">
             <Image
               src={prompt.image_url}
               alt={title}
               className="h-full w-full object-cover"
               width={1200}
-              height={400}
+              height={280}
             />
           </div>
         )}
 
-        {/* Content area */}
-        <div className="space-y-10 p-8 md:p-12">
-          {/* Tags + Stats row */}
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center gap-2">
+        {/* Content */}
+        <div className="space-y-5 p-4 sm:p-6">
+          {/* Tags + Stats */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-1.5">
               {prompt.categories && (
-                <span className="rounded-full border border-primary/20 bg-primary/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+                <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>
                   {categoryName}
                 </span>
               )}
               {tags.map((tag) => (
-                <Link key={tag.id} href={routes.explore + "?tag=" + tag.slug}>
-                  <span className="rounded-full bg-surface-highest px-4 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary">
+                <Link key={tag.id} href={routes.home + "?tag=" + tag.slug}>
+                  <span className="rounded-md bg-surface-3 px-2 py-0.5 text-[10px] font-medium text-foreground-secondary transition-colors hover:bg-brand-muted hover:text-brand">
                     {tag.name}
                   </span>
                 </Link>
               ))}
             </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5">
-                <Eye className="size-4" />
-                {prompt.views_count} {t("views")}
+            <div className="flex items-center gap-3 text-[11px] text-foreground-tertiary">
+              <span className="inline-flex items-center gap-1">
+                <Eye className="size-3" />
+                {prompt.views_count}
               </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar className="size-4" />
+              <span>·</span>
+              <span>
                 {new Date(prompt.created_at).toLocaleDateString(locale, {
-                  year: "numeric",
-                  month: "long",
+                  month: "short",
                   day: "numeric",
+                  year: "numeric",
                 })}
               </span>
             </div>
           </div>
 
-          {/* Action buttons row */}
-          <div className="flex flex-wrap gap-4 pt-4">
+          {/* Action buttons */}
+          <div className="flex gap-2">
             <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" label={t("likePrompt")} />
             {prompt.link && (
               <Link
                 href={prompt.link}
                 target="_blank"
-                className="flex flex-1 items-center justify-center gap-3 rounded-lg bg-accent px-8 py-4 font-bold text-accent-foreground shadow-lg shadow-accent/20 transition-all hover:bg-primary active:scale-95 md:flex-none"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground shadow-sm transition-all hover:bg-brand-hover active:scale-[0.98]"
               >
-                <ExternalLink className="size-5" />
+                <ExternalLink className="size-4" />
                 {t("tryIt")}
               </Link>
             )}
           </div>
 
-          {/* Description section */}
+          {/* Description */}
           <div>
-            <h3 className="text-xl font-bold">{t("description")}</h3>
-            <p className="mt-3 max-w-3xl text-lg font-light leading-relaxed text-muted-foreground">
+            <h3 className="text-sm font-semibold text-foreground-secondary uppercase tracking-wider">{t("description")}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-foreground-secondary">
               {description}
             </p>
           </div>
 
-          {/* Prompt Syntax section */}
+          {/* Prompt Syntax */}
           {prompt.prompt_text && (
             <div>
-              <h3 className="mb-4 text-xl font-bold">{t("promptSyntax")}</h3>
-              <div className="group relative">
-                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-25 blur transition duration-1000 group-hover:opacity-40" />
-                <div className="relative">
-                  <PromptSnippet text={prompt.prompt_text} variant="full" />
-                </div>
-              </div>
+              <h3 className="mb-2 text-sm font-semibold text-foreground-secondary uppercase tracking-wider">{t("promptSyntax")}</h3>
+              <PromptSnippet text={prompt.prompt_text} variant="full" />
             </div>
           )}
 
-          {/* Separator */}
-          <hr className="border-border/5" />
+          <hr className="border-border" />
 
-          {/* Author section */}
+          {/* Author */}
           <div className="flex items-center justify-between">
-            <Link href={routes.userProfile(prompt.user_id)} className="group flex items-center gap-4">
-              <Avatar className="size-16 ring-4 ring-primary/10">
+            <Link href={routes.userProfile(prompt.user_id)} className="group flex items-center gap-3">
+              <Avatar className="size-10 ring-2 ring-brand/15">
                 <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
-                <AvatarFallback>{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
+                <AvatarFallback className="text-sm">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-xl font-bold transition-colors group-hover:text-primary">
+                <p className="text-sm font-semibold transition-colors group-hover:text-brand">
                   {prompt.profiles?.full_name ?? prompt.profiles?.username}
                 </p>
-                <p className="font-mono text-sm text-muted-foreground">
+                <p className="font-mono text-[11px] text-foreground-tertiary">
                   @{prompt.profiles?.username ?? prompt.profiles?.full_name}
                 </p>
               </div>
             </Link>
             <button
               type="button"
-              className="hidden rounded-lg border border-border px-6 py-2 text-sm font-medium transition-colors hover:border-primary/50 md:flex"
+              className="hidden rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-brand/20 md:flex"
             >
               {t("followCreator")}
             </button>
@@ -187,35 +180,52 @@ export function PromptDetail({ id }: { id: string }) {
         </div>
       </article>
 
-      {/* Similar Syntaxes — outside card */}
-      <section className="mt-20 space-y-8">
-        <h2 className="flex items-center gap-3 text-2xl font-bold">
-          <Sparkles className="size-5 text-secondary" />
-          {t("similarSyntaxes")}
-        </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="group cursor-pointer rounded-xl border border-border/5 bg-surface-low p-6 transition-colors hover:bg-surface-high">
-            <div className="mb-4 flex items-start justify-between">
-              <span className="font-mono text-xs text-secondary">#interior-design</span>
-              <TrendingUp className="size-4 text-muted-foreground transition-colors group-hover:text-primary" />
-            </div>
-            <h4 className="mb-2 font-bold">Scandinavian Loft Interior</h4>
-            <p className="line-clamp-2 text-sm italic text-muted-foreground">
-              &quot;Minimalist bright space with wooden accents and soft afternoon sun...&quot;
-            </p>
-          </div>
-          <div className="group cursor-pointer rounded-xl border border-border/5 bg-surface-low p-6 transition-colors hover:bg-surface-high">
-            <div className="mb-4 flex items-start justify-between">
-              <span className="font-mono text-xs text-secondary">#concept-art</span>
-              <TrendingUp className="size-4 text-muted-foreground transition-colors group-hover:text-primary" />
-            </div>
-            <h4 className="mb-2 font-bold">Cyberpunk Cityscape Dusk</h4>
-            <p className="line-clamp-2 text-sm italic text-muted-foreground">
-              &quot;Neon drenched streets with rain puddles and holographic ads...&quot;
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Similar Syntaxes */}
+      <SimilarSyntaxes currentId={id} locale={locale} t={t} />
     </main>
+  );
+}
+
+function SimilarSyntaxes({ currentId, locale, t }: { currentId: string; locale: string; t: (key: string) => string }) {
+  const isAr = locale === Locale.AR;
+  const { data: prompts, isLoading } = useFeaturedPrompts(4);
+
+  const similar = prompts?.filter((p) => p.id !== currentId).slice(0, 2);
+
+  if (isLoading) return null;
+  if (!similar || similar.length === 0) return null;
+
+  return (
+    <section className="mt-8 space-y-4">
+      <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-foreground-secondary">
+        <Sparkles className="size-3.5 text-brand" />
+        {t("similarSyntaxes")}
+      </h2>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {similar.map((prompt) => {
+          const title = (isAr && prompt.title_ar) ? prompt.title_ar : prompt.title;
+          const desc = (isAr && prompt.description_ar) ? prompt.description_ar : prompt.description;
+          const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
+          return (
+            <Link
+              key={prompt.id}
+              href={routes.promptDetail(prompt.id)}
+              className="group rounded-lg border border-card-border bg-surface-1 p-3 transition-colors hover:bg-surface-2"
+            >
+              <div className="mb-2 flex items-start justify-between">
+                {tags[0] && (
+                  <span className="font-mono text-[10px] text-brand">#{tags[0].name}</span>
+                )}
+                <TrendingUp className="size-3 text-foreground-tertiary transition-colors group-hover:text-brand" />
+              </div>
+              <h4 className="text-sm font-medium">{title}</h4>
+              <p className="mt-1 line-clamp-2 text-xs text-foreground-tertiary">
+                {desc}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
   );
 }

@@ -14,9 +14,15 @@ type PromptSnippetProps = {
   maxLength?: number;
 };
 
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text;
+  return text.slice(0, max).trimEnd() + "\u2026";
+}
+
 export function PromptSnippet({
   text,
   variant = "compact",
+  maxLength = 200,
 }: PromptSnippetProps) {
   const t = useTranslations("prompt");
   const [copied, setCopied] = useState(false);
@@ -34,28 +40,24 @@ export function PromptSnippet({
 
   if (variant === "compact") {
     return (
-      <div className="overflow-hidden rounded-lg bg-surface-lowest">
-        <div className="flex items-center justify-between px-3 pt-2">
-          <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+      <div className="relative overflow-hidden rounded-md bg-surface-2" onClick={handleCopy} role="button" tabIndex={0}>
+        <div className="flex items-center justify-between px-2.5 pt-1.5">
+          <span className="text-[9px] font-semibold tracking-widest text-foreground-tertiary uppercase">
             {t("promptText")}
           </span>
-          <button
-            type="button"
-            onClick={handleCopy}
-            className={`rounded p-0.5 transition-colors ${copied ? "text-green-500" : "text-muted-foreground hover:text-foreground"}`}
-          >
-            <CopyIcon className="size-3.5 transition-transform duration-200" />
-          </button>
+          <span className={`text-[9px] transition-colors ${copied ? "text-green-500" : "text-foreground-tertiary"}`}>
+            {copied ? "✓" : ""}
+          </span>
         </div>
-        <p dir="ltr" className="line-clamp-3 px-3 pt-1 pb-2.5 font-mono text-xs leading-relaxed text-muted-foreground">
+        <div dir="ltr" className="prompt-code mx-2 mb-1.5 mt-0.5 bg-transparent">
           {text}
-        </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-border/5 bg-surface-lowest">
+    <div className="rounded-xl border border-border/5 bg-background">
       <div className="flex items-center justify-between px-8 py-3">
         <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {t("promptText")}

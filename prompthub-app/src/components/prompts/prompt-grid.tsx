@@ -16,7 +16,7 @@ export function PromptGrid({
 
   if (isLoading) {
     return (
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <PromptCardSkeleton key={i} />
         ))}
@@ -38,7 +38,7 @@ export function PromptGrid({
   }
 
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {prompts.map((prompt) => (
         <PromptCard key={prompt.id} prompt={prompt} />
       ))}
@@ -48,34 +48,29 @@ export function PromptGrid({
 
 function PromptCardSkeleton() {
   return (
-    <div className="flex flex-col rounded-xl border border-border/5 bg-surface-low p-5 sm:p-6">
+    <div className="flex h-full flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card">
       <div className="flex items-center justify-between">
-        <Skeleton className="h-5 w-16 rounded-full" />
-        <div className="flex gap-3">
-          <Skeleton className="h-3 w-12" />
-          <Skeleton className="h-3 w-12" />
-        </div>
+        <Skeleton className="h-4 w-14 rounded-full" />
+        <Skeleton className="h-3 w-16" />
       </div>
-      <div className="flex gap-2 pt-3">
-        <Skeleton className="h-3 w-10" />
-        <Skeleton className="h-3 w-12" />
+      <div className="mt-2 flex gap-1.5">
+        <Skeleton className="h-3 w-10 rounded-md" />
+        <Skeleton className="h-3 w-12 rounded-md" />
       </div>
-      <div className="space-y-2 pt-3">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-2/3" />
+      <div className="mt-2 space-y-1.5">
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-full" />
       </div>
-      <div className="mt-3 rounded-lg bg-surface-lowest p-3">
-        <Skeleton className="mb-2 h-3 w-16" />
+      <div className="mt-2 rounded-md bg-surface-2 p-2">
         <Skeleton className="h-3 w-full" />
         <Skeleton className="mt-1 h-3 w-4/5" />
       </div>
-      <div className="mt-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Skeleton className="size-6 rounded-full" />
-          <Skeleton className="h-3 w-20" />
+      <div className="mt-2 flex items-center justify-between">
+        <div className="flex items-center gap-1.5">
+          <Skeleton className="size-5 rounded-full" />
+          <Skeleton className="h-3 w-16" />
         </div>
-        <Skeleton className="h-7 w-14 rounded-full" />
+        <Skeleton className="h-3 w-10" />
       </div>
     </div>
   );
