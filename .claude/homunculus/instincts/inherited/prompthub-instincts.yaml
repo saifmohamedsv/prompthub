@@ -1,0 +1,367 @@
+# Instincts generated from https://github.com/saifmohamedsv/prompthub
+# Generated: 2026-03-19T02:30:11.039Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: prompthub-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, fix, refactor, chore
+
+## Evidence
+
+- 72 commits analyzed
+- Detected conventional commit pattern
+- Examples: fix: streamline LocaleLayout function and improve formatting, feat: add top progress bar for route transitions
+
+---
+id: prompthub-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Commit Length
+
+## Action
+
+Write moderate-length commit messages (~54 characters)
+
+## Evidence
+
+- Average commit message length: 54 chars
+- Based on 72 commits
+
+---
+id: prompthub-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: prompthub-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: prompthub-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Export Style
+
+## Action
+
+Prefer default exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: default
+
+---
+id: prompthub-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: app, components, hooks, i18n, lib
+
+---
+id: prompthub-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: prompthub-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~17x per month
+- Files: src/app/[locale]/(dashboard)/my-prompts/*, src/app/[locale]/(public)/*, src/app/[locale]/*
+
+---
+id: prompthub-workflow-refactoring
+trigger: "when refactoring code"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Refactoring
+
+## Action
+
+Follow the refactoring workflow:
+1. Ensure tests pass before refactor
+2. Refactor code structure
+3. Verify tests still pass
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~6x per month
+- Files: src/**/*
+
+---
+id: prompthub-workflow-update-arabic-font-or-typography
+trigger: "when doing update arabic font or typography"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Update Arabic Font Or Typography
+
+## Action
+
+Follow the update-arabic-font-or-typography workflow:
+1. Edit src/app/[locale]/layout.tsx to update font-family or font logic.
+2. Edit src/lib/fonts.ts to import or switch font definitions.
+3. Edit src/app/globals.css to adjust global font-weight, font-size, or RTL-specific styles.
+4. Optionally, update prompt card or detail components for per-component font/size tweaks.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: src/app/[locale]/layout.tsx, src/lib/fonts.ts, src/app/globals.css
+
+---
+id: prompthub-workflow-add-or-update-design-tokens-and-theme
+trigger: "when doing add or update design tokens and theme"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Update Design Tokens And Theme
+
+## Action
+
+Follow the add-or-update-design-tokens-and-theme workflow:
+1. Edit src/app/globals.css to define or update CSS variables for theme tokens.
+2. Update components (e.g., prompt-card, prompt-snippet, navbar, logo) to use new or updated token classes.
+3. Normalize usage of utility classes (e.g., size-N, text-N) across components.
+4. Optionally, update logo or branding assets for visual consistency.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/app/globals.css, src/components/prompts/prompt-card.tsx, src/components/prompts/prompt-snippet.tsx
+
+---
+id: prompthub-workflow-add-or-change-prompt-form-or-detail-layout
+trigger: "when doing add or change prompt form or detail layout"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Change Prompt Form Or Detail Layout
+
+## Action
+
+Follow the add-or-change-prompt-form-or-detail-layout workflow:
+1. Edit src/components/prompts/prompt-form.tsx to adjust form fields, spacing, or validation.
+2. Edit src/components/prompts/prompt-detail.tsx for layout or display changes.
+3. Optionally, update prompt-card or prompt-snippet for consistency.
+4. Update global styles if spacing or color changes are needed.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: src/components/prompts/prompt-form.tsx, src/components/prompts/prompt-detail.tsx, src/app/globals.css
+
+---
+id: prompthub-workflow-add-or-switch-logo-or-branding
+trigger: "when doing add or switch logo or branding"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Switch Logo Or Branding
+
+## Action
+
+Follow the add-or-switch-logo-or-branding workflow:
+1. Edit src/components/logo.tsx to update SVG, font-weight, or layout.
+2. Optionally, update global styles or navbar for logo integration.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/components/logo.tsx, src/components/navbar.tsx
+
+---
+id: prompthub-workflow-add-or-update-dashboard-or-user-pages
+trigger: "when doing add or update dashboard or user pages"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Update Dashboard Or User Pages
+
+## Action
+
+Follow the add-or-update-dashboard-or-user-pages workflow:
+1. Create or edit src/app/[locale]/(dashboard)/* page files for new dashboard sections.
+2. Update or create supporting view components (e.g., my-prompts-view, likes-view).
+3. Update navbar or navigation components to link to new pages.
+4. Update i18n message files for new labels.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/app/[locale]/(dashboard)/*.tsx, src/components/my-prompts-view.tsx, src/components/likes-view.tsx
+
+---
+id: prompthub-workflow-add-or-update-i18n-messages
+trigger: "when doing add or update i18n messages"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Update I18n Messages
+
+## Action
+
+Follow the add-or-update-i18n-messages workflow:
+1. Edit messages/ar.json and messages/en.json to add or update translation keys.
+2. Update components to use new or changed translation keys.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: messages/ar.json, messages/en.json
+
+---
+id: prompthub-workflow-add-or-update-supabase-schema-and-migrations
+trigger: "when doing add or update supabase schema and migrations"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/saifmohamedsv/prompthub
+---
+
+# Prompthub Workflow Add Or Update Supabase Schema And Migrations
+
+## Action
+
+Follow the add-or-update-supabase-schema-and-migrations workflow:
+1. Edit supabase/schema.sql to define new tables or columns.
+2. Create new migration SQL file in supabase/migration-*.sql.
+3. Update src/types/database.ts to reflect new schema.
+4. Update src/lib/supabase/queries.ts for new queries or mutations.
+5. Update seed files if initial data is required.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: supabase/schema.sql, supabase/migration-*.sql, src/types/database.ts
+
