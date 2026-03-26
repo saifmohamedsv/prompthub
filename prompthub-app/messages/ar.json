@@ -91,7 +91,8 @@
     "saving": "جاري الحفظ...",
     "addArabicVersion": "إضافة نسخة عربية",
     "removeArabicVersion": "إزالة النسخة العربية",
-    "followCreator": "متابعة المبدع",
+    "follow": "متابعة",
+    "following": "متابَع",
     "addNewSubtitle": "أنشئ برومبت يفيد المجتمع.",
     "promptSyntax": "صيغة البرومبت",
     "dropImage": "اسحب صورة هنا أو انقر للرفع",
@@ -115,6 +116,7 @@
     "totalLikes": "إجمالي الإعجابات",
     "promptsBy": "برومبتات {name}",
     "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد.",
+    "followers": "متابعون",
     "contributions": "المساهمات",
     "editProfile": "تعديل الملف",
     "shareProfile": "مشاركة"

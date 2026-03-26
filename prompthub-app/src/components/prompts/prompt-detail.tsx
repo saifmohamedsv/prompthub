@@ -8,6 +8,7 @@ import { usePromptDetail, useIncrementViews, useFeaturedPrompts } from "@/hooks/
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
+import { FollowButton } from "@/components/follow-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
 import { ExternalLink, ArrowLeft, Eye, Calendar, Sparkles, TrendingUp } from "lucide-react";
@@ -170,12 +171,7 @@ export function PromptDetail({ id }: { id: string }) {
                 </p>
               </div>
             </Link>
-            <button
-              type="button"
-              className="hidden rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-brand/20 md:flex"
-            >
-              {t("followCreator")}
-            </button>
+            <FollowButton userId={prompt.user_id} />
           </div>
         </div>
       </article>

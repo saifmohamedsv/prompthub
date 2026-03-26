@@ -22,4 +22,10 @@ export const queryKeys = {
   tags: {
     all: ["tags"] as const,
   },
+  follows: {
+    all: ["follows"] as const,
+    myFollowings: ["follows", "my-followings"] as const,
+    feed: (filters?: Record<string, string>) =>
+      ["follows", "feed", filters] as const,
+  },
 } as const;

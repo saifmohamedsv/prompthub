@@ -15,6 +15,8 @@ export interface Database {
           username: string | null;
           full_name: string | null;
           avatar_url: string | null;
+          followers_count: number;
+          following_count: number;
           created_at: string;
           updated_at: string;
         };
@@ -23,6 +25,8 @@ export interface Database {
           username?: string | null;
           full_name?: string | null;
           avatar_url?: string | null;
+          followers_count?: number;
+          following_count?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -31,6 +35,8 @@ export interface Database {
           username?: string | null;
           full_name?: string | null;
           avatar_url?: string | null;
+          followers_count?: number;
+          following_count?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -162,6 +168,23 @@ export interface Database {
           created_at?: string;
         };
       };
+      follows: {
+        Row: {
+          follower_id: string;
+          following_id: string;
+          created_at: string;
+        };
+        Insert: {
+          follower_id: string;
+          following_id: string;
+          created_at?: string;
+        };
+        Update: {
+          follower_id?: string;
+          following_id?: string;
+          created_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
@@ -170,6 +193,10 @@ export interface Database {
       increment_views: {
         Args: { p_prompt_id: string };
         Returns: void;
+      };
+      toggle_follow: {
+        Args: { p_following_id: string };
+        Returns: boolean;
       };
     };
     Enums: {

@@ -91,7 +91,8 @@
     "saving": "Saving...",
     "addArabicVersion": "Add Arabic version",
     "removeArabicVersion": "Remove Arabic version",
-    "followCreator": "Follow Creator",
+    "follow": "Follow",
+    "following": "Following",
     "addNewSubtitle": "Craft a prompt that helps the community.",
     "promptSyntax": "Prompt Syntax",
     "dropImage": "Drop an image here or click to upload",
@@ -115,6 +116,7 @@
     "totalLikes": "Total Likes",
     "promptsBy": "Prompts by {name}",
     "noPrompts": "This user hasn't shared any prompts yet.",
+    "followers": "Followers",
     "contributions": "Contributions",
     "editProfile": "Edit Profile",
     "shareProfile": "Share"

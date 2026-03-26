@@ -5,6 +5,7 @@ import { usePublicProfile, useUserPublicPrompts } from "@/hooks/use-profile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
+import { FollowButton } from "@/components/follow-button";
 
 export function UserProfileView({ userId }: { userId: string }) {
   const t = useTranslations("profile");
@@ -71,6 +72,13 @@ export function UserProfileView({ userId }: { userId: string }) {
               <span className="font-bold">{totalLikes}</span>
               <span className="text-muted-foreground">{t("totalLikes")}</span>
             </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs">
+              <span className="font-bold">{profile.followers_count}</span>
+              <span className="text-muted-foreground">{t("followers")}</span>
+            </span>
+          </div>
+          <div className="mt-3">
+            <FollowButton userId={userId} size="lg" />
           </div>
         </div>
       </div>

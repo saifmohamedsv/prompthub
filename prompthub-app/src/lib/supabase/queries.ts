@@ -309,6 +309,43 @@ export async function uploadPromptImage(
   return data.publicUrl;
 }
 
+export async function fetchUserFollowings(userId: string): Promise<string[]> {
+  const { data, error } = await supabase()
+    .from("follows")
+    .select("following_id")
+    .eq("follower_id", userId);
+  if (error) throw error;
+  return (
+    (data as unknown as { following_id: string }[])?.map((f) => f.following_id) ?? []
+  );
+}
+
+export async function toggleFollow(followingId: string): Promise<boolean> {
+  const { data, error } = await supabase().rpc("toggle_follow", {
+    p_following_id: followingId,
+  } as never);
+  if (error) throw error;
+  return data as boolean;
+}
+
+export async function fetchFollowedCreatorPrompts(
+  userId: string,
+  limit = 4
+): Promise<PromptWithAuthor[]> {
+  const followingIds = await fetchUserFollowings(userId);
+  if (followingIds.length === 0) return [];
+
+  const { data, error } = await supabase()
+    .from("prompts")
+    .select(PROMPT_SELECT)
+    .in("user_id", followingIds)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return (data ?? []) as unknown as PromptWithAuthor[];
+}
+
 export async function toggleLike(
   userId: string,
   promptId: string,
