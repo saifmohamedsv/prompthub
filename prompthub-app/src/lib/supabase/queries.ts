@@ -122,6 +122,18 @@ export async function fetchFeaturedPrompts(limit = 3): Promise<PromptWithAuthor[
   return (data ?? []) as unknown as PromptWithAuthor[];
 }
 
+export async function fetchTrendingPrompts(limit = 8): Promise<PromptWithAuthor[]> {
+  const { data, error } = await supabase()
+    .from("prompts")
+    .select(PROMPT_SELECT)
+    .order("likes_count", { ascending: false })
+    .order("views_count", { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return (data ?? []) as unknown as PromptWithAuthor[];
+}
+
 export async function fetchPromptById(
   id: string
 ): Promise<PromptWithAuthor | null> {

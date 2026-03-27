@@ -44,6 +44,8 @@
     "sortMostViewed": "Most Viewed",
     "sortMostLiked": "Most Liked",
     "sortHot": "Hot",
+    "trendingTitle": "Trending",
+    "trendingSeeAll": "See all",
     "tagFilter": "Tag: {name}",
     "clearTag": "Clear",
     "sortLabel": "Sort by",

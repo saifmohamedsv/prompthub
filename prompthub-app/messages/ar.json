@@ -44,6 +44,8 @@
     "sortMostViewed": "الأكثر مشاهدة",
     "sortMostLiked": "الأكثر إعجاباً",
     "sortHot": "رائج",
+    "trendingTitle": "الأكثر رواجاً",
+    "trendingSeeAll": "عرض الكل",
     "tagFilter": "الوسم: {name}",
     "clearTag": "مسح",
     "sortLabel": "ترتيب حسب",

@@ -18,6 +18,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import { TrendingSection } from "@/components/trending-section";
 import { Loader2, X } from "lucide-react";
 
 export function ExploreView() {
@@ -144,6 +145,8 @@ export function ExploreView() {
           )}
         </div>
       </section>
+
+      <TrendingSection />
 
       <section className="max-w-7xl">
         <PromptGrid prompts={prompts} isLoading={isLoading} />
