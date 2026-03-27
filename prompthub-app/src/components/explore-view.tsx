@@ -35,6 +35,7 @@ export function ExploreView() {
     { value: "recent", label: t("sortRecent") },
     { value: "most_viewed", label: t("sortMostViewed") },
     { value: "most_liked", label: t("sortMostLiked") },
+    { value: "hot", label: t("sortHot") },
   ];
 
   const activeTagName = tag ? allTags?.find((t) => t.slug === tag)?.name ?? tag : "";

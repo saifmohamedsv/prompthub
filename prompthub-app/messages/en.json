@@ -43,6 +43,7 @@
     "sortRecent": "Recently Added",
     "sortMostViewed": "Most Viewed",
     "sortMostLiked": "Most Liked",
+    "sortHot": "Hot",
     "tagFilter": "Tag: {name}",
     "clearTag": "Clear",
     "sortLabel": "Sort by",

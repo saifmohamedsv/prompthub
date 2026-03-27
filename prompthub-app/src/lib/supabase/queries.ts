@@ -8,7 +8,7 @@ const PROMPT_SELECT = `
   prompt_tags (tags (id, name, slug))
 `;
 
-export type SortOption = "recent" | "most_viewed" | "most_liked";
+export type SortOption = "recent" | "most_viewed" | "most_liked" | "hot";
 
 export type PromptFilters = {
   search?: string;
@@ -43,17 +43,24 @@ export async function fetchPrompts(
   }
 
   const sort = filters?.sort ?? "recent";
-  const orderColumn =
-    sort === "most_viewed"
-      ? "views_count"
-      : sort === "most_liked"
-        ? "likes_count"
-        : "created_at";
 
   let query = client
     .from("prompts")
-    .select(PROMPT_SELECT, { count: "exact" })
-    .order(orderColumn, { ascending: false });
+    .select(PROMPT_SELECT, { count: "exact" });
+
+  if (sort === "hot") {
+    query = query
+      .order("likes_count", { ascending: false })
+      .order("views_count", { ascending: false });
+  } else {
+    const orderColumn =
+      sort === "most_viewed"
+        ? "views_count"
+        : sort === "most_liked"
+          ? "likes_count"
+          : "created_at";
+    query = query.order(orderColumn, { ascending: false });
+  }
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);
