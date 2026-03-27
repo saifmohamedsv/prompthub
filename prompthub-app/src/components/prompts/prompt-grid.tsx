@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PromptCard } from "@/components/prompts/prompt-card";
+import { PromptPreviewSheet } from "@/components/prompts/prompt-preview-sheet";
 import type { PromptWithAuthor } from "@/types/prompt";
 
 export function PromptGrid({
@@ -13,6 +15,7 @@ export function PromptGrid({
   isLoading?: boolean;
 }) {
   const t = useTranslations("explore");
+  const [previewId, setPreviewId] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -38,11 +41,21 @@ export function PromptGrid({
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {prompts.map((prompt) => (
-        <PromptCard key={prompt.id} prompt={prompt} />
-      ))}
-    </div>
+    <>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {prompts.map((prompt) => (
+          <PromptCard
+            key={prompt.id}
+            prompt={prompt}
+            onPreview={(id) => setPreviewId(id)}
+          />
+        ))}
+      </div>
+      <PromptPreviewSheet
+        promptId={previewId}
+        onClose={() => setPreviewId(null)}
+      />
+    </>
   );
 }
 

@@ -53,6 +53,11 @@
     "titleHighlight": "Syntax Gallery",
     "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models."
   },
+  "preview": {
+    "openFull": "Open full page",
+    "copy": "Copy prompt",
+    "copied": "Copied!"
+  },
   "prompt": {
     "by": "by",
     "likes": "likes",

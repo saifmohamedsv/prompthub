@@ -3,14 +3,20 @@
 import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Locale, getCategoryBadgeClass } from "@/lib/config";
-import { Eye } from "lucide-react";
+import { Eye, Expand } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LikeButton } from "@/components/prompts/like-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
-export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
+export function PromptCard({
+  prompt,
+  onPreview,
+}: {
+  prompt: PromptWithAuthor;
+  onPreview?: (id: string) => void;
+}) {
   const locale = useLocale();
   const isAr = locale === Locale.AR;
   const router = useRouter();
@@ -27,6 +33,21 @@ export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
 
   return (
     <article className="group relative flex h-full flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card transition-all hover:border-brand/20 hover:shadow-md">
+      {/* Preview trigger — visible on hover */}
+      {onPreview && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onPreview(prompt.id);
+          }}
+          className="absolute top-2 end-2 z-20 rounded-lg bg-black/40 p-1.5 text-white opacity-0 backdrop-blur-md transition-opacity hover:bg-black/55 group-hover:opacity-100"
+        >
+          <Expand className="size-3.5" />
+        </button>
+      )}
+
       {/* Row 1: Category badge + stats — single line, 11px */}
       <div className="flex items-center justify-between">
         {categoryName && (
