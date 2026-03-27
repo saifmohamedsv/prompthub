@@ -1,5 +1,5 @@
 -- ============================================
--- PromptHub Seed Data v2 (bilingual)
+-- Syntaxa Seed Data v2 (bilingual)
 -- ============================================
 -- IMPORTANT: Replace YOUR_USER_ID_HERE with your actual auth.users UUID
 -- You can find it with: SELECT id FROM auth.users LIMIT 1;

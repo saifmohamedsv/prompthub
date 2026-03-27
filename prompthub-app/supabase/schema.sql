@@ -1,5 +1,5 @@
 -- ============================================
--- PromptHub Database Schema
+-- Syntaxa Database Schema
 -- ============================================
 
 -- Profiles (extends auth.users)

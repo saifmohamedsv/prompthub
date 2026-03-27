@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "PromptHub",
+    "appName": "Syntaxa",
     "loading": "Loading...",
     "error": "Something went wrong",
     "save": "Save",
@@ -122,7 +122,7 @@
     "shareProfile": "Share"
   },
   "auth": {
-    "loginTitle": "Welcome to PromptHub",
+    "loginTitle": "Welcome to Syntaxa",
     "loginSubtitle": "Sign in to share and like prompts",
     "continueWithGoogle": "Continue with Google",
     "continueWithGitHub": "Continue with GitHub",
@@ -139,8 +139,8 @@
     "likedPromptsEmptyDesc": "Explore prompts and like the ones you find useful."
   },
   "sidebar": {
-    "title": "PromptHub",
-    "subtitle": "Prompt Gallery",
+    "title": "Syntaxa",
+    "subtitle": "Forge smarter prompts",
     "createPrompt": "Create Prompt",
     "settings": "Settings"
   },

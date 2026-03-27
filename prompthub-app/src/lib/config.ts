@@ -8,7 +8,7 @@ export enum Locale {
 }
 
 export const siteConfig = {
-  name: "PromptHub",
+  name: "Syntaxa",
   description: "Discover and share AI prompts",
   developer: {
     name: "Saif Mohamed",

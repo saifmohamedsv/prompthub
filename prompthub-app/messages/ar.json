@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "PromptHub",
+    "appName": "Syntaxa",
     "loading": "جاري التحميل...",
     "error": "حدث خطأ ما",
     "save": "حفظ",
@@ -122,7 +122,7 @@
     "shareProfile": "مشاركة"
   },
   "auth": {
-    "loginTitle": "مرحباً بك في PromptHub",
+    "loginTitle": "مرحباً بك في Syntaxa",
     "loginSubtitle": "سجّل دخولك لمشاركة البرومبتات والإعجاب بها",
     "continueWithGoogle": "المتابعة مع Google",
     "continueWithGitHub": "المتابعة مع GitHub",
@@ -139,8 +139,8 @@
     "likedPromptsEmptyDesc": "استكشف البرومبتات وأعجب بما تجده مفيداً."
   },
   "sidebar": {
-    "title": "PromptHub",
-    "subtitle": "معرض البرومبتات",
+    "title": "Syntaxa",
+    "subtitle": "اصنع برومبتات أذكى",
     "createPrompt": "إنشاء برومبت",
     "settings": "الإعدادات"
   },

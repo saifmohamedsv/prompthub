@@ -4,7 +4,7 @@ import { type ReactNode, useSyncExternalStore, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { routes } from "@/lib/config";
 
-const STORAGE_KEY = "prompthub_visited";
+const STORAGE_KEY = "syntaxa_visited";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);

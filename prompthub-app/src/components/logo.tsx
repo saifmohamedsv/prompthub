@@ -37,8 +37,8 @@ export function Logo({ size = "md", className = "" }: LogoProps) {
     <span dir="ltr" className={`inline-flex items-center font-extrabold tracking-tight ${sizes[size]} ${className}`}>
       <SparkIcon className={iconSizes[size]} />
       <span>
-        <span className="text-foreground">prompt</span>
-        <span className="text-primary">hub</span>
+        <span className="text-foreground">Syntax</span>
+        <span className="text-primary">a</span>
       </span>
     </span>
   );

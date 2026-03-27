@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-PromptHub is a bilingual (Arabic/English) AI prompt marketplace built with Next.js 16 App Router, Supabase, and React Query. Users browse, share, like, and manage AI prompts across categories.
+Syntaxa is a bilingual (Arabic/English) AI prompt marketplace built with Next.js 16 App Router, Supabase, and React Query. Users browse, share, like, and manage AI prompts across categories.
 
 ## Tech Stack
 

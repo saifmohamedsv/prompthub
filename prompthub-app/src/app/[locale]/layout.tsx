@@ -16,10 +16,10 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "PromptHub",
-    template: "%s | PromptHub",
+    default: "Syntaxa",
+    template: "%s | Syntaxa",
   },
-  description: "Discover and share the best AI prompts for ChatGPT, Claude, Midjourney, and more.",
+  description: "Discover, share, and remix AI prompts for ChatGPT, Claude, Midjourney, and more.",
 };
 
 export function generateStaticParams() {
