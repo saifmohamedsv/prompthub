@@ -21,11 +21,10 @@ export async function POST() {
   }
 
   try {
-    // 1. Delete current user's prompts (RLS allows this)
-    // prompt_tags cascade on prompt delete, so no need to delete separately
+    // 1. Delete ALL current user's prompts (prompt_tags cascade)
     await supabase.from("prompts").delete().eq("user_id", user.id);
 
-    // 2. Upsert categories (idempotent via slug conflict)
+    // 2. Upsert categories
     const { data: catData, error: catError } = await supabase
       .from("categories")
       .upsert(categories.map((c) => ({ ...c })) as never, { onConflict: "slug" })
@@ -36,7 +35,7 @@ export async function POST() {
       (catData as unknown as { id: string; slug: string }[]).map((c) => [c.slug, c.id])
     );
 
-    // 3. Upsert tags (idempotent via slug conflict)
+    // 3. Upsert tags
     const tagRows = tags.map((name) => ({ name, slug: name }));
     const { data: tagData, error: tagError } = await supabase
       .from("tags")
@@ -48,7 +47,7 @@ export async function POST() {
       (tagData as unknown as { id: string; slug: string }[]).map((t) => [t.slug, t.id])
     );
 
-    // 4. Seed prompts
+    // 4. Seed prompts with views, likes, and links
     let seededCount = 0;
     for (const p of prompts) {
       const categoryId = catMap.get(p.category_slug);
@@ -58,12 +57,15 @@ export async function POST() {
         .from("prompts")
         .insert({
           title: p.title,
-          title_ar: p.title_ar,
+          title_ar: p.title_ar || null,
           description: p.description,
-          description_ar: p.description_ar,
+          description_ar: p.description_ar || null,
           prompt_text: p.prompt_text,
           category_id: categoryId,
           user_id: user.id,
+          link: p.link || null,
+          views_count: p.views_count ?? 0,
+          likes_count: p.likes_count ?? 0,
         } as never)
         .select("id")
         .single();
