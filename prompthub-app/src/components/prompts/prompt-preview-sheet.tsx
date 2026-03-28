@@ -37,7 +37,7 @@ export function PromptPreviewSheet({
     >
       <SheetContent
         side="right"
-        className="w-full sm:max-w-lg overflow-y-auto"
+        className="w-full sm:max-w-lg overflow-y-auto p-6 pt-10"
       >
         {promptId && <PreviewContent promptId={promptId} />}
       </SheetContent>

@@ -5,29 +5,28 @@ import { Link } from "@/i18n/navigation";
 import { Flame, Eye, Heart } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTrendingPrompts } from "@/hooks/use-trending";
-import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
+import { Locale, getCategoryBadgeClass } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
 export function TrendingSection() {
   const t = useTranslations("explore");
   const locale = useLocale();
   const isAr = locale === Locale.AR;
-  const { data, isLoading } = useTrendingPrompts();
+  const { data, isLoading } = useTrendingPrompts(6);
 
   if (isLoading) {
     return (
       <section className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Flame className="size-5 text-primary" />
-            <Skeleton className="h-5 w-24" />
-          </div>
-          <Skeleton className="h-4 w-16" />
+        <div className="flex items-center gap-2 mb-3">
+          <Flame className="size-5 text-primary" />
+          <Skeleton className="h-5 w-24" />
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <TrendingCardSkeleton key={i} />
-          ))}
+        <div className="overflow-x-auto md:overflow-visible">
+          <div className="grid grid-cols-[repeat(6,minmax(160px,1fr))] gap-3 pb-2 md:grid-cols-3 md:pb-0 lg:grid-cols-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <TrendingCardSkeleton key={i} />
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -37,29 +36,23 @@ export function TrendingSection() {
 
   return (
     <section className="mb-6">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <Flame className="size-5 text-primary" />
-          <h2 className="text-lg font-bold tracking-tight">
-            {t("trendingTitle")}
-          </h2>
-        </div>
-        <Link
-          href={`${routes.home}?sort=hot`}
-          className="text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          {t("trendingSeeAll")}
-        </Link>
+      <div className="flex items-center gap-2 mb-3">
+        <Flame className="size-5 text-primary" />
+        <h2 className="text-lg font-bold tracking-tight">
+          {t("trendingTitle")}
+        </h2>
       </div>
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {data.map((prompt, index) => (
-          <TrendingCard
-            key={prompt.id}
-            prompt={prompt}
-            rank={index + 1}
-            isAr={isAr}
-          />
-        ))}
+      <div className="overflow-x-auto md:overflow-visible">
+        <div className="grid grid-cols-[repeat(6,minmax(160px,1fr))] gap-3 pb-2 md:grid-cols-3 md:pb-0 lg:grid-cols-6">
+          {data.map((prompt, index) => (
+            <TrendingCard
+              key={prompt.id}
+              prompt={prompt}
+              rank={index + 1}
+              isAr={isAr}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -82,7 +75,7 @@ function TrendingCard({
   return (
     <Link
       href={routes.promptDetail(prompt.id)}
-      className="min-w-[200px] max-w-[220px] shrink-0 rounded-xl border border-card-border bg-surface-1 p-3 transition-all hover:border-brand/20 hover:shadow-md"
+      className="rounded-xl border border-card-border bg-surface-1 p-3 transition-all hover:border-brand/20 hover:shadow-md"
     >
       <div className="flex items-start gap-2">
         <span className="text-lg font-black leading-none text-primary">
@@ -117,7 +110,7 @@ function TrendingCard({
 
 function TrendingCardSkeleton() {
   return (
-    <div className="min-w-[200px] max-w-[220px] shrink-0 rounded-xl border border-card-border bg-surface-1 p-3">
+    <div className="rounded-xl border border-card-border bg-surface-1 p-3">
       <div className="flex items-start gap-2">
         <Skeleton className="h-5 w-4" />
         <div className="flex-1">
