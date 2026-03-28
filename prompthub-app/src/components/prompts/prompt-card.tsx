@@ -65,12 +65,12 @@ export function PromptCard({
             </span>
           )}
           {isPopular && (
-            <span className="whitespace-nowrap rounded-full bg-warning-muted px-1.5 py-px text-[10px] font-bold text-warning-foreground">
+            <span className="whitespace-nowrap rounded-full bg-warning-muted px-1.5 py-px text-[10px] font-bold text-warning">
               🔥 {t("popular")}
             </span>
           )}
           {isRising && (
-            <span className="whitespace-nowrap rounded-full bg-success-muted px-1.5 py-px text-[10px] font-bold text-success-foreground">
+            <span className="whitespace-nowrap rounded-full bg-success-muted px-1.5 py-px text-[10px] font-bold text-success">
               ↑ {t("rising")}
             </span>
           )}
