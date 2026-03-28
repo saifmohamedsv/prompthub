@@ -37,7 +37,7 @@ export function PromptPreviewSheet({
     >
       <SheetContent
         side="right"
-        className="w-full sm:max-w-lg overflow-y-auto p-6 pt-10"
+        className="w-full sm:max-w-lg overflow-y-auto px-4 py-6 pt-10 sm:px-6"
       >
         {promptId && <PreviewContent promptId={promptId} />}
       </SheetContent>
@@ -112,7 +112,7 @@ function PreviewContent({ promptId }: { promptId: string }) {
 
       {/* Prompt text block */}
       {prompt.prompt_text && (
-        <div className="rounded-xl border border-border/5 bg-surface-2">
+        <div className="rounded-xl border border-border bg-surface-2">
           <div className="flex items-center justify-between px-4 py-2">
             <span className="text-[10px] font-semibold tracking-widest text-foreground-tertiary uppercase">
               {tp("promptText")}
@@ -159,7 +159,7 @@ function PreviewContent({ promptId }: { promptId: string }) {
       </Link>
 
       {/* Stats + Like */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4">
         <span className="inline-flex items-center gap-1 text-sm text-foreground-tertiary">
           <Eye className="size-4" />
           {prompt.views_count} {tp("views")}

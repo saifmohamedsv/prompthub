@@ -57,8 +57,8 @@ export function PromptSnippet({
   }
 
   return (
-    <div className="rounded-xl border border-border/5 bg-background">
-      <div className="flex items-center justify-between px-8 py-3">
+    <div className="rounded-xl border border-border bg-background">
+      <div className="flex items-center justify-between px-3 py-2 sm:px-5 sm:py-3">
         <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {t("promptText")}
         </span>
@@ -67,7 +67,7 @@ export function PromptSnippet({
           {copied ? t("linkCopied") : t("copyPrompt")}
         </Button>
       </div>
-      <pre dir="ltr" className="whitespace-pre-wrap px-8 pb-8 font-mono leading-loose text-primary/90">
+      <pre dir="ltr" className="whitespace-pre-wrap px-3 pb-4 font-mono text-sm leading-relaxed text-primary/90 sm:px-5 sm:pb-6 sm:leading-loose">
         {text}
       </pre>
     </div>

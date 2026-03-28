@@ -10,20 +10,11 @@ import { routes } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { useCategories } from "@/hooks/use-categories";
 import { useTags } from "@/hooks/use-tags";
 import { useAuth } from "@/hooks/use-auth";
-import {
-  usePromptDetail,
-  useCreatePrompt,
-  useUpdatePrompt,
-} from "@/hooks/use-prompts";
+import { usePromptDetail, useCreatePrompt, useUpdatePrompt } from "@/hooks/use-prompts";
 import { uploadPromptImage } from "@/lib/supabase/queries";
 
 type FormErrors = {
@@ -86,9 +77,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   })();
 
   function toggleTag(tagId: string) {
-    setSelectedTagIds((prev) =>
-      prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]
-    );
+    setSelectedTagIds((prev) => (prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]));
   }
 
   function validate(): FormErrors {
@@ -149,7 +138,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             toast.success(t("updateSuccess"));
             router.push(routes.myPrompts);
           },
-        }
+        },
       );
     } else {
       createMutation.mutate(payload, {
@@ -168,9 +157,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       {/* Title + Category — two-column row */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="flex flex-col">
-          <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            {t("title")}
-          </label>
+          <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("title")}</label>
           <Input
             placeholder={t("titlePlaceholder")}
             value={title}
@@ -179,66 +166,53 @@ export function PromptForm({ promptId }: { promptId?: string }) {
               if (errors.title) setErrors((p) => ({ ...p, title: undefined }));
             }}
           />
-          {errors.title && (
-            <p className="mt-1 text-sm text-destructive">{errors.title}</p>
-          )}
+          {errors.title && <p className="mt-1 text-sm text-destructive">{errors.title}</p>}
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            {t("category")}
-          </label>
+          <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("category")}</label>
           <Select
             value={categoryId}
             onValueChange={(v) => {
               setCategoryId(v ?? "");
-              if (errors.category_id)
-                setErrors((p) => ({ ...p, category_id: undefined }));
+              if (errors.category_id) setErrors((p) => ({ ...p, category_id: undefined }));
             }}
           >
             <SelectTrigger>
               <span>{selectedCategoryLabel}</span>
             </SelectTrigger>
             <SelectContent>
-              {categories?.slice().sort((a, b) => a.slug === "other" ? 1 : b.slug === "other" ? -1 : 0).map((cat) => (
-                <SelectItem key={cat.id} value={cat.id}>
-                  {locale === Locale.AR ? cat.name_ar : cat.name}
-                </SelectItem>
-              ))}
+              {categories
+                ?.slice()
+                .sort((a, b) => (a.slug === "other" ? 1 : b.slug === "other" ? -1 : 0))
+                .map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id}>
+                    {locale === Locale.AR ? cat.name_ar : cat.name}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
-          {errors.category_id && (
-            <p className="mt-1 text-sm text-destructive">{errors.category_id}</p>
-          )}
+          {errors.category_id && <p className="mt-1 text-sm text-destructive">{errors.category_id}</p>}
         </div>
       </div>
 
       {/* Description / Detailed Objective */}
       <div className="flex flex-col">
-        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          {t("detailedObjective")}
-        </label>
+        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("detailedObjective")}</label>
         <Textarea
           placeholder={t("descriptionPlaceholder")}
           className="min-h-[100px]"
           value={description}
           onChange={(e) => {
             setDescription(e.target.value);
-            if (errors.description)
-              setErrors((p) => ({ ...p, description: undefined }));
+            if (errors.description) setErrors((p) => ({ ...p, description: undefined }));
           }}
         />
-        {errors.description && (
-          <p className="mt-1 text-sm text-destructive">{errors.description}</p>
-        )}
+        {errors.description && <p className="mt-1 text-sm text-destructive">{errors.description}</p>}
       </div>
 
       {/* Arabic Translation — collapsible with Globe icon */}
-      <button
-        type="button"
-        onClick={() => setShowArabic(!showArabic)}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-      >
+      <button type="button" onClick={() => setShowArabic(!showArabic)} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
         {showArabic ? (
           <>
             <X className="size-4" />
@@ -255,27 +229,12 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       {showArabic && (
         <div className="space-y-4 rounded-xl bg-surface-1 p-4">
           <div className="flex flex-col">
-            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              {t("titleAr")}
-            </label>
-            <Input
-              dir="rtl"
-              placeholder={t("titleArPlaceholder")}
-              value={titleAr}
-              onChange={(e) => setTitleAr(e.target.value)}
-            />
+            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("titleAr")}</label>
+            <Input dir="rtl" placeholder={t("titleArPlaceholder")} value={titleAr} onChange={(e) => setTitleAr(e.target.value)} />
           </div>
           <div className="flex flex-col">
-            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              {t("descriptionAr")}
-            </label>
-            <Textarea
-              dir="rtl"
-              placeholder={t("descriptionArPlaceholder")}
-              className="min-h-24"
-              value={descriptionAr}
-              onChange={(e) => setDescriptionAr(e.target.value)}
-            />
+            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("descriptionAr")}</label>
+            <Textarea dir="rtl" placeholder={t("descriptionArPlaceholder")} className="min-h-24" value={descriptionAr} onChange={(e) => setDescriptionAr(e.target.value)} />
           </div>
         </div>
       )}
@@ -283,28 +242,16 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       {/* Prompt Syntax — monospace recessed textarea */}
       <div className="flex flex-col">
         <div className="mb-1 flex items-center justify-between">
-          <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            {t("promptSyntaxLabel")}
-          </label>
-          <span className="text-xs text-muted-foreground">
-            {t("charCount", { count: promptText.length })}
-          </span>
+          <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("promptSyntaxLabel")}</label>
+          <span className="text-xs text-muted-foreground">{t("charCount", { count: promptText.length })}</span>
         </div>
-        <Textarea
-          dir="ltr"
-          placeholder={t("promptTextPlaceholder")}
-          className="min-h-32 bg-background font-mono text-sm"
-          value={promptText}
-          onChange={(e) => setPromptText(e.target.value)}
-        />
+        <Textarea dir="ltr" placeholder={t("promptTextPlaceholder")} className="min-h-32 bg-background font-mono text-sm" value={promptText} onChange={(e) => setPromptText(e.target.value)} />
         <p className="mt-1 text-xs text-muted-foreground">{t("promptTextHint")}</p>
       </div>
 
       {/* Link */}
       <div className="flex flex-col">
-        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          {t("link")}
-        </label>
+        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("link")}</label>
         <Input
           placeholder={t("linkPlaceholder")}
           type="url"
@@ -315,16 +262,12 @@ export function PromptForm({ promptId }: { promptId?: string }) {
             if (errors.link) setErrors((p) => ({ ...p, link: undefined }));
           }}
         />
-        {errors.link && (
-          <p className="mt-1 text-sm text-destructive">{errors.link}</p>
-        )}
+        {errors.link && <p className="mt-1 text-sm text-destructive">{errors.link}</p>}
       </div>
 
       {/* Tags */}
       <div className="flex flex-col">
-        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          {t("tags")}
-        </label>
+        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("tags")}</label>
         <div dir="ltr" className="flex flex-wrap gap-2">
           {tags?.map((tag) => {
             const isSelected = selectedTagIds.includes(tag.id);
@@ -334,9 +277,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 type="button"
                 onClick={() => toggleTag(tag.id)}
                 className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                  isSelected
-                    ? "border-brand/20 bg-brand-muted text-brand"
-                    : "border-transparent bg-surface-3 text-muted-foreground hover:text-foreground"
+                  isSelected ? "border-brand/20 bg-brand-muted text-brand" : "border-transparent bg-surface-3 text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {tag.name}
@@ -349,16 +290,10 @@ export function PromptForm({ promptId }: { promptId?: string }) {
 
       {/* Image upload */}
       <div className="flex flex-col">
-        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-          {t("image")}
-        </label>
+        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("image")}</label>
         {imagePreview && (
           <div className="relative mb-3">
-            <img
-              src={imagePreview}
-              alt=""
-              className="h-40 w-full rounded-xl border object-cover"
-            />
+            <img src={imagePreview} alt="" className="h-40 w-full rounded-xl border object-cover" />
             <button
               type="button"
               onClick={() => {
@@ -375,7 +310,9 @@ export function PromptForm({ promptId }: { promptId?: string }) {
           role="button"
           tabIndex={0}
           onClick={() => fileInputRef.current?.click()}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click(); }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
+          }}
           className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-border/30 bg-background p-8 text-center transition-colors hover:border-brand/20"
         >
           <Upload className="size-8 text-muted-foreground" />
@@ -397,25 +334,12 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       </div>
 
       {/* Submit row — Cancel + Submit */}
-      <div className="flex justify-end gap-3 pt-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => router.push(routes.myPrompts)}
-          className="rounded-lg border border-border px-6 py-2.5 text-sm font-medium"
-        >
-          {tCommon("cancel")}
+      <div className="flex justify-start gap-3 pt-4">
+        <Button type="submit" disabled={isPending} className="rounded-lg bg-brand px-6 py-2.5 text-sm font-bold text-brand-foreground hover:bg-brand-hover">
+          {isPending ? t("saving") : promptId ? t("editPrompt") : t("addNew")}
         </Button>
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="rounded-lg bg-brand px-6 py-2.5 text-sm font-bold text-brand-foreground hover:bg-brand-hover"
-        >
-          {isPending
-            ? t("saving")
-            : promptId
-              ? t("editPrompt")
-              : t("addNew")}
+        <Button type="button" variant="outline" onClick={() => router.push(routes.myPrompts)} className="rounded-lg border border-border px-6 py-2.5 text-sm font-medium">
+          {tCommon("cancel")}
         </Button>
       </div>
 

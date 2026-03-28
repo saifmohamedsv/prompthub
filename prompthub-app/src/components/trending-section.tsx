@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Flame, Eye, Heart } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTrendingPrompts } from "@/hooks/use-trending";
-import { Locale, getCategoryBadgeClass } from "@/lib/config";
+import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
 export function TrendingSection() {
@@ -21,10 +21,12 @@ export function TrendingSection() {
           <Flame className="size-5 text-primary" />
           <Skeleton className="h-5 w-24" />
         </div>
-        <div className="overflow-x-auto md:overflow-visible">
-          <div className="grid grid-cols-[repeat(6,minmax(160px,1fr))] gap-3 pb-2 md:grid-cols-3 md:pb-0 lg:grid-cols-6">
+        <div className="overflow-x-auto pb-2 md:overflow-visible md:pb-0">
+          <div className="flex gap-3 md:grid md:grid-cols-3 lg:grid-cols-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <TrendingCardSkeleton key={i} />
+              <div key={i} className="w-[200px] shrink-0 md:w-auto">
+                <TrendingCardSkeleton />
+              </div>
             ))}
           </div>
         </div>
@@ -42,15 +44,16 @@ export function TrendingSection() {
           {t("trendingTitle")}
         </h2>
       </div>
-      <div className="overflow-x-auto md:overflow-visible">
-        <div className="grid grid-cols-[repeat(6,minmax(160px,1fr))] gap-3 pb-2 md:grid-cols-3 md:pb-0 lg:grid-cols-6">
+      <div className="overflow-x-auto pb-2 md:overflow-visible md:pb-0">
+        <div className="flex gap-3 md:grid md:grid-cols-3 lg:grid-cols-6">
           {data.map((prompt, index) => (
-            <TrendingCard
-              key={prompt.id}
-              prompt={prompt}
-              rank={index + 1}
-              isAr={isAr}
-            />
+            <div key={prompt.id} className="w-[200px] shrink-0 md:w-auto">
+              <TrendingCard
+                prompt={prompt}
+                rank={index + 1}
+                isAr={isAr}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -75,7 +78,7 @@ function TrendingCard({
   return (
     <Link
       href={routes.promptDetail(prompt.id)}
-      className="rounded-xl border border-card-border bg-surface-1 p-3 transition-all hover:border-brand/20 hover:shadow-md"
+      className="block h-full rounded-xl border border-card-border bg-surface-1 p-3 transition-all hover:border-brand/20 hover:shadow-md"
     >
       <div className="flex items-start gap-2">
         <span className="text-lg font-black leading-none text-primary">
