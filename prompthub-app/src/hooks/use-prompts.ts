@@ -12,6 +12,7 @@ import {
   fetchPrompts,
   fetchPromptById,
   fetchFeaturedPrompts,
+  fetchPromptOfTheDay,
   fetchUserPrompts,
   fetchLikedPrompts,
   fetchUserLikes,
@@ -55,6 +56,15 @@ export function useFeaturedPrompts(limit = 3) {
     queryFn: () => fetchFeaturedPrompts(limit),
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
+  });
+}
+
+export function usePromptOfTheDay() {
+  return useQuery({
+    queryKey: queryKeys.prompts.ofTheDay,
+    queryFn: fetchPromptOfTheDay,
+    staleTime: 60 * 60 * 1000,
+    gcTime: 2 * 60 * 60 * 1000,
   });
 }
 

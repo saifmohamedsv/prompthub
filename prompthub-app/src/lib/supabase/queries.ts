@@ -43,23 +43,20 @@ export async function fetchPrompts(
   }
 
   const sort = filters?.sort ?? "recent";
+  const orderColumn =
+    sort === "most_viewed" || sort === "hot"
+      ? "likes_count"
+      : sort === "most_liked"
+        ? "likes_count"
+        : "created_at";
 
   let query = client
     .from("prompts")
-    .select(PROMPT_SELECT, { count: "exact" });
+    .select(PROMPT_SELECT, { count: "exact" })
+    .order(orderColumn, { ascending: false });
 
   if (sort === "hot") {
-    query = query
-      .order("likes_count", { ascending: false })
-      .order("views_count", { ascending: false });
-  } else {
-    const orderColumn =
-      sort === "most_viewed"
-        ? "views_count"
-        : sort === "most_liked"
-          ? "likes_count"
-          : "created_at";
-    query = query.order(orderColumn, { ascending: false });
+    query = query.order("views_count", { ascending: false });
   }
 
   if (categoryId) {
@@ -111,23 +108,37 @@ export async function fetchPrompts(
   });
 }
 
-export async function fetchFeaturedPrompts(limit = 3): Promise<PromptWithAuthor[]> {
+export async function fetchTrendingPrompts(limit = 6): Promise<PromptWithAuthor[]> {
   const { data, error } = await supabase()
     .from("prompts")
     .select(PROMPT_SELECT)
     .order("likes_count", { ascending: false })
+    .order("views_count", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
   return (data ?? []) as unknown as PromptWithAuthor[];
 }
 
-export async function fetchTrendingPrompts(limit = 8): Promise<PromptWithAuthor[]> {
+export async function fetchPromptOfTheDay(): Promise<PromptWithAuthor | null> {
   const { data, error } = await supabase()
     .from("prompts")
     .select(PROMPT_SELECT)
     .order("likes_count", { ascending: false })
-    .order("views_count", { ascending: false })
+    .limit(20);
+
+  if (error) throw error;
+  const prompts = (data ?? []) as unknown as PromptWithAuthor[];
+  if (!prompts.length) return null;
+  const idx = new Date().getDate() % prompts.length;
+  return prompts[idx];
+}
+
+export async function fetchFeaturedPrompts(limit = 3): Promise<PromptWithAuthor[]> {
+  const { data, error } = await supabase()
+    .from("prompts")
+    .select(PROMPT_SELECT)
+    .order("likes_count", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
@@ -363,6 +374,32 @@ export async function fetchFollowedCreatorPrompts(
 
   if (error) throw error;
   return (data ?? []) as unknown as PromptWithAuthor[];
+}
+
+export async function fetchFeedPrompts(
+  userId: string,
+  limit = 12,
+  page = 0
+): Promise<PromptWithAuthor[]> {
+  const followingIds = await fetchUserFollowings(userId);
+  if (followingIds.length === 0) {
+    return Object.assign([] as unknown as PromptWithAuthor[], { totalCount: 0 });
+  }
+
+  const from = page * limit;
+  const to = from + limit - 1;
+
+  const { data, count, error } = await supabase()
+    .from("prompts")
+    .select(PROMPT_SELECT, { count: "exact" })
+    .in("user_id", followingIds)
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+  return Object.assign((data ?? []) as unknown as PromptWithAuthor[], {
+    totalCount: count ?? 0,
+  });
 }
 
 export async function toggleLike(

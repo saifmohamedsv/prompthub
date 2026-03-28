@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Locale, getCategoryBadgeClass } from "@/lib/config";
 import { Eye, Expand } from "lucide-react";
@@ -9,6 +9,15 @@ import { LikeButton } from "@/components/prompts/like-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
+
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+function computeBadge(likesCount: number, createdAt: string) {
+  const isPopular = likesCount >= 50;
+  const isRecent = new Date(createdAt).getTime() > Date.now() - SEVEN_DAYS_MS;
+  const isRising = !isPopular && isRecent && likesCount >= 10;
+  return { isPopular, isRising };
+}
 
 export function PromptCard({
   prompt,
@@ -20,11 +29,14 @@ export function PromptCard({
   const locale = useLocale();
   const isAr = locale === Locale.AR;
   const router = useRouter();
+  const t = useTranslations("badges");
 
   const categoryName = isAr ? prompt.categories?.name_ar : prompt.categories?.name;
   const title = (isAr && prompt.title_ar) ? prompt.title_ar : prompt.title;
   const description = (isAr && prompt.description_ar) ? prompt.description_ar : prompt.description;
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
+
+  const { isPopular, isRising } = computeBadge(prompt.likes_count, prompt.created_at);
 
   const shortDate = new Date(prompt.created_at).toLocaleDateString(locale, {
     month: "short",
@@ -37,25 +49,33 @@ export function PromptCard({
       {onPreview && (
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onPreview(prompt.id);
-          }}
-          className="absolute top-2 end-2 z-20 rounded-lg bg-black/40 p-1.5 text-white opacity-0 backdrop-blur-md transition-opacity hover:bg-black/55 group-hover:opacity-100"
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPreview(prompt.id); }}
+          className="absolute top-2 inset-e-2 z-20 rounded-lg bg-black/40 p-1.5 text-white opacity-0 backdrop-blur-md transition-opacity hover:bg-black/55 group-hover:opacity-100"
         >
           <Expand className="size-3.5" />
         </button>
       )}
 
-      {/* Row 1: Category badge + stats — single line, 11px */}
-      <div className="flex items-center justify-between">
-        {categoryName && (
-          <span className={`rounded-full px-2 py-px text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>
-            {categoryName}
-          </span>
-        )}
-        <div className="flex items-center gap-2 text-[11px] text-foreground-tertiary">
+      {/* Row 1: badges (mobile: stacked, sm+: inline with stats) */}
+      <div className="flex flex-wrap items-center justify-between gap-y-1">
+        <div className="flex items-center gap-1.5">
+          {categoryName && (
+            <span className={`rounded-full px-2 py-px text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>
+              {categoryName}
+            </span>
+          )}
+          {isPopular && (
+            <span className="whitespace-nowrap rounded-full bg-warning-muted px-1.5 py-px text-[10px] font-bold text-warning-foreground">
+              🔥 {t("popular")}
+            </span>
+          )}
+          {isRising && (
+            <span className="whitespace-nowrap rounded-full bg-success-muted px-1.5 py-px text-[10px] font-bold text-success-foreground">
+              ↑ {t("rising")}
+            </span>
+          )}
+        </div>
+        <div className="flex shrink-0 items-center gap-2 text-[11px] text-foreground-tertiary">
           <span className="inline-flex items-center gap-0.5">
             <Eye className="size-3" />
             {prompt.views_count}
@@ -85,7 +105,7 @@ export function PromptCard({
       <h3 className="mt-2 line-clamp-2 text-sm font-medium leading-tight transition-colors group-hover:text-brand">
         <Link
           href={routes.promptDetail(prompt.id)}
-          className="after:absolute after:inset-0 after:content-['']"
+          className="font-semibold after:absolute after:inset-0 after:content-['']"
         >
           {title}
         </Link>
@@ -103,7 +123,7 @@ export function PromptCard({
         </div>
       )}
 
-      {/* Row 6: Footer — 20px avatar + 11px author left, heart + count right */}
+      {/* Row 6: Footer — author left, like right */}
       <div className="relative z-10 mt-2 flex items-center justify-between">
         <button
           type="button"

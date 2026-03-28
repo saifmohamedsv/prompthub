@@ -11,6 +11,7 @@ export const queryKeys = {
     my: ["prompts", "my"] as const,
     liked: ["prompts", "liked"] as const,
     featured: ["prompts", "featured"] as const,
+    ofTheDay: ["prompts", "of-the-day"] as const,
     trending: ["prompts", "trending"] as const,
     userPublic: (id: string) => ["prompts", "user", id] as const,
   },
@@ -28,5 +29,6 @@ export const queryKeys = {
     myFollowings: ["follows", "my-followings"] as const,
     feed: (filters?: Record<string, string>) =>
       ["follows", "feed", filters] as const,
+    feedInfinite: ["follows", "feed-infinite"] as const,
   },
 } as const;

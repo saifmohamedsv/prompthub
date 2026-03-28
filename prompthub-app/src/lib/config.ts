@@ -27,6 +27,7 @@ export const routes = {
   editPrompt: (id: string) => `/my-prompts/${id}/edit` as const,
   promptDetail: (id: string) => `/prompt/${id}` as const,
   likes: "/likes",
+  feed: "/feed",
   userProfile: (id: string) => `/user/${id}` as const,
   apiAuthCallback: "/api/auth/callback",
   apiMe: "/api/me",

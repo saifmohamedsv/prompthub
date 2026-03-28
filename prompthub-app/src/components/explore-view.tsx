@@ -18,8 +18,10 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { TrendingSection } from "@/components/trending-section";
 import { Loader2, X } from "lucide-react";
+import { PromptOfTheDay } from "@/components/prompt-of-the-day";
+import { TrendingSection } from "@/components/trending-section";
+import { FollowingSection } from "@/components/following-section";
 
 export function ExploreView() {
   const t = useTranslations("explore");
@@ -82,10 +84,11 @@ export function ExploreView() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+      <PromptOfTheDay />
       <section className="space-y-5 mb-8">
         {/* Heading */}
         <div className="space-y-2">
-          <h1 className="text-3xl lg:text-5xl font-black tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tight">
             {t("titlePrefix")}{" "}
             <span className="text-primary">
               {t("titleHighlight")}
@@ -146,6 +149,7 @@ export function ExploreView() {
         </div>
       </section>
 
+      <FollowingSection />
       <TrendingSection />
 
       <section className="max-w-7xl">

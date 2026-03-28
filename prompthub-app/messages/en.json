@@ -46,17 +46,32 @@
     "sortHot": "Hot",
     "trendingTitle": "Trending",
     "trendingSeeAll": "See all",
+    "followingTitle": "From creators you follow",
+    "followingSeeAll": "See all",
     "tagFilter": "Tag: {name}",
     "clearTag": "Clear",
     "sortLabel": "Sort by",
     "titlePrefix": "Explore the",
     "titleHighlight": "Syntax Gallery",
-    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models."
+    "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models.",
+    "potdLabel": "✦ Prompt of the Day",
+    "potdOpen": "Open"
+  },
+  "badges": {
+    "popular": "Popular",
+    "rising": "Rising"
   },
   "preview": {
     "openFull": "Open full page",
     "copy": "Copy prompt",
     "copied": "Copied!"
+  },
+  "feed": {
+    "title": "Your Feed",
+    "subtitle": "Latest prompts from creators you follow",
+    "emptyTitle": "Nothing here yet",
+    "emptyDesc": "Follow some creators to see their latest prompts here.",
+    "exploreCta": "Explore prompts"
   },
   "prompt": {
     "by": "by",
