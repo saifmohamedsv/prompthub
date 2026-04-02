@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
 import { Eye } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LikeButton } from "@/components/prompts/like-button";
+import { UpvoteButton } from "@/components/prompts/upvote-button";
 import { usePromptOfTheDay } from "@/hooks/use-prompts";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -76,7 +76,7 @@ export function PromptOfTheDay() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" />
+          <UpvoteButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" />
           <span className="inline-flex items-center gap-1 text-sm text-foreground-tertiary">
             <Eye className="size-4" />
             {prompt.views_count}

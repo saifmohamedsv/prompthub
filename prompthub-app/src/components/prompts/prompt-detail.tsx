@@ -7,11 +7,11 @@ import { Locale, getCategoryBadgeClass } from "@/lib/config";
 import { usePromptDetail, useIncrementViews, useFeaturedPrompts } from "@/hooks/use-prompts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LikeButton } from "@/components/prompts/like-button";
+import { UpvoteButton } from "@/components/prompts/upvote-button";
 import { FollowButton } from "@/components/follow-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
-import { ExternalLink, ArrowLeft, Eye, Calendar, Sparkles, TrendingUp } from "lucide-react";
+import { ExternalLink, ArrowLeft, Eye, Sparkles, TrendingUp } from "lucide-react";
 import Image from "next/image";
 
 export function PromptDetail({ id }: { id: string }) {
@@ -109,7 +109,7 @@ export function PromptDetail({ id }: { id: string }) {
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2">
-            <LikeButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" label={t("likePrompt")} />
+            <UpvoteButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" label={t("upvotePrompt")} />
             {prompt.link && (
               <Link
                 href={prompt.link}

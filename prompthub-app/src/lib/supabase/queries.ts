@@ -53,7 +53,8 @@ export async function fetchPrompts(
   let query = client
     .from("prompts")
     .select(PROMPT_SELECT, { count: "exact" })
-    .order(orderColumn, { ascending: false });
+    .order(orderColumn, { ascending: false })
+    .order("id", { ascending: false });
 
   if (sort === "hot") {
     query = query.order("views_count", { ascending: false });
@@ -198,7 +199,7 @@ export async function fetchUserPrompts(
     .from("prompts")
     .select(PROMPT_SELECT)
     .eq("user_id", userId)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false }).order("id", { ascending: false });
 
   if (error) throw error;
   return (data ?? []) as unknown as PromptWithAuthor[];
@@ -224,7 +225,7 @@ export async function fetchLikedPrompts(
     .from("prompts")
     .select(PROMPT_SELECT)
     .in("id", ids)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false }).order("id", { ascending: false });
 
   if (error) throw error;
   return (data ?? []) as unknown as PromptWithAuthor[];
@@ -369,7 +370,7 @@ export async function fetchFollowedCreatorPrompts(
     .from("prompts")
     .select(PROMPT_SELECT)
     .in("user_id", followingIds)
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: false }).order("id", { ascending: false })
     .limit(limit);
 
   if (error) throw error;
@@ -393,7 +394,7 @@ export async function fetchFeedPrompts(
     .from("prompts")
     .select(PROMPT_SELECT, { count: "exact" })
     .in("user_id", followingIds)
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: false }).order("id", { ascending: false })
     .range(from, to);
 
   if (error) throw error;

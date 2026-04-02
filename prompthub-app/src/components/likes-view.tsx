@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { useLikedPrompts } from "@/hooks/use-prompts";
 import { routes } from "@/lib/config";
-import { Heart, Compass } from "lucide-react";
+import { ChevronUp, Compass } from "lucide-react";
 
 export function LikesView() {
   const t = useTranslations();
@@ -17,23 +17,23 @@ export function LikesView() {
     <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
       <div className="mb-4">
         <h1 className="text-3xl font-extrabold tracking-tight">
-          {t("dashboard.likedPrompts")}
+          {t("dashboard.upvotedPrompts")}
         </h1>
         <p className="text-muted-foreground pt-2">
-          {t("dashboard.likedPromptsSubtitle")}
+          {t("dashboard.upvotedPromptsSubtitle")}
         </p>
       </div>
 
       {isEmpty ? (
         <div className="flex flex-col items-center justify-center rounded-lg bg-surface-1 p-5 text-center shadow-sm">
           <div className="rounded-lg bg-surface-3 p-3">
-            <Heart className="size-6 text-muted-foreground" />
+            <ChevronUp className="size-6 text-muted-foreground" />
           </div>
           <h3 className="pt-4 text-lg font-bold">
-            {t("dashboard.likedPromptsEmpty")}
+            {t("dashboard.upvotedPromptsEmpty")}
           </h3>
           <p className="pt-2 text-sm text-muted-foreground">
-            {t("dashboard.likedPromptsEmptyDesc")}
+            {t("dashboard.upvotedPromptsEmptyDesc")}
           </p>
           <Link
             href={routes.home}

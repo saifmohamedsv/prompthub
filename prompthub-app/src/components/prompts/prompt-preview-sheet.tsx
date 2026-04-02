@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Link } from "@/i18n/navigation";
-import { Copy, Check, Eye, Heart, ExternalLink } from "lucide-react";
+import { Copy, Check, Eye, ChevronUp, ExternalLink } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -15,7 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LikeButton } from "@/components/prompts/like-button";
+import { UpvoteButton } from "@/components/prompts/upvote-button";
 import { usePromptDetail } from "@/hooks/use-prompts";
 import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
 
@@ -165,15 +165,15 @@ function PreviewContent({ promptId }: { promptId: string }) {
           {prompt.views_count} {tp("views")}
         </span>
         <span className="inline-flex items-center gap-1 text-sm text-foreground-tertiary">
-          <Heart className="size-4" />
-          {prompt.likes_count} {tp("likes")}
+          <ChevronUp className="size-4" />
+          {prompt.likes_count} {tp("upvotes")}
         </span>
         <div className="ms-auto">
-          <LikeButton
+          <UpvoteButton
             promptId={prompt.id}
             initialCount={prompt.likes_count}
             size="lg"
-            label={tp("likePrompt")}
+            label={tp("upvotePrompt")}
           />
         </div>
       </div>

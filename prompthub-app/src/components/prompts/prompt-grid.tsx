@@ -19,7 +19,7 @@ export function PromptGrid({
 
   if (isLoading) {
     return (
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="columns-1 gap-3 sm:columns-2 xl:columns-3 *:mb-3 *:break-inside-avoid">
         {Array.from({ length: 6 }).map((_, i) => (
           <PromptCardSkeleton key={i} />
         ))}
@@ -42,7 +42,7 @@ export function PromptGrid({
 
   return (
     <>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="columns-1 gap-3 sm:columns-2 xl:columns-3 *:mb-3 *:break-inside-avoid">
         {prompts.map((prompt) => (
           <PromptCard
             key={prompt.id}
@@ -61,7 +61,7 @@ export function PromptGrid({
 
 function PromptCardSkeleton() {
   return (
-    <div className="flex h-full flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card">
+    <div className="flex flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-14 rounded-full" />
         <Skeleton className="h-3 w-16" />

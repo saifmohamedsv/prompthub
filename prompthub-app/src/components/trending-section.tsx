@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Flame, Eye, Heart } from "lucide-react";
+import { Flame, Eye, ChevronUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTrendingPrompts } from "@/hooks/use-trending";
 import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
@@ -99,7 +99,7 @@ function TrendingCard({
       </div>
       <div className="mt-2 flex items-center gap-3 text-[11px] text-foreground-tertiary">
         <span className="inline-flex items-center gap-0.5">
-          <Heart className="size-3" />
+          <ChevronUp className="size-3" />
           {prompt.likes_count}
         </span>
         <span className="inline-flex items-center gap-0.5">

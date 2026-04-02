@@ -18,7 +18,11 @@
     "myPrompts": "برومبتاتي",
     "likes": "المفضلة",
     "login": "تسجيل الدخول",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "prompts": "البرومبتات",
+    "myCollection": "مجموعتي",
+    "comingSoon": "قريباً",
+    "feed": "التغذية"
   },
   "home": {
     "title": "اكتشف وشارك أفضل",
@@ -55,7 +59,20 @@
     "titleHighlight": "معرض البرومبتات",
     "subtitle": "اكتشف برومبتات عالية الأداء مُصممة لأقوى نماذج الذكاء الاصطناعي في العالم.",
     "potdLabel": "✦ برومبت اليوم",
-    "potdOpen": "فتح"
+    "potdOpen": "فتح",
+    "promptsHeading": "البرومبتات",
+    "promptsCount": "{count} نتيجة",
+    "filters": "الفلاتر",
+    "clearSearch": "مسح",
+    "categories": "الفئات",
+    "tagsHeading": "الوسوم",
+    "typeFilter": "النوع",
+    "typeAll": "الكل",
+    "typeText": "نص",
+    "typeImage": "صورة",
+    "typeVideo": "فيديو",
+    "createPrompt": "إنشاء برومبت",
+    "sortMostUpvoted": "الأكثر تصويتاً"
   },
   "badges": {
     "popular": "شائع",
@@ -79,7 +96,8 @@
     "views": "مشاهدة",
     "share": "مشاركة",
     "copyPrompt": "نسخ البرومبت",
-    "linkCopied": "تم النسخ!",
+    "copied": "تم نسخ البرومبت!",
+    "linkCopied": "تم نسخ الرابط!",
     "tryIt": "جربه",
     "forgeTitle": "اصنع صيغة جديدة",
     "forgeSubtitle": "صمّم قطعتك الذكية بدقة. كل حرف مهم في معرض البرومبتات.",
@@ -130,13 +148,16 @@
     "promptSyntaxLabel": "صيغة البرومبت",
     "charCount": "{count} حرف",
     "similarSyntaxes": "صيغ مشابهة",
-    "likePrompt": "إعجاب بالبرومبت"
+    "likePrompt": "إعجاب بالبرومبت",
+    "upvotes": "تصويت",
+    "upvotePrompt": "تصويت"
   },
   "profile": {
     "title": "الملف الشخصي",
     "joined": "انضم في {date}",
     "totalPrompts": "البرومبتات",
     "totalLikes": "إجمالي الإعجابات",
+    "totalUpvotes": "إجمالي التصويتات",
     "promptsBy": "برومبتات {name}",
     "noPrompts": "لم يشارك هذا المستخدم أي برومبتات بعد.",
     "followers": "متابعون",
@@ -159,7 +180,11 @@
     "likedPrompts": "البرومبتات المفضلة",
     "likedPromptsSubtitle": "البرومبتات التي حفظتها للاطلاع عليها لاحقاً.",
     "likedPromptsEmpty": "لم تعجب بأي برومبتات بعد.",
-    "likedPromptsEmptyDesc": "استكشف البرومبتات وأعجب بما تجده مفيداً."
+    "likedPromptsEmptyDesc": "استكشف البرومبتات وأعجب بما تجده مفيداً.",
+    "upvotedPrompts": "البرومبتات المُصوَّت عليها",
+    "upvotedPromptsSubtitle": "البرومبتات التي صوّتت لها.",
+    "upvotedPromptsEmpty": "لم تصوّت لأي برومبتات بعد.",
+    "upvotedPromptsEmptyDesc": "استكشف البرومبتات وصوّت لما تجده مفيداً."
   },
   "sidebar": {
     "title": "Syntaxa",

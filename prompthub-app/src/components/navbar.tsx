@@ -10,13 +10,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/logo";
 import { routes } from "@/lib/config";
-import { Menu, Compass, FileText, Heart } from "lucide-react";
+import { Menu, LayoutGrid, Rss } from "lucide-react";
 import { useState } from "react";
 
 const navIcons = {
-  [routes.home]: Compass,
-  [routes.myPrompts]: FileText,
-  [routes.likes]: Heart,
+  [routes.home]: LayoutGrid,
+  [routes.feed]: Rss,
 } as const;
 
 export function Navbar() {
@@ -25,9 +24,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: routes.home, label: t("explore") },
-    { href: routes.myPrompts, label: t("myPrompts") },
-    { href: routes.likes, label: t("likes") },
+    { href: routes.home, label: t("prompts"), icon: LayoutGrid },
+    { href: routes.feed, label: t("feed"), icon: Rss },
   ] as const;
 
   return (
@@ -51,6 +49,10 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <span className="flex items-center gap-1.5 text-[13px] text-foreground-tertiary cursor-default">
+            {t("myCollection")}
+            <span className="rounded-full bg-surface-3 px-1.5 py-px text-[9px] font-medium">{t("comingSoon")}</span>
+          </span>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
@@ -93,6 +95,10 @@ export function Navbar() {
                       </Link>
                     );
                   })}
+                  <span className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground-tertiary cursor-default">
+                    {t("myCollection")}
+                    <span className="rounded-full bg-surface-3 px-1.5 py-px text-[9px] font-medium">{t("comingSoon")}</span>
+                  </span>
                 </nav>
               </div>
             </SheetContent>

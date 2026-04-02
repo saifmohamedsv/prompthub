@@ -30,6 +30,8 @@ export type SeedPrompt = {
   link?: string;
   views_count?: number;
   likes_count?: number;
+  type?: "text" | "image" | "video";
+  image_url?: string;
 };
 
 export const prompts: SeedPrompt[] = [
@@ -611,6 +613,8 @@ Add: --ar 16:9 --v 6 --style raw --s 750`,
     tag_slugs: ["midjourney", "creative", "portrait", "landscape"],
     views_count: 5432,
     likes_count: 1089,
+    type: "image",
+    image_url: "https://images.unsplash.com/photo-1634017839464-5c339eba3df4?w=800&q=80",
   },
   {
     title: "DALL-E Product Mockup Generator",
@@ -631,6 +635,8 @@ Generate 3 prompt variants: editorial, e-commerce, and social media ad style.`,
     tag_slugs: ["dall-e", "creative", "marketing"],
     views_count: 1876,
     likes_count: 345,
+    type: "image",
+    image_url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
   },
   {
     title: "Brand Identity Concept Generator",
@@ -656,6 +662,8 @@ Generate:
     tag_slugs: ["creative", "business", "marketing"],
     views_count: 2345,
     likes_count: 467,
+    type: "image",
+    image_url: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
   },
   {
     // NO TAGS edge case
@@ -675,6 +683,8 @@ For each combination, write a detailed visual art prompt suitable for Midjourney
     tag_slugs: [],
     views_count: 432,
     likes_count: 67,
+    type: "image",
+    image_url: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80",
   },
 
   // ═══════════════════════════════════════════

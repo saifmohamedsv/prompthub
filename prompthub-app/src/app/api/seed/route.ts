@@ -66,6 +66,8 @@ export async function POST() {
           link: p.link || null,
           views_count: p.views_count ?? 0,
           likes_count: p.likes_count ?? 0,
+          type: p.type || "text",
+          image_url: p.image_url || null,
         } as never)
         .select("id")
         .single();

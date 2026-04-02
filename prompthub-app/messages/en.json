@@ -18,7 +18,11 @@
     "myPrompts": "My Prompts",
     "likes": "Likes",
     "login": "Log in",
-    "logout": "Log out"
+    "logout": "Log out",
+    "prompts": "Prompts",
+    "myCollection": "My Collection",
+    "comingSoon": "Soon",
+    "feed": "Feed"
   },
   "home": {
     "title": "Discover & Share the Best",
@@ -55,7 +59,20 @@
     "titleHighlight": "Syntax Gallery",
     "subtitle": "Discover and remix high-performance prompts engineered for the world's most advanced AI models.",
     "potdLabel": "✦ Prompt of the Day",
-    "potdOpen": "Open"
+    "potdOpen": "Open",
+    "promptsHeading": "Prompts",
+    "promptsCount": "{count} found",
+    "filters": "Filters",
+    "clearSearch": "Clear",
+    "categories": "Categories",
+    "tagsHeading": "Tags",
+    "typeFilter": "Type",
+    "typeAll": "All",
+    "typeText": "Text",
+    "typeImage": "Image",
+    "typeVideo": "Video",
+    "createPrompt": "Create Prompt",
+    "sortMostUpvoted": "Most Upvoted"
   },
   "badges": {
     "popular": "Popular",
@@ -79,7 +96,8 @@
     "views": "views",
     "share": "Share",
     "copyPrompt": "Copy Prompt",
-    "linkCopied": "Copied!",
+    "copied": "Prompt copied!",
+    "linkCopied": "Link copied!",
     "tryIt": "Try it",
     "forgeTitle": "Forge a New Syntax",
     "forgeSubtitle": "Craft your AI artifact with precision. Every character matters in the gallery of prompts.",
@@ -130,13 +148,16 @@
     "promptSyntaxLabel": "Prompt Syntax",
     "charCount": "{count} characters",
     "similarSyntaxes": "Similar Syntaxes",
-    "likePrompt": "Like Prompt"
+    "likePrompt": "Like Prompt",
+    "upvotes": "upvotes",
+    "upvotePrompt": "Upvote"
   },
   "profile": {
     "title": "User Profile",
     "joined": "Joined {date}",
     "totalPrompts": "Prompts",
     "totalLikes": "Total Likes",
+    "totalUpvotes": "Total Upvotes",
     "promptsBy": "Prompts by {name}",
     "noPrompts": "This user hasn't shared any prompts yet.",
     "followers": "Followers",
@@ -159,7 +180,11 @@
     "likedPrompts": "Liked Prompts",
     "likedPromptsSubtitle": "Prompts you've saved for later.",
     "likedPromptsEmpty": "You haven't liked any prompts yet.",
-    "likedPromptsEmptyDesc": "Explore prompts and like the ones you find useful."
+    "likedPromptsEmptyDesc": "Explore prompts and like the ones you find useful.",
+    "upvotedPrompts": "Upvoted Prompts",
+    "upvotedPromptsSubtitle": "Prompts you've upvoted.",
+    "upvotedPromptsEmpty": "You haven't upvoted any prompts yet.",
+    "upvotedPromptsEmptyDesc": "Explore prompts and upvote the ones you find useful."
   },
   "sidebar": {
     "title": "Syntaxa",

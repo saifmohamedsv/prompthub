@@ -78,6 +78,7 @@ export interface Database {
           views_count: number;
           category_id: string | null;
           user_id: string;
+          type: "text" | "image" | "video";
           fts: unknown | null;
           created_at: string;
           updated_at: string;
@@ -95,6 +96,7 @@ export interface Database {
           views_count?: number;
           category_id?: string | null;
           user_id: string;
+          type?: "text" | "image" | "video";
           fts?: unknown | null;
           created_at?: string;
           updated_at?: string;
@@ -112,6 +114,7 @@ export interface Database {
           views_count?: number;
           category_id?: string | null;
           user_id?: string;
+          type?: "text" | "image" | "video";
           fts?: unknown | null;
           created_at?: string;
           updated_at?: string;
