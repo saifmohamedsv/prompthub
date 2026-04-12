@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useFeedInfinite } from "@/hooks/use-follows";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { routes } from "@/lib/config";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import { Users, Compass, Loader2 } from "lucide-react";
 
 export function FeedView() {
@@ -21,27 +21,7 @@ export function FeedView() {
   const prompts = data?.pages.flat();
   const isEmpty = !isLoading && (!prompts || prompts.length === 0);
 
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    },
-    [hasNextPage, isFetchingNextPage, fetchNextPage]
-  );
-
-  useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(handleObserver, {
-      rootMargin: "200px",
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [handleObserver]);
+  const sentinelRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
@@ -67,7 +47,7 @@ export function FeedView() {
             href={routes.home}
             className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-bold text-brand-foreground transition-all hover:bg-brand-hover"
           >
-            <Compass className="me-1 size-4" />
+            <Compass className="mr-1 size-4" />
             {t("feed.exploreCta")}
           </Link>
         </div>

@@ -15,6 +15,7 @@ export type PromptFilters = {
   category?: string;
   tag?: string;
   sort?: SortOption;
+  type?: string;
   limit?: number;
   page?: number;
 };
@@ -43,21 +44,29 @@ export async function fetchPrompts(
   }
 
   const sort = filters?.sort ?? "recent";
-  const orderColumn =
-    sort === "most_viewed" || sort === "hot"
-      ? "likes_count"
-      : sort === "most_liked"
-        ? "likes_count"
-        : "created_at";
 
   let query = client
     .from("prompts")
-    .select(PROMPT_SELECT, { count: "exact" })
-    .order(orderColumn, { ascending: false })
-    .order("id", { ascending: false });
+    .select(PROMPT_SELECT, { count: "exact" });
 
   if (sort === "hot") {
-    query = query.order("views_count", { ascending: false });
+    // Hot: recent prompts first, weighted by likes — differs from most_liked
+    query = query
+      .order("created_at", { ascending: false })
+      .order("likes_count", { ascending: false })
+      .order("id", { ascending: false });
+  } else if (sort === "most_viewed") {
+    query = query
+      .order("views_count", { ascending: false })
+      .order("id", { ascending: false });
+  } else if (sort === "most_liked") {
+    query = query
+      .order("likes_count", { ascending: false })
+      .order("id", { ascending: false });
+  } else {
+    query = query
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: false });
   }
 
   if (categoryId) {
@@ -86,11 +95,16 @@ export async function fetchPrompts(
     query = query.in("id", promptIds);
   }
 
-  // Flexible partial-match search across title, description, and Arabic variants
+  // Type filter
+  if (filters?.type && filters.type !== "all") {
+    query = query.eq("type", filters.type);
+  }
+
+  // Flexible partial-match search
   if (filters?.search) {
     const term = `%${filters.search}%`;
     query = query.or(
-      `title.ilike.${term},description.ilike.${term},title_ar.ilike.${term},description_ar.ilike.${term},prompt_text.ilike.${term}`
+      `title.ilike.${term},description.ilike.${term},prompt_text.ilike.${term}`
     );
   }
 

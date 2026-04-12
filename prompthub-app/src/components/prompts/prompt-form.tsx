@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef, type FormEvent } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { Locale } from "@/lib/config";
 import { toast } from "sonner";
 import { X, Upload, Globe, Sparkles, Shield, Tag } from "lucide-react";
 import { routes } from "@/lib/config";
@@ -27,7 +26,6 @@ type FormErrors = {
 export function PromptForm({ promptId }: { promptId?: string }) {
   const t = useTranslations("prompt");
   const tCommon = useTranslations("common");
-  const locale = useLocale();
   const router = useRouter();
   const { user } = useAuth();
   const { data: categories } = useCategories();
@@ -73,7 +71,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
     if (!categoryId) return t("selectCategory");
     const cat = categories?.find((c) => c.id === categoryId);
     if (!cat) return t("selectCategory");
-    return locale === Locale.AR ? cat.name_ar : cat.name;
+    return cat.name;
   })();
 
   function toggleTag(tagId: string) {
@@ -187,7 +185,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 .sort((a, b) => (a.slug === "other" ? 1 : b.slug === "other" ? -1 : 0))
                 .map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
-                    {locale === Locale.AR ? cat.name_ar : cat.name}
+                    {cat.name}
                   </SelectItem>
                 ))}
             </SelectContent>
@@ -300,7 +298,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 setImagePreview(null);
                 if (fileInputRef.current) fileInputRef.current.value = "";
               }}
-              className="absolute top-2 end-2 rounded-full bg-black/60 p-1 text-white hover:bg-black/80"
+              className="absolute top-2 right-2 rounded-full bg-black/60 p-1 text-white hover:bg-black/80"
             >
               <X className="size-3.5" />
             </button>

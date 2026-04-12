@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Locale, getCategoryBadgeClass } from "@/lib/config";
+import { getCategoryBadgeClass } from "@/lib/config";
 import { usePromptDetail, useIncrementViews, useFeaturedPrompts } from "@/hooks/use-prompts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,7 +17,6 @@ import Image from "next/image";
 export function PromptDetail({ id }: { id: string }) {
   const t = useTranslations("prompt");
   const tCommon = useTranslations("common");
-  const locale = useLocale();
   const { data: prompt, isLoading } = usePromptDetail(id);
   const { mutate: incrementViews } = useIncrementViews();
 
@@ -51,9 +50,9 @@ export function PromptDetail({ id }: { id: string }) {
     );
   }
 
-  const categoryName = locale === Locale.AR ? prompt.categories?.name_ar : prompt.categories?.name;
-  const title = locale === Locale.AR && prompt.title_ar ? prompt.title_ar : prompt.title;
-  const description = locale === Locale.AR && prompt.description_ar ? prompt.description_ar : prompt.description;
+  const categoryName = prompt.categories?.name;
+  const title = prompt.title;
+  const description = prompt.description;
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
   return (
@@ -98,7 +97,7 @@ export function PromptDetail({ id }: { id: string }) {
               </span>
               <span>·</span>
               <span>
-                {new Date(prompt.created_at).toLocaleDateString(locale, {
+                {new Date(prompt.created_at).toLocaleDateString("en", {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
@@ -156,13 +155,12 @@ export function PromptDetail({ id }: { id: string }) {
       </article>
 
       {/* Similar Syntaxes */}
-      <SimilarSyntaxes currentId={id} locale={locale} t={t} />
+      <SimilarSyntaxes currentId={id} t={t} />
     </main>
   );
 }
 
-function SimilarSyntaxes({ currentId, locale, t }: { currentId: string; locale: string; t: (key: string) => string }) {
-  const isAr = locale === Locale.AR;
+function SimilarSyntaxes({ currentId, t }: { currentId: string; t: (key: string) => string }) {
   const { data: prompts, isLoading } = useFeaturedPrompts(4);
 
   const similar = prompts?.filter((p) => p.id !== currentId).slice(0, 2);
@@ -178,8 +176,8 @@ function SimilarSyntaxes({ currentId, locale, t }: { currentId: string; locale: 
       </h2>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {similar.map((prompt) => {
-          const title = isAr && prompt.title_ar ? prompt.title_ar : prompt.title;
-          const desc = isAr && prompt.description_ar ? prompt.description_ar : prompt.description;
+          const title = prompt.title;
+          const desc = prompt.description;
           const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
           return (
             <Link key={prompt.id} href={routes.promptDetail(prompt.id)} className="group rounded-lg border border-card-border bg-surface-1 p-3 transition-colors hover:bg-surface-2">

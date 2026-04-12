@@ -11,8 +11,8 @@ export function LoginView() {
     <main className="relative flex min-h-screen items-center justify-center px-4">
       {/* Background gradient glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-[20%] start-[10%] h-[50%] w-[40%] rounded-full bg-brand/20 blur-[120px]" />
-        <div className="absolute -bottom-[10%] end-[5%] h-[40%] w-[35%] rounded-full bg-secondary/10 blur-[100px]" />
+        <div className="absolute -top-[20%] left-[10%] h-[50%] w-[40%] rounded-full bg-brand/20 blur-[120px]" />
+        <div className="absolute -bottom-[10%] right-[5%] h-[40%] w-[35%] rounded-full bg-secondary/10 blur-[100px]" />
       </div>
 
       <div className="w-full max-w-md mx-auto rounded-xl bg-surface-2/80 backdrop-blur-sm p-6 shadow-lg">

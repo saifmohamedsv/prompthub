@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { usePrompts } from "@/hooks/use-prompts";
@@ -9,10 +9,9 @@ import { routes } from "@/lib/config";
 import type { SortOption } from "@/lib/supabase/queries";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
 import { useDebounce } from "@/hooks/use-debounce";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import { Loader2 } from "lucide-react";
 import { PromptOfTheDay } from "@/components/prompt-of-the-day";
-import { TrendingSection } from "@/components/trending-section";
-import { FollowingSection } from "@/components/following-section";
 import { FilterSidebar } from "@/components/filter-sidebar";
 import { MobileFilterSheet } from "@/components/mobile-filter-sheet";
 import { ContentHeader } from "@/components/content-header";
@@ -36,6 +35,7 @@ export function ExploreView() {
     ...(category !== "all" && { category }),
     ...(sort !== "recent" && { sort }),
     ...(tag && { tag }),
+    ...(typeFilter !== "all" && { type: typeFilter }),
   };
 
   const {
@@ -49,27 +49,7 @@ export function ExploreView() {
   const prompts = data?.pages.flat();
   const totalCount = (data?.pages[0] as unknown as { totalCount: number })?.totalCount ?? 0;
 
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    },
-    [hasNextPage, isFetchingNextPage, fetchNextPage]
-  );
-
-  useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(handleObserver, {
-      rootMargin: "200px",
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [handleObserver]);
+  const sentinelRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
   const handleTagChange = (slug: string) => {
     router.replace(slug ? routes.home + "?tag=" + slug : routes.home);
@@ -82,7 +62,7 @@ export function ExploreView() {
       <div className="flex gap-6">
         {/* Desktop sidebar */}
         <div className="hidden md:block w-60 shrink-0">
-          <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto pe-4 border-e border-border/10">
+          <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto pr-4 border-r border-border/10">
             <FilterSidebar
               search={search}
               onSearchChange={setSearch}
@@ -107,8 +87,6 @@ export function ExploreView() {
             onClearTag={() => router.replace(routes.home)}
             onOpenMobileFilter={() => setIsMobileFilterOpen(true)}
           />
-          {/* <FollowingSection />
-          <TrendingSection /> */}
           <PromptGrid prompts={prompts} isLoading={isLoading} />
           <div ref={sentinelRef} className="h-1" />
           {isFetchingNextPage && (

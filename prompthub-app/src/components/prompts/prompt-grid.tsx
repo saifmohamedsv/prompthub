@@ -47,7 +47,6 @@ export function PromptGrid({
           <PromptCard
             key={prompt.id}
             prompt={prompt}
-            onPreview={(id) => setPreviewId(id)}
           />
         ))}
       </div>

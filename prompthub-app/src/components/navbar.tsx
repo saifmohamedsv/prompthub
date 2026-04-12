@@ -3,8 +3,6 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { LocaleSwitcher } from "@/components/locale-switcher";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { UserAvatar } from "@/components/auth/user-avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
@@ -56,8 +54,6 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <LocaleSwitcher />
-          <ThemeToggle />
           <UserAvatar />
 
           <Sheet open={open} onOpenChange={setOpen}>

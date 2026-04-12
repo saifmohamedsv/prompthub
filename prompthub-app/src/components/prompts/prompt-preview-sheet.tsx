@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Link } from "@/i18n/navigation";
 import { Copy, Check, Eye, ChevronUp, ExternalLink } from "lucide-react";
@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UpvoteButton } from "@/components/prompts/upvote-button";
 import { usePromptDetail } from "@/hooks/use-prompts";
-import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
+import { getCategoryBadgeClass, routes } from "@/lib/config";
 
 export function PromptPreviewSheet({
   promptId,
@@ -48,8 +48,6 @@ export function PromptPreviewSheet({
 function PreviewContent({ promptId }: { promptId: string }) {
   const t = useTranslations("preview");
   const tp = useTranslations("prompt");
-  const locale = useLocale();
-  const isAr = locale === Locale.AR;
   const { data: prompt, isLoading } = usePromptDetail(promptId);
   const [copied, setCopied] = useState(false);
 
@@ -67,12 +65,9 @@ function PreviewContent({ promptId }: { promptId: string }) {
 
   if (!prompt) return null;
 
-  const title = isAr && prompt.title_ar ? prompt.title_ar : prompt.title;
-  const description =
-    isAr && prompt.description_ar ? prompt.description_ar : prompt.description;
-  const categoryName = isAr
-    ? prompt.categories?.name_ar
-    : prompt.categories?.name;
+  const title = prompt.title;
+  const description = prompt.description;
+  const categoryName = prompt.categories?.name;
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
   return (

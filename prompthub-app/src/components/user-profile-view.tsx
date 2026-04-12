@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { usePublicProfile, useUserPublicPrompts } from "@/hooks/use-profile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,14 +9,13 @@ import { FollowButton } from "@/components/follow-button";
 
 export function UserProfileView({ userId }: { userId: string }) {
   const t = useTranslations("profile");
-  const locale = useLocale();
   const { data: profile, isLoading: profileLoading } = usePublicProfile(userId);
   const { data: prompts, isLoading: promptsLoading } = useUserPublicPrompts(userId);
 
   const totalLikes = prompts?.reduce((sum, p) => sum + p.likes_count, 0) ?? 0;
   const displayName = profile?.full_name ?? profile?.username ?? "—";
   const joinDate = profile?.created_at
-    ? new Date(profile.created_at).toLocaleDateString(locale, {
+    ? new Date(profile.created_at).toLocaleDateString("en", {
         year: "numeric",
         month: "long",
       })

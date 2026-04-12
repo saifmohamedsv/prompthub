@@ -27,7 +27,7 @@ export function ContentHeader({
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <h1 className="text-xl font-bold">{t("promptsHeading")}</h1>
-          <span className="ms-2 text-sm text-muted-foreground">
+          <span className="ml-2 text-sm text-muted-foreground">
             {t("promptsCount", { count: totalCount.toLocaleString() })}
           </span>
         </div>
@@ -60,7 +60,7 @@ export function ContentHeader({
             <button
               type="button"
               onClick={onClearTag}
-              className="ms-1 rounded-full hover:bg-muted"
+              className="ml-1 rounded-full hover:bg-muted"
             >
               <X className="size-3.5" />
               <span className="sr-only">{t("clearTag")}</span>

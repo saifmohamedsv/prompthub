@@ -1,9 +1,8 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Locale, getCategoryBadgeClass } from "@/lib/config";
-import { Copy, Eye, Expand, Share2 } from "lucide-react";
+import { Copy, Eye, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UpvoteButton } from "@/components/prompts/upvote-button";
@@ -11,31 +10,16 @@ import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-
-function computeBadge(likesCount: number, createdAt: string) {
-  const isPopular = likesCount >= 50;
-  const isRecent = new Date(createdAt).getTime() > Date.now() - SEVEN_DAYS_MS;
-  const isRising = !isPopular && isRecent && likesCount >= 10;
-  return { isPopular, isRising };
-}
-
-export function PromptCard({ prompt, onPreview }: { prompt: PromptWithAuthor; onPreview?: (id: string) => void }) {
-  const locale = useLocale();
-  const isAr = locale === Locale.AR;
+export function PromptCard({ prompt }: { prompt: PromptWithAuthor }) {
   const router = useRouter();
-  const t = useTranslations("badges");
   const tPrompt = useTranslations("prompt");
   const tExplore = useTranslations("explore");
 
-  const categoryName = isAr ? prompt.categories?.name_ar : prompt.categories?.name;
-  const title = isAr && prompt.title_ar ? prompt.title_ar : prompt.title;
-  const description = isAr && prompt.description_ar ? prompt.description_ar : prompt.description;
+  const title = prompt.title;
+  const description = prompt.description;
   const tags = prompt.prompt_tags?.map((pt) => pt.tags) ?? [];
 
-  const { isPopular, isRising } = computeBadge(prompt.likes_count, prompt.created_at);
-
-  const shortDate = new Date(prompt.created_at).toLocaleDateString(locale, {
+  const shortDate = new Date(prompt.created_at).toLocaleDateString("en", {
     month: "short",
     day: "numeric",
   });
@@ -43,27 +27,13 @@ export function PromptCard({ prompt, onPreview }: { prompt: PromptWithAuthor; on
   return (
     <article className="group relative flex flex-col rounded-xl border border-card-border bg-surface-1 p-3 shadow-card transition-all hover:border-brand/20 hover:shadow-md">
       {/* Type badge */}
-      <span className="absolute top-2 inset-s-2 z-10 rounded-md bg-surface-3/90 px-1.5 py-px text-[9px] font-semibold uppercase tracking-wider text-foreground-secondary backdrop-blur-sm">
+      <span className="absolute top-2 left-2 z-10 rounded-md bg-surface-3/90 px-1.5 py-px text-[9px] font-semibold uppercase tracking-wider text-foreground-secondary backdrop-blur-sm">
         {prompt.type === "image" ? tExplore("typeImage") : prompt.type === "video" ? tExplore("typeVideo") : tExplore("typeText")}
       </span>
 
-      {/* Preview trigger — visible on hover */}
-      {/* {onPreview && (
-        <button
-          type="button"
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onPreview(prompt.id); }}
-          className="absolute top-2 inset-e-2 z-20 rounded-lg bg-black/40 p-1.5 text-white opacity-0 backdrop-blur-md transition-opacity hover:bg-black/55 group-hover:opacity-100"
-        >
-          <Expand className="size-3.5" />
-        </button>
-      )} */}
-
-      {/* Row 1: badges (mobile: stacked, sm+: inline with stats) */}
+      {/* Row 1: stats */}
       <div className="flex flex-wrap items-center justify-between gap-y-1">
         <div className="flex items-center gap-1.5">
-          {/* {categoryName && <span className={`rounded-full px-2 py-px text-[10px] font-semibold uppercase tracking-wider ${getCategoryBadgeClass(prompt.categories?.slug)}`}>{categoryName}</span>} */}
-          {/* {isPopular && <span className="whitespace-nowrap rounded-full bg-warning-muted px-1.5 py-px text-[10px] font-bold text-warning">🔥 {t("popular")}</span>} */}
-          {/* {isRising && <span className="whitespace-nowrap rounded-full bg-success-muted px-1.5 py-px text-[10px] font-bold text-success">↑ {t("rising")}</span>} */}
         </div>
         <div className="flex shrink-0 items-center gap-2 text-[11px] text-foreground-tertiary">
           <span className="inline-flex items-center gap-0.5">

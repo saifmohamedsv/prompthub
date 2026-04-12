@@ -1,10 +1,9 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Search, X } from "lucide-react";
 import { useCategories } from "@/hooks/use-categories";
 import { useTags } from "@/hooks/use-tags";
-import { Locale } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import type { SortOption } from "@/lib/supabase/queries";
 import {
@@ -53,8 +52,6 @@ export function FilterSidebar({
   className?: string;
 }) {
   const t = useTranslations("explore");
-  const locale = useLocale();
-  const isAr = locale === Locale.AR;
   const { data: categories } = useCategories();
   const { data: tags } = useTags();
 
@@ -76,19 +73,19 @@ export function FilterSidebar({
     <div className={cn("space-y-5 p-2", className)}>
       {/* Search */}
       <div className="relative">
-        <Search className="absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <input
           type="text"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={t("searchPlaceholder")}
-          className="h-10 w-full rounded-xl border-none bg-surface-2 ps-10 pe-9 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/20"
+          className="h-10 w-full rounded-xl border-none bg-surface-2 pl-10 pr-9 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/20"
         />
         {search && (
           <button
             type="button"
             onClick={() => onSearchChange("")}
-            className="absolute end-3 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-muted-foreground transition-colors hover:text-foreground"
           >
             <X className="size-3.5" />
             <span className="sr-only">{t("clearSearch")}</span>
@@ -150,7 +147,7 @@ export function FilterSidebar({
                 )}
               >
                 <span className="text-sm">{CATEGORY_ICONS[cat.slug] ?? "🏷️"}</span>
-                <span>{isAr ? cat.name_ar : cat.name}</span>
+                <span>{cat.name}</span>
               </button>
             ))}
         </div>

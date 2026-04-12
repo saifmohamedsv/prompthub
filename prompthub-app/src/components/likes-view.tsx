@@ -39,7 +39,7 @@ export function LikesView() {
             href={routes.home}
             className="mt-6 inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-bold text-brand-foreground transition-all hover:bg-brand-hover"
           >
-            <Compass className="me-1 h-4 w-4" />
+            <Compass className="mr-1 h-4 w-4" />
             {t("nav.explore")}
           </Link>
         </div>

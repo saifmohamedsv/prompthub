@@ -14,15 +14,9 @@ type PromptSnippetProps = {
   maxLength?: number;
 };
 
-function truncate(text: string, max: number): string {
-  if (text.length <= max) return text;
-  return text.slice(0, max).trimEnd() + "\u2026";
-}
-
 export function PromptSnippet({
   text,
   variant = "compact",
-  maxLength = 200,
 }: PromptSnippetProps) {
   const t = useTranslations("prompt");
   const [copied, setCopied] = useState(false);
@@ -31,7 +25,7 @@ export function PromptSnippet({
     e.preventDefault();
     e.stopPropagation();
     navigator.clipboard.writeText(text);
-    toast.success(t("linkCopied"));
+    toast.success(t("copied"));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }, [text, t]);

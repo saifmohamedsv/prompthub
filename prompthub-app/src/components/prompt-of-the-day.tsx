@@ -1,8 +1,8 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
+import { getCategoryBadgeClass, routes } from "@/lib/config";
 import { Eye } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UpvoteButton } from "@/components/prompts/upvote-button";
@@ -11,8 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function PromptOfTheDay() {
-  const locale = useLocale();
-  const isAr = locale === Locale.AR;
   const t = useTranslations("explore");
   const { data: prompt, isLoading } = usePromptOfTheDay();
 
@@ -40,9 +38,9 @@ export function PromptOfTheDay() {
 
   if (!prompt) return null;
 
-  const title = (isAr && prompt.title_ar) ? prompt.title_ar : prompt.title;
-  const description = (isAr && prompt.description_ar) ? prompt.description_ar : prompt.description;
-  const categoryName = isAr ? prompt.categories?.name_ar : prompt.categories?.name;
+  const title = prompt.title;
+  const description = prompt.description;
+  const categoryName = prompt.categories?.name;
 
   return (
     <div className="mb-6 rounded-2xl border border-brand/20 bg-linear-to-br from-brand-muted/60 to-transparent p-4 sm:p-5">

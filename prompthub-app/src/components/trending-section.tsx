@@ -1,17 +1,15 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Flame, Eye, ChevronUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTrendingPrompts } from "@/hooks/use-trending";
-import { Locale, getCategoryBadgeClass, routes } from "@/lib/config";
+import { getCategoryBadgeClass, routes } from "@/lib/config";
 import type { PromptWithAuthor } from "@/types/prompt";
 
 export function TrendingSection() {
   const t = useTranslations("explore");
-  const locale = useLocale();
-  const isAr = locale === Locale.AR;
   const { data, isLoading } = useTrendingPrompts(6);
 
   if (isLoading) {
@@ -51,7 +49,6 @@ export function TrendingSection() {
               <TrendingCard
                 prompt={prompt}
                 rank={index + 1}
-                isAr={isAr}
               />
             </div>
           ))}
@@ -64,16 +61,12 @@ export function TrendingSection() {
 function TrendingCard({
   prompt,
   rank,
-  isAr,
 }: {
   prompt: PromptWithAuthor;
   rank: number;
-  isAr: boolean;
 }) {
-  const categoryName = isAr
-    ? prompt.categories?.name_ar
-    : prompt.categories?.name;
-  const title = isAr && prompt.title_ar ? prompt.title_ar : prompt.title;
+  const categoryName = prompt.categories?.name;
+  const title = prompt.title;
 
   return (
     <Link
