@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useUserLikes, useToggleLike } from "@/hooks/use-prompts";
 import { ChevronUp } from "lucide-react";
@@ -15,8 +14,6 @@ export function UpvoteButton({ promptId, initialCount, floating, size = "default
   const router = useRouter();
 
   const isLiked = likedIds?.includes(promptId) ?? false;
-  const [optimisticDelta, setOptimisticDelta] = useState(0);
-  const displayCount = initialCount + optimisticDelta;
 
   function handleClick(e: React.MouseEvent) {
     e.preventDefault();
@@ -25,12 +22,7 @@ export function UpvoteButton({ promptId, initialCount, floating, size = "default
       router.push(routes.login);
       return;
     }
-    setOptimisticDelta((d) => (isLiked ? d - 1 : d + 1));
-    mutate({ promptId, isLiked }, {
-      onError: () => {
-        setOptimisticDelta((d) => (isLiked ? d + 1 : d - 1));
-      },
-    });
+    mutate({ promptId, isLiked });
   }
 
   if (floating) {
@@ -42,7 +34,7 @@ export function UpvoteButton({ promptId, initialCount, floating, size = "default
         className="flex items-center gap-1.5 rounded-full bg-black/40 px-2.5 py-1.5 text-white backdrop-blur-md transition-colors hover:bg-black/55"
       >
         <ChevronUp className={cn("size-3.5 transition-colors", isLiked && "text-brand")} />
-        <span className="text-xs font-medium">{displayCount}</span>
+        <span className="text-xs font-medium">{initialCount}</span>
       </button>
     );
   }
@@ -54,12 +46,12 @@ export function UpvoteButton({ promptId, initialCount, floating, size = "default
         onClick={handleClick}
         disabled={isPending}
         className={cn(
-          "inline-flex items-center gap-2 rounded-lg  px-4 py-2 text-sm font-semibold transition-all active:scale-[0.98]",
+          "inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all active:scale-[0.98]",
           isLiked ? "bg-brand/10 text-brand" : "bg-surface-3 text-foreground hover:bg-surface-4",
         )}
       >
         <ChevronUp className={cn("size-4 transition-colors", isLiked ? "text-brand" : "")} />
-        <span>{label ?? displayCount}</span>
+        <span>{label ?? initialCount}</span>
       </button>
     );
   }
@@ -72,7 +64,7 @@ export function UpvoteButton({ promptId, initialCount, floating, size = "default
       className={cn("inline-flex items-center gap-1 text-sm text-foreground-tertiary transition-colors hover:text-foreground", isLiked && "text-brand")}
     >
       <ChevronUp className={cn("size-4 transition-colors", isLiked ? "text-brand" : "text-foreground-tertiary")} />
-      <span className="font-medium">{displayCount}</span>
+      <span className="font-medium">{initialCount}</span>
     </button>
   );
 }
