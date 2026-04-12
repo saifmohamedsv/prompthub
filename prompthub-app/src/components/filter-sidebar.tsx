@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Search, X } from "lucide-react";
+import { Search, X, PenLine, Code2, Megaphone, GraduationCap, Briefcase, Palette, Zap, Package, Sparkles, type LucideIcon } from "lucide-react";
 import { useCategories } from "@/hooks/use-categories";
 import { useTags } from "@/hooks/use-tags";
 import { cn } from "@/lib/utils";
@@ -13,15 +13,15 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 
-const CATEGORY_ICONS: Record<string, string> = {
-  writing: "✍️",
-  coding: "💻",
-  marketing: "📣",
-  education: "🎓",
-  business: "💼",
-  creative: "🎨",
-  productivity: "⚡",
-  other: "📦",
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  writing: PenLine,
+  coding: Code2,
+  marketing: Megaphone,
+  education: GraduationCap,
+  business: Briefcase,
+  creative: Palette,
+  productivity: Zap,
+  other: Package,
 };
 
 const TYPE_OPTIONS = ["all", "text", "image", "video"] as const;
@@ -128,28 +128,31 @@ export function FilterSidebar({
                 : "text-foreground-secondary hover:bg-surface-2 hover:text-foreground"
             )}
           >
-            <span className="text-sm">✦</span>
+            <Sparkles className="size-4" />
             <span>{t("allCategories")}</span>
           </button>
           {categories
             ?.slice()
             .sort((a, b) => (a.slug === "other" ? 1 : b.slug === "other" ? -1 : 0))
-            .map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => onCategoryChange(cat.slug)}
-                className={cn(
-                  "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
-                  category === cat.slug
-                    ? "bg-brand-muted text-brand font-semibold"
-                    : "text-foreground-secondary hover:bg-surface-2 hover:text-foreground"
-                )}
-              >
-                <span className="text-sm">{CATEGORY_ICONS[cat.slug] ?? "🏷️"}</span>
-                <span>{cat.name}</span>
-              </button>
-            ))}
+            .map((cat) => {
+              const Icon = CATEGORY_ICONS[cat.slug] ?? Package;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => onCategoryChange(cat.slug)}
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+                    category === cat.slug
+                      ? "bg-brand-muted text-brand font-semibold"
+                      : "text-foreground-secondary hover:bg-surface-2 hover:text-foreground"
+                  )}
+                >
+                  <Icon className="size-4" />
+                  <span>{cat.name}</span>
+                </button>
+              );
+            })}
         </div>
       </div>
 

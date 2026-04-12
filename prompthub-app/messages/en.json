@@ -105,14 +105,10 @@
     "editPrompt": "Edit Prompt",
     "deletePrompt": "Delete Prompt",
     "deleteConfirm": "Are you sure you want to delete this prompt?",
-    "title": "Title (English)",
+    "title": "Title",
     "titlePlaceholder": "Give your prompt a catchy title",
-    "titleAr": "Title (Arabic)",
-    "titleArPlaceholder": "العنوان بالعربي",
     "description": "Description",
     "descriptionPlaceholder": "Describe what this prompt does...",
-    "descriptionAr": "Description (Arabic)",
-    "descriptionArPlaceholder": "وصف البرومبت بالعربي...",
     "link": "Link",
     "linkPlaceholder": "https://...",
     "category": "Category",
@@ -130,8 +126,6 @@
     "createSuccess": "Prompt created successfully!",
     "updateSuccess": "Prompt updated successfully!",
     "saving": "Saving...",
-    "addArabicVersion": "Add Arabic version",
-    "removeArabicVersion": "Remove Arabic version",
     "follow": "Follow",
     "following": "Following",
     "addNewSubtitle": "Craft a prompt that helps the community.",
@@ -196,7 +190,6 @@
     "madeBy": "Made by"
   },
   "locale": {
-    "en": "English",
-    "ar": "العربية"
+    "en": "English"
   }
 }

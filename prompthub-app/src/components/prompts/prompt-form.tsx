@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
-import { X, Upload, Globe, Sparkles, Shield, Tag } from "lucide-react";
+import { X, Upload, Sparkles, Shield, Tag } from "lucide-react";
 import { routes } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,9 +36,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   const [isUploading, setIsUploading] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [titleAr, setTitleAr] = useState("");
   const [description, setDescription] = useState("");
-  const [descriptionAr, setDescriptionAr] = useState("");
   const [promptText, setPromptText] = useState("");
   const [link, setLink] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -46,23 +44,17 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [showArabic, setShowArabic] = useState(false);
 
   useEffect(() => {
     if (existing) {
       setTitle(existing.title);
-      setTitleAr(existing.title_ar ?? "");
       setDescription(existing.description);
-      setDescriptionAr(existing.description_ar ?? "");
       setPromptText(existing.prompt_text ?? "");
       setLink(existing.link ?? "");
       setCategoryId(existing.category_id ?? "");
       setImagePreview(existing.image_url ?? null);
       if (existing.prompt_tags?.length) {
         setSelectedTagIds(existing.prompt_tags.map((pt) => pt.tags.id));
-      }
-      if (existing.title_ar || existing.description_ar) {
-        setShowArabic(true);
       }
     }
   }, [existing]);
@@ -118,9 +110,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
 
     const payload = {
       title: title.trim(),
-      title_ar: titleAr.trim() || null,
       description: description.trim(),
-      description_ar: descriptionAr.trim() || null,
       prompt_text: promptText.trim() || null,
       link: link.trim() || null,
       category_id: categoryId,
@@ -208,34 +198,6 @@ export function PromptForm({ promptId }: { promptId?: string }) {
         />
         {errors.description && <p className="mt-1 text-sm text-destructive">{errors.description}</p>}
       </div>
-
-      {/* Arabic Translation — collapsible with Globe icon */}
-      <button type="button" onClick={() => setShowArabic(!showArabic)} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
-        {showArabic ? (
-          <>
-            <X className="size-4" />
-            {t("removeArabicVersion")}
-          </>
-        ) : (
-          <>
-            <Globe className="size-4" />
-            {t("addArabicVersion")}
-          </>
-        )}
-      </button>
-
-      {showArabic && (
-        <div className="space-y-4 rounded-xl bg-surface-1 p-4">
-          <div className="flex flex-col">
-            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("titleAr")}</label>
-            <Input dir="rtl" placeholder={t("titleArPlaceholder")} value={titleAr} onChange={(e) => setTitleAr(e.target.value)} />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{t("descriptionAr")}</label>
-            <Textarea dir="rtl" placeholder={t("descriptionArPlaceholder")} className="min-h-24" value={descriptionAr} onChange={(e) => setDescriptionAr(e.target.value)} />
-          </div>
-        </div>
-      )}
 
       {/* Prompt Syntax — monospace recessed textarea */}
       <div className="flex flex-col">

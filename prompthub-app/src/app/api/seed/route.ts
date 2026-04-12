@@ -57,9 +57,7 @@ export async function POST() {
         .from("prompts")
         .insert({
           title: p.title,
-          title_ar: p.title_ar || null,
           description: p.description,
-          description_ar: p.description_ar || null,
           prompt_text: p.prompt_text,
           category_id: categoryId,
           user_id: user.id,

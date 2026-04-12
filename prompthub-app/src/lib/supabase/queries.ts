@@ -4,7 +4,7 @@ import type { PromptWithAuthor, Category, Tag, Profile } from "@/types/prompt";
 const PROMPT_SELECT = `
   *,
   profiles:user_id (username, full_name, avatar_url),
-  categories:category_id (name, name_ar, slug),
+  categories:category_id (name, slug),
   prompt_tags (tags (id, name, slug))
 `;
 
@@ -259,9 +259,7 @@ export async function fetchUserLikes(userId: string): Promise<string[]> {
 
 export async function createPrompt(data: {
   title: string;
-  title_ar?: string | null;
   description: string;
-  description_ar?: string | null;
   prompt_text?: string | null;
   link?: string | null;
   image_url?: string | null;
@@ -282,9 +280,7 @@ export async function updatePrompt(
   id: string,
   data: {
     title?: string;
-    title_ar?: string | null;
     description?: string;
-    description_ar?: string | null;
     prompt_text?: string | null;
     link?: string | null;
     image_url?: string | null;

@@ -115,9 +115,7 @@ export function useCreatePrompt() {
   return useMutation({
     mutationFn: async (data: {
       title: string;
-      title_ar?: string | null;
       description: string;
-      description_ar?: string | null;
       prompt_text?: string | null;
       link?: string | null;
       image_url?: string | null;
@@ -149,9 +147,7 @@ export function useUpdatePrompt() {
     }: {
       id: string;
       title?: string;
-      title_ar?: string | null;
       description?: string;
-      description_ar?: string | null;
       prompt_text?: string | null;
       link?: string | null;
       image_url?: string | null;
