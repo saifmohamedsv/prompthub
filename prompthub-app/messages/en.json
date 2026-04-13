@@ -72,7 +72,9 @@
     "typeImage": "Image",
     "typeVideo": "Video",
     "createPrompt": "Create Prompt",
-    "sortMostUpvoted": "Most Upvoted"
+    "sortMostUpvoted": "Most Upvoted",
+    "loadMore": "Load more prompts",
+    "loading": "Loading..."
   },
   "badges": {
     "popular": "Popular",
@@ -88,7 +90,9 @@
     "subtitle": "Latest prompts from creators you follow",
     "emptyTitle": "Nothing here yet",
     "emptyDesc": "Follow some creators to see their latest prompts here.",
-    "exploreCta": "Explore prompts"
+    "exploreCta": "Explore prompts",
+    "loadMore": "Load more",
+    "loading": "Loading..."
   },
   "prompt": {
     "by": "by",
@@ -144,7 +148,12 @@
     "similarSyntaxes": "Similar Syntaxes",
     "likePrompt": "Like Prompt",
     "upvotes": "upvotes",
-    "upvotePrompt": "Upvote"
+    "upvotePrompt": "Upvote",
+    "fillVariables": "Fill in the blanks",
+    "variableCount": "{count} variables detected",
+    "filledCopy": "Copy filled prompt",
+    "bestWithModels": "Best with",
+    "selectModels": "Which AI models work best? (max 3)"
   },
   "profile": {
     "title": "User Profile",
@@ -188,6 +197,10 @@
   },
   "footer": {
     "madeBy": "Made by"
+  },
+  "leaderboard": {
+    "title": "PromptMasters",
+    "subtitle": "Top contributors ranked by total likes on their prompts"
   },
   "locale": {
     "en": "English"

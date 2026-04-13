@@ -4,8 +4,8 @@ import { useState, useEffect, useRef, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
-import { X, Upload, Sparkles, Shield, Tag } from "lucide-react";
-import { routes } from "@/lib/config";
+import { X, Upload, Sparkles, Shield, Tag, Cpu } from "lucide-react";
+import { routes, AI_MODELS } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -41,6 +41,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
   const [link, setLink] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
+  const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -56,6 +57,9 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       if (existing.prompt_tags?.length) {
         setSelectedTagIds(existing.prompt_tags.map((pt) => pt.tags.id));
       }
+      if (existing.best_with_models?.length) {
+        setSelectedModels(existing.best_with_models);
+      }
     }
   }, [existing]);
 
@@ -68,6 +72,14 @@ export function PromptForm({ promptId }: { promptId?: string }) {
 
   function toggleTag(tagId: string) {
     setSelectedTagIds((prev) => (prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]));
+  }
+
+  function toggleModel(slug: string) {
+    setSelectedModels((prev) => {
+      if (prev.includes(slug)) return prev.filter((s) => s !== slug);
+      if (prev.length >= 3) return prev;
+      return [...prev, slug];
+    });
   }
 
   function validate(): FormErrors {
@@ -116,6 +128,7 @@ export function PromptForm({ promptId }: { promptId?: string }) {
       category_id: categoryId,
       image_url: imageUrl,
       tag_ids: selectedTagIds,
+      best_with_models: selectedModels.length > 0 ? selectedModels : null,
     };
 
     if (promptId) {
@@ -241,6 +254,39 @@ export function PromptForm({ promptId }: { promptId?: string }) {
                 }`}
               >
                 {tag.name}
+                {isSelected && <X className="size-3" />}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Best with Models */}
+      <div className="flex flex-col">
+        <label className="mb-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          <Cpu className="me-1 inline size-3" />
+          {t("bestWithModels")}
+        </label>
+        <p className="mb-2 text-xs text-muted-foreground">{t("selectModels")}</p>
+        <div dir="ltr" className="flex flex-wrap gap-2">
+          {AI_MODELS.map((model) => {
+            const isSelected = selectedModels.includes(model.slug);
+            const isDisabled = !isSelected && selectedModels.length >= 3;
+            return (
+              <button
+                key={model.slug}
+                type="button"
+                disabled={isDisabled}
+                onClick={() => toggleModel(model.slug)}
+                className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                  isSelected
+                    ? "border-brand/20 bg-brand-muted text-brand"
+                    : isDisabled
+                      ? "cursor-not-allowed border-transparent bg-surface-3 text-muted-foreground/40"
+                      : "border-transparent bg-surface-3 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {model.name}
                 {isSelected && <X className="size-3" />}
               </button>
             );

@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useFeedInfinite } from "@/hooks/use-follows";
 import { PromptGrid } from "@/components/prompts/prompt-grid";
+import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/config";
-import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import { Users, Compass, Loader2 } from "lucide-react";
 
 export function FeedView() {
@@ -20,8 +20,6 @@ export function FeedView() {
 
   const prompts = data?.pages.flat();
   const isEmpty = !isLoading && (!prompts || prompts.length === 0);
-
-  const sentinelRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
@@ -55,11 +53,17 @@ export function FeedView() {
         <section className="max-w-7xl">
           <PromptGrid prompts={prompts} isLoading={isLoading} />
 
-          <div ref={sentinelRef} className="h-1" />
-
-          {isFetchingNextPage && (
+          {hasNextPage && (
             <div className="flex justify-center py-6">
-              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              <Button
+                variant="outline"
+                onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
+                className="gap-2"
+              >
+                {isFetchingNextPage && <Loader2 className="size-4 animate-spin" />}
+                {isFetchingNextPage ? t("feed.loading") : t("feed.loadMore")}
+              </Button>
             </div>
           )}
         </section>

@@ -187,6 +187,7 @@ export function useCreatePrompt() {
       image_url?: string | null;
       category_id: string;
       tag_ids?: string[];
+      best_with_models?: string[] | null;
     }) => {
       if (!user) throw new Error("Must be authenticated");
       const { tag_ids, ...promptData } = data;
@@ -223,6 +224,7 @@ export function useUpdatePrompt() {
       image_url?: string | null;
       category_id?: string;
       tag_ids?: string[];
+      best_with_models?: string[] | null;
     }) => {
       const prompt = await updatePrompt(id, data);
       if (tag_ids !== undefined) {

@@ -193,6 +193,48 @@ export async function fetchTags(): Promise<Tag[]> {
   return (data ?? []) as unknown as Tag[];
 }
 
+export type LeaderboardEntry = {
+  user_id: string;
+  username: string | null;
+  full_name: string | null;
+  avatar_url: string | null;
+  prompt_count: number;
+  total_likes: number;
+  total_views: number;
+};
+
+export async function fetchLeaderboard(limit = 20): Promise<LeaderboardEntry[]> {
+  const { data, error } = await supabase()
+    .from("prompts")
+    .select("user_id, likes_count, views_count, profiles:user_id (username, full_name, avatar_url)");
+
+  if (error) throw error;
+
+  const userMap = new Map<string, LeaderboardEntry>();
+  for (const row of (data as unknown as { user_id: string; likes_count: number; views_count: number; profiles: { username: string | null; full_name: string | null; avatar_url: string | null } | null }[])) {
+    const existing = userMap.get(row.user_id);
+    if (existing) {
+      existing.prompt_count++;
+      existing.total_likes += row.likes_count;
+      existing.total_views += row.views_count;
+    } else {
+      userMap.set(row.user_id, {
+        user_id: row.user_id,
+        username: row.profiles?.username ?? null,
+        full_name: row.profiles?.full_name ?? null,
+        avatar_url: row.profiles?.avatar_url ?? null,
+        prompt_count: 1,
+        total_likes: row.likes_count,
+        total_views: row.views_count,
+      });
+    }
+  }
+
+  return Array.from(userMap.values())
+    .sort((a, b) => b.total_likes - a.total_likes)
+    .slice(0, limit);
+}
+
 export async function fetchProfileById(
   userId: string
 ): Promise<Profile | null> {
@@ -265,6 +307,7 @@ export async function createPrompt(data: {
   image_url?: string | null;
   category_id: string;
   user_id: string;
+  best_with_models?: string[] | null;
 }) {
   const { data: prompt, error } = await supabase()
     .from("prompts")
@@ -285,6 +328,7 @@ export async function updatePrompt(
     link?: string | null;
     image_url?: string | null;
     category_id?: string;
+    best_with_models?: string[] | null;
   }
 ) {
   const { data: prompt, error } = await supabase()

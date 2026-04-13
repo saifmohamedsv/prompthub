@@ -14,4 +14,6 @@ export type PromptWithAuthor = Prompt & {
   profiles: Pick<Profile, "username" | "full_name" | "avatar_url"> | null;
   categories: Pick<Category, "name" | "name_ar" | "slug"> | null;
   prompt_tags?: { tags: Pick<Tag, "id" | "name" | "slug"> }[];
+  best_with_models?: string[] | null;
+  source_contributor?: string | null;
 };

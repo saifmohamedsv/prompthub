@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { getCategoryBadgeClass } from "@/lib/config";
+import { getCategoryBadgeClass, getModelName } from "@/lib/config";
 import { usePromptDetail, useIncrementViews, useFeaturedPrompts } from "@/hooks/use-prompts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +11,7 @@ import { UpvoteButton } from "@/components/prompts/upvote-button";
 import { FollowButton } from "@/components/follow-button";
 import { PromptSnippet } from "@/components/prompts/prompt-snippet";
 import { routes } from "@/lib/config";
-import { ExternalLink, ArrowLeft, Eye, Sparkles, TrendingUp } from "lucide-react";
+import { ExternalLink, ArrowLeft, Eye, Sparkles, TrendingUp, Cpu } from "lucide-react";
 import Image from "next/image";
 
 export function PromptDetail({ id }: { id: string }) {
@@ -106,6 +106,24 @@ export function PromptDetail({ id }: { id: string }) {
             </div>
           </div>
 
+          {/* Best with models */}
+          {prompt.best_with_models && prompt.best_with_models.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-foreground-secondary uppercase tracking-wider">
+                <Cpu className="size-3.5" />
+                {t("bestWithModels")}
+              </span>
+              {prompt.best_with_models.map((slug) => (
+                <span
+                  key={slug}
+                  className="rounded-full bg-brand-muted px-2.5 py-0.5 text-[11px] font-medium text-brand"
+                >
+                  {getModelName(slug)}
+                </span>
+              ))}
+            </div>
+          )}
+
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2">
             <UpvoteButton promptId={prompt.id} initialCount={prompt.likes_count} size="lg" label={t("upvotePrompt")} />
@@ -139,17 +157,29 @@ export function PromptDetail({ id }: { id: string }) {
 
           {/* Author */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <Link href={routes.userProfile(prompt.user_id)} className="group flex items-center gap-2 sm:gap-3">
-              <Avatar className="size-8 ring-2 ring-brand/15 sm:size-10">
-                <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
-                <AvatarFallback className="text-sm">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm font-semibold transition-colors group-hover:text-brand">{prompt.profiles?.full_name ?? prompt.profiles?.username}</p>
-                <p className="font-mono text-[11px] text-foreground-tertiary">@{prompt.profiles?.username ?? prompt.profiles?.full_name}</p>
+            {prompt.source_contributor ? (
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Avatar className="size-8 sm:size-10">
+                  <AvatarFallback className="text-sm bg-surface-3">{prompt.source_contributor[0]?.toUpperCase()}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-semibold">@{prompt.source_contributor}</p>
+                  <p className="text-[11px] text-foreground-tertiary">via prompts.chat</p>
+                </div>
               </div>
-            </Link>
-            <FollowButton userId={prompt.user_id} />
+            ) : (
+              <Link href={routes.userProfile(prompt.user_id)} className="group flex items-center gap-2 sm:gap-3">
+                <Avatar className="size-8 ring-2 ring-brand/15 sm:size-10">
+                  <AvatarImage src={prompt.profiles?.avatar_url ?? undefined} />
+                  <AvatarFallback className="text-sm">{prompt.profiles?.full_name?.[0] ?? "?"}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-semibold transition-colors group-hover:text-brand">{prompt.profiles?.full_name ?? prompt.profiles?.username}</p>
+                  <p className="font-mono text-[11px] text-foreground-tertiary">@{prompt.profiles?.username ?? prompt.profiles?.full_name}</p>
+                </div>
+              </Link>
+            )}
+            {!prompt.source_contributor && <FollowButton userId={prompt.user_id} />}
           </div>
         </div>
       </article>
