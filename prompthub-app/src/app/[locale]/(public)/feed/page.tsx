@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
@@ -6,9 +7,11 @@ import { FeedView } from "@/components/feed-view";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata() {
-  return { title: "Feed | Syntaxa" };
-}
+export const metadata: Metadata = {
+  title: "Your feed",
+  description: "The latest prompts from creators you follow on Syntaxa.",
+  robots: { index: false },
+};
 
 export default async function FeedPage({
   params,

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
@@ -5,6 +6,12 @@ import { routes } from "@/lib/config";
 import { LikesView } from "@/components/likes-view";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Your likes",
+  description: "Prompts you've upvoted on Syntaxa.",
+  robots: { index: false },
+};
 
 export default async function LikesPage({
   params,

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { LogoIcon, LogoWordmark } from "./logo-svg";
 
 type LogoProps = {
   size?: "sm" | "md" | "lg";
@@ -20,41 +20,11 @@ const iconSize = {
 
 export function Logo({ size = "md", iconOnly = false, className = "" }: LogoProps) {
   if (iconOnly) {
-    return (
-      <Image
-        src="/icon.png"
-        alt="Syntaxa"
-        width={iconSize[size]}
-        height={iconSize[size]}
-        className={className}
-        priority
-      />
-    );
+    const s = iconSize[size];
+    return <LogoIcon width={s} height={s} className={className} />;
   }
 
   const h = logoHeight[size];
-  const w = h * 4;
 
-  return (
-    <>
-      <Image
-        src="/logo.png"
-        alt="Syntaxa"
-        height={h}
-        width={w}
-        className={`h-auto dark:hidden ${className}`}
-        style={{ height: h, width: "auto" }}
-        priority
-      />
-      <Image
-        src="/logo-dark.png"
-        alt="Syntaxa"
-        height={h}
-        width={w}
-        className={`h-auto hidden dark:block ${className}`}
-        style={{ height: h, width: "auto" }}
-        priority
-      />
-    </>
-  );
+  return <LogoWordmark height={h} className={`text-foreground ${className}`} />;
 }

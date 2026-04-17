@@ -5,6 +5,8 @@
 export const siteConfig = {
   name: "Syntaxa",
   description: "Discover and share AI prompts",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  twitterHandle: "@syntaxa",
   developer: {
     name: "Saif Mohamed",
     github: "https://github.com/saifmohamedsv",

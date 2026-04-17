@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { siteConfig } from "@/lib/config";
 import { inter, lora, jetbrainsMono } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/lib/react-query/provider";
@@ -12,18 +13,31 @@ import { AuthProvider } from "@/hooks/use-auth";
 import NextTopLoader from "nextjs-toploader";
 import "../globals.css";
 
+const defaultTitle = "Syntaxa — Discover AI prompts that actually work";
+const defaultDescription =
+  "Browse 1,600+ battle-tested prompts for ChatGPT, Claude, Midjourney, and more. Fill in variables, copy in one click, and share what works.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Syntaxa",
+    default: defaultTitle,
     template: "%s | Syntaxa",
   },
-  description: "Discover, share, and remix AI prompts for ChatGPT, Claude, Midjourney, and more.",
-  icons: {
-    icon: [
-      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-    ],
-    apple: "/apple-icon.png",
+  description: defaultDescription,
+  applicationName: "Syntaxa",
+  openGraph: {
+    type: "website",
+    siteName: "Syntaxa",
+    title: defaultTitle,
+    description: defaultDescription,
+    url: siteConfig.url,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    creator: siteConfig.twitterHandle,
   },
 };
 
