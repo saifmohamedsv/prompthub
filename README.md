@@ -4,13 +4,12 @@
   <img src="https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?style=for-the-badge&logo=supabase" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss" />
-  <img src="https://img.shields.io/badge/i18n-AR%20%7C%20EN-FF6B6B?style=for-the-badge" />
 </p>
 
 <h1 align="center">PromptHub (Syntaxa)</h1>
 
 <p align="center">
-  <strong>A bilingual AI prompt marketplace where creators share, discover, and curate high-quality prompts for ChatGPT, Claude, Gemini, Midjourney, DALL-E, and more.</strong>
+  <strong>An AI prompt marketplace where creators share, discover, and curate high-quality prompts for ChatGPT, Claude, Gemini, Midjourney, DALL-E, and more.</strong>
 </p>
 
 <p align="center">
@@ -29,7 +28,7 @@
 
 ## Why PromptHub?
 
-The AI ecosystem is flooded with powerful models — but crafting the *right prompt* is the difference between a mediocre output and a brilliant one. **PromptHub** is a community-driven marketplace where prompt engineers share their best work, discover trending prompts, and follow top creators — all in a beautiful, bilingual (Arabic/English) interface with full RTL support.
+The AI ecosystem is flooded with powerful models — but crafting the *right prompt* is the difference between a mediocre output and a brilliant one. **PromptHub** is a community-driven marketplace where prompt engineers share their best work, discover trending prompts, and follow top creators.
 
 ---
 
@@ -37,7 +36,7 @@ The AI ecosystem is flooded with powerful models — but crafting the *right pro
 
 ### Prompt Marketplace
 - **Browse & Explore** — Infinite-scroll grid with filtering by category, tags, sort order (recent, most viewed, most liked, hot), and prompt type (text/image/video)
-- **Full-Text Search** — Lightning-fast search across titles, descriptions, prompt text, and Arabic variants powered by PostgreSQL `tsvector` with GIN indexing
+- **Full-Text Search** — Lightning-fast search across titles, descriptions, and prompt text powered by PostgreSQL `tsvector` with GIN indexing
 - **Prompt Detail View** — Rich prompt pages with syntax-highlighted code blocks, one-click copy, hero images, author cards, and "Similar Syntaxes" recommendations
 - **Quick Preview** — Side-panel sheet for previewing prompts without navigating away from the grid
 
@@ -59,12 +58,6 @@ Top prompts ranked by community engagement (likes + views), displayed in a horiz
 - **Liked Prompts** — View all prompts you've upvoted in one place
 - **Image Upload** — Direct upload to Supabase Storage with public CDN delivery
 
-### Bilingual & RTL Support
-- **Arabic & English** — Full bilingual content with locale-based routing via `next-intl`
-- **RTL Layout** — Complete right-to-left layout support for Arabic, including mirrored navigation, text alignment, and UI components
-- **Locale Switcher** — One-click language switching that persists across sessions
-- **Bilingual Content** — Prompts support Arabic title and description fields alongside English
-
 ### Authentication
 - **Social Login** — Google and GitHub OAuth via Supabase Auth
 - **Auto Profile Creation** — Database triggers automatically create user profiles from OAuth metadata
@@ -85,16 +78,16 @@ Top prompts ranked by community engagement (likes + views), displayed in a horiz
 
 ## Categories
 
-| Category | Arabic | Icon |
-|----------|--------|------|
-| Writing | الكتابة | ✍️ |
-| Coding | البرمجة | 💻 |
-| Marketing | التسويق | 📢 |
-| Education | التعليم | 🎓 |
-| Business | الأعمال | 💼 |
-| Creative | الإبداع | 🎨 |
-| Productivity | الإنتاجية | ⚡ |
-| Other | أخرى | 📦 |
+| Category | Icon |
+|----------|------|
+| Writing | ✍️ |
+| Coding | 💻 |
+| Marketing | 📢 |
+| Education | 🎓 |
+| Business | 💼 |
+| Creative | 🎨 |
+| Productivity | ⚡ |
+| Other | 📦 |
 
 ### Supported AI Model Tags
 `gpt-4` · `gpt-4o` · `claude` · `gemini` · `midjourney` · `dall-e` · `stable-diffusion` · `coding` · `writing` · `marketing` · `seo` · `portrait` · `landscape` · `productivity` · `education` · `creative` · `business` · `data-analysis` · `summarization` · `translation`
@@ -113,7 +106,6 @@ Top prompts ranked by community engagement (likes + views), displayed in a horiz
 | **UI Components** | shadcn/ui + Radix primitives | Latest |
 | **Styling** | Tailwind CSS | 4.x |
 | **Animations** | Framer Motion | 12.35 |
-| **Internationalization** | next-intl | 4.8 |
 | **Theming** | next-themes | 0.4 |
 | **Icons** | Lucide React | 0.577 |
 | **Toasts** | Sonner | 2.0 |
@@ -129,28 +121,25 @@ Top prompts ranked by community engagement (likes + views), displayed in a horiz
 ├──────────────┤       ├──────────────┤       ├──────────────┤
 │ id (uuid)    │◄──────│ user_id (FK) │   ┌──►│ id (uuid)    │
 │ username     │       │ id (uuid)    │   │   │ name         │
-│ full_name    │       │ title        │   │   │ name_ar      │
-│ avatar_url   │       │ title_ar     │   │   │ slug         │
-│ followers_   │       │ description  │   │   └──────────────┘
-│   count      │       │ description_ │   │
-│ following_   │       │   ar         │   │   ┌──────────────┐
-│   count      │       │ prompt_text  │   │   │    tags      │
-└──────┬───────┘       │ link         │   │   ├──────────────┤
-       │               │ image_url    │   │   │ id (uuid)    │
-       │               │ likes_count  │   │   │ name         │
-┌──────┴───────┐       │ views_count  │   │   │ slug         │
-│   follows    │       │ category_id──┘   │   └──────┬───────┘
-├──────────────┤       │ type (enum)  │   │          │
-│ follower_id  │       │ fts (vector) │   │   ┌──────┴───────┐
-│ following_id │       └──────┬───────┘   │   │ prompt_tags  │
-│ (no self-    │              │           │   ├──────────────┤
-│  follow)     │       ┌──────┴───────┐   │   │ prompt_id    │
-└──────────────┘       │    likes     │   │   │ tag_id       │
-                       ├──────────────┤   │   └──────────────┘
-                       │ user_id      │   │
-                       │ prompt_id    │   │
-                       └──────────────┘   │
-                                          │
+│ full_name    │       │ title        │   │   │ slug         │
+│ avatar_url   │       │ description  │   │   └──────────────┘
+│ followers_   │       │ prompt_text  │   │
+│   count      │       │ link         │   │   ┌──────────────┐
+│ following_   │       │ image_url    │   │   │    tags      │
+│   count      │       │ likes_count  │   │   ├──────────────┤
+└──────┬───────┘       │ views_count  │   │   │ id (uuid)    │
+       │               │ category_id──┘   │   │ name         │
+       │               │ type (enum)  │       │ slug         │
+┌──────┴───────┐       │ fts (vector) │       └──────┬───────┘
+│   follows    │       └──────┬───────┘              │
+├──────────────┤              │               ┌──────┴───────┐
+│ follower_id  │       ┌──────┴───────┐       │ prompt_tags  │
+│ following_id │       │    likes     │       ├──────────────┤
+│ (no self-    │       ├──────────────┤       │ prompt_id    │
+│  follow)     │       │ user_id      │       │ tag_id       │
+└──────────────┘       │ prompt_id    │       └──────────────┘
+                       └──────────────┘
+
                        RLS: Enabled on all tables
                        Triggers: auto-profile, auto-like-count
                        RPC: increment_views, toggle_follow
@@ -182,8 +171,6 @@ Top prompts ranked by community engagement (likes + views), displayed in a horiz
 | `/prompt/[id]` | Prompt detail view | Public |
 | `/user/[id]` | Public user profile | Public |
 | `/login` | Social authentication | Public |
-
-> All routes are locale-prefixed: `/en/feed`, `/ar/feed`, etc.
 
 ---
 
@@ -221,7 +208,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
    supabase/schema.sql
    supabase/migration-002-prompt-text-views-tags.sql
-   supabase/migration-003-title-ar-description-ar.sql
    supabase/20260326_add_follows.sql
    supabase/20260401_add_prompt_type.sql
    ```
@@ -273,22 +259,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 prompthub-app/
 ├── src/
 │   ├── app/
-│   │   ├── [locale]/
-│   │   │   ├── (auth)/          # Login page
-│   │   │   ├── (dashboard)/     # Prompt management (create/edit)
-│   │   │   └── (public)/        # Public pages (explore, feed, likes, profiles)
+│   │   ├── (auth)/              # Login page
+│   │   ├── (dashboard)/         # Prompt management (create/edit)
+│   │   ├── (public)/            # Public pages (explore, feed, likes, profiles)
 │   │   └── api/                 # API routes (auth, me, seed)
 │   ├── components/
 │   │   ├── auth/                # Login, social auth, avatar
 │   │   ├── prompts/             # Prompt card, detail, form, grid, preview
 │   │   └── ui/                  # shadcn/ui primitives
 │   ├── hooks/                   # Custom hooks (auth, prompts, follows, etc.)
-│   ├── i18n/                    # next-intl config & routing
 │   ├── lib/
 │   │   ├── react-query/         # Query keys & provider
 │   │   └── supabase/            # Client, server, middleware, queries
 │   └── types/                   # TypeScript definitions
-├── messages/                    # i18n translation files (ar.json, en.json)
 └── supabase/                    # Schema, migrations, seed data
 ```
 
